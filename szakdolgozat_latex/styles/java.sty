@@ -1,0 +1,49 @@
+% Default fixed font does not support bold face
+%\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{10} % for bold
+%\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{10}  % for normal
+
+\usepackage{listings}
+
+% Custom colors
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\definecolor{codebg}{rgb}{0.95,0.95,0.95}
+\definecolor{framecolor}{rgb}{0.85,0.85,0.85}
+
+% Java style for highlighting
+\newcommand\javastyle{\lstset{
+language=java,
+%basicstyle=\ttm,
+backgroundcolor=\color{codebg},
+otherkeywords={self},             % Add keywords here
+keywordstyle=\color{deepblue},
+emphstyle=\color{deepred},    % Custom highlighting style
+stringstyle=\color{deepgreen},
+frame=single,                         % Any extra options here
+frameround=tttt,
+showstringspaces=false,            % 
+% numbers=left,
+% numberstyle=\color{gray},
+framesep=6pt,
+rulecolor=\color{framecolor},
+numbersep=16pt
+}}
+
+% Java environment
+\lstnewenvironment{java}[1][]
+{
+\javastyle
+\lstset{#1}
+}
+{}
+
+% Java for external files
+\newcommand\javaexternal[2][]{{
+\javastyle
+\lstinputlisting[#1]{#2}}}
+
+% Java for inline
+\newcommand\javainline[1]{{\pythonstyle\lstinline!#1!}}

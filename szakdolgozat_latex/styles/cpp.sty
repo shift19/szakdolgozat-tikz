@@ -1,0 +1,50 @@
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{10} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{10}  % for normal
+
+\usepackage{listings}
+
+% Custom colors
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\definecolor{codebg}{rgb}{0.95,0.95,0.95}
+\definecolor{framecolor}{rgb}{0.85,0.85,0.85}
+
+% C++ style for highlighting
+\newcommand\cppstyle{\lstset{
+language=c++,
+basicstyle=\ttm,
+backgroundcolor=\color{codebg},
+otherkeywords={self},             % Add keywords here
+keywordstyle=\ttb\color{deepblue},
+emphstyle=\ttb\color{deepred},    % Custom highlighting style
+stringstyle=\color{deepgreen},
+frame=single,                         % Any extra options here
+frameround=tttt,
+showstringspaces=false,            % 
+% numbers=left,
+% numberstyle=\color{gray},
+framesep=6pt,
+rulecolor=\color{framecolor},
+numbersep=16pt
+}}
+
+% C++ environment
+\lstnewenvironment{cpp}[1][]
+{
+\cppstyle
+\lstset{#1}
+}
+{}
+
+% C++ for external files
+\newcommand\cppexternal[2][]{{
+\cppstyle
+\lstinputlisting[#1]{#2}}}
+
+% C++ for inline
+\newcommand\cppinline[1]{{\pythonstyle\lstinline!#1!}}
+

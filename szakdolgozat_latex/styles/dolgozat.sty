@@ -1,0 +1,124 @@
+%A szükséges csomagok
+%méretek: margó, lap, fej~ és lábléc stb. NE MÓDOSÍTSUK!
+\usepackage[paperwidth=210mm,paperheight=297mm,headheight=15.2pt,headsep=7.1mm,top=25mm,bottom=25mm,inner=30mm,outer=25mm,dvips]{geometry}
+%fejléc kezelõ csomag
+\usepackage{fancyhdr}
+%ams matematikai makrócsomag
+\usepackage{amsmath}
+%ams matematikai szimbólumcsomag
+\usepackage{amssymb}
+%színkezelés
+\usepackage{color}
+%eps ábrák beszúrása
+\usepackage{epsfig}
+%grafikai csomag
+\usepackage{graphicx}
+%vezérlési szerkezetek
+\usepackage{ifthen}
+%array csomag a táblázatokhoz
+\usepackage{array}
+%saját tételszerû környezetekhez
+\usepackage{ntheorem}
+%multirow csomag: összevont sorokhoz
+\usepackage{multirow}
+%szines tablazatok
+\usepackage{colortbl}
+%ábrakészítés a Tex-kel
+\usepackage[metapost]{mfpic}
+%latin2 kódolás - a magyar ékezetes betûk miatt
+\usepackage[utf8]{inputenc}
+%a magyar elválasztáshoz szükséges
+\usepackage[T1]{fontenc}
+%elválasztást végzõ csomag
+\usepackage[magyar]{babel}
+
+% \newcommand{\myinclude}[1]{%
+% 
+% \ifthenelse{\not\(\isodd{\thepage}\)}{\thispagestyle{empty}\hbox{}\newpage}%
+% 
+% \include{#1}}
+
+%myheadings beállítása
+\def\ps@myheadings{%
+     \def\@oddfoot{\hfil\thepage}
+     \def\@oddhead{}
+      }
+
+%fancyhdr beállítása
+\fancyhead[L]{}
+\fancyhead[R]{}
+\fancyfoot[C]{}
+\fancyfoot[R]{\thepage}
+
+%chapter átdefiniálása
+\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+                    \thispagestyle{myheadings}%
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@chapter\@schapter}
+
+%Saját fejezet parancs: \Chapter
+\newcommand{\Chapter}[1]{\chapter{#1}
+\chead{}
+}
+
+%Saját fejezet parancs, rövidítést használhatunk a tartalomjegyzékben: \SChapter
+\newcommand{\SChapter}[2]{\chapter[#2]{#1}}
+
+%Alfejezet parancs: \Section
+\newcommand{\Section}[1]{\section{#1}
+\chead{\textsl{\thesection. #1}}
+}
+
+%Alfejezet parancs, rövidítést használhatunk a fejlécben  és a tartalomjegyzékben is: \SSection
+\newcommand{\SSection}[3]{\section[#3]{#1}
+\chead{\textsl{\thesection. #2}}}
+
+%Al-alfejezet parancs: \SubSection
+\newcommand{\SubSection}[1]{\subsection{#1}
+}
+
+%Al-alfejezet parancs, rövidítést használhatunk a tartalomjegyzékben: \SSubSection
+\newcommand{\SSubSection}[2]{\subsection[#2]{#1}
+}
+
+%Saját referencia - nem teszi hozzá a névelõt, de a pontot igen!
+\newcommand{\myref}[1]{\ref{#1}.}
+
+%Saját magyar referencia - hozzáteszi a névelõt és a pontot!
+\newcommand{\myaref}[1]{\aref{#1}.}
+
+%táblázatok beállítása
+\renewcommand{\arraystretch}{1.3}  %default: 1 Sorok közötti távolság nagyítása
+
+\setlength{\arrayrulewidth}{0.6pt} %default: 0.6pt A vonalak vastagsága
+
+%A túlcsordulási hibák jelzése a nyomtatási képben vastag, telített téglalappal
+\overfullrule10pt
+
+%pont után nem nagyobb a szóköz
+\frenchspacing
+
+
+%Új tételkörnyezetek
+\newtheoremstyle{MYhun}%
+{\item[\hskip\labelsep\theorem@headerfont ##2.\ ##1.]}%
+{\item[\hskip\labelsep\theorem@headerfont ##2.\ ##1\ \textnormal{(##3).}]}
+
+\newtheoremstyle{MYwithoutnumber}%
+{\item[\hskip\labelsep\theorem@headerfont ##1.]}%
+{\item[\hskip\labelsep\theorem@headerfont ##3.]}
+
+\theoremstyle{MYhun}
+\theorembodyfont{\it}
+\newtheorem{theorem}{tétel}[chapter]
+\theorembodyfont{\rm}\newtheorem{definition}[theorem]{definíció}
+\theorembodyfont{\it}\newtheorem{lemma}[theorem]{lemma}
+\theorembodyfont{\it}\newtheorem{corollary}[theorem]{következmény}
+\theorembodyfont{\rm}\newtheorem{remark}[theorem]{megjegyzés}
+\theorembodyfont{\rm}\newtheorem{example}[theorem]{példa}
+\theoremstyle{MYwithoutnumber}
+\theorembodyfont{\rm}\newtheorem{prooF}{Bizonyítás}
+
+\def\QEDsign{\hfill$\Box$}
+\newenvironment{proof}{\begin{prooF}}{\QEDsign\end{prooF}}

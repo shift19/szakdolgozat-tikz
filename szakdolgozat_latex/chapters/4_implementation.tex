@@ -1,0 +1,45 @@
+\Chapter{Megvalósítás}
+
+Ez a fejezet mutatja be a megvalósítás lépéseit.
+Itt lehet az esetlegesen előforduló technikai nehézségeket említeni.
+Be lehet már mutatni a program elkészült részeit.
+
+Meg lehet mutatni az elkészített programkód érdekesebb részeit.
+(Az érdekesebb részek bemutatására kellene szorítkozni.
+Többségében a szöveges leírásnak kellene benne lennie.
+Abból lehet kiindulni, hogy a forráskód a dolgozathoz elérhető, azt nem kell magába a dolgozatba bemásolni, elegendő csak behivatkozni.)
+
+A dolgozatban szereplő forráskódrészletekhez külön vannak programnyelvenként stílusok.
+Python esetében például így néz ki egy formázott kódrészlet.
+\begin{python}
+import sys
+
+if __name__ == '__main__':
+    pass
+\end{python}
+
+A stílusfájlok a \texttt{styles} jegyzékben találhatók.
+A stílusok között szerepel még C++, Java és Rust stílusfájl.
+Ezek használatához a \texttt{dolgozat.tex} fájl elején \texttt{usepackage} paranccsal hozzá kell adni a stílust, majd a stílusfájl nevével megegyező környezetet lehet használni.
+További példaként C++ forráskód esetében ez így szerepel.
+\begin{cpp}
+#include <iostream>
+
+class Sample : public Object
+{
+    // An empty class definition
+}
+\end{cpp}
+Stílusfájlokból elegendő csak annyit meghagyni, amennyire a dolgozatban szükség van.
+Más, C szintaktikájú nyelvekhez (mint például a JavaScript és C\#) a Java vagy C++ stílusfájlok átszerkesztésére van szükség.
+(Elegendő lehet csak a fájlnevet átírni, és a fájlban a környezet nevét.)
+
+Nyers adatok, parancssori kimenetek megjelenítéséhez a \texttt{verbatim} környezetet lehet használni.
+\begin{verbatim}
+$ some commands with arguments
+1 2 3 4 5
+$ _
+\end{verbatim}
+
+A kutatás jellegű témáknál ez a fejezet gyakorlatilag kimaradhat.
+Helyette inkább a fő vizsgálati módszerek, kutatási irányok kaphatnak külön-külön fejezeteket.

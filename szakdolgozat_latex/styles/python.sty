@@ -1,0 +1,48 @@
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{10} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{10}  % for normal
+
+% Custom colors
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\definecolor{codebg}{rgb}{0.95,0.95,0.95}
+\definecolor{framecolor}{rgb}{0.85,0.85,0.85}
+
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+language=Python,
+basicstyle=\ttm,
+backgroundcolor=\color{codebg},
+otherkeywords={self},             % Add keywords here
+keywordstyle=\ttb\color{deepblue},
+emphstyle=\ttb\color{deepred},    % Custom highlighting style
+stringstyle=\color{deepgreen},
+frame=single,                         % Any extra options here
+frameround=tttt,
+showstringspaces=false,            % 
+% numbers=left,
+% numberstyle=\color{gray},
+framesep=6pt,
+rulecolor=\color{framecolor},
+numbersep=16pt
+}}
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+

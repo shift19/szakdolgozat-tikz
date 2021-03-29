@@ -1,0 +1,78 @@
+\Chapter{Tervezés}
+
+Itt kezdődik a dolgozat lényegi része, úgy értve, hogy a saját munka bemutatása.
+Jellemzően ebben szerepelni szoktak blokkdiagramok, a program struktúrájával foglalkozó leírások.
+Ehhez célszerű UML ábrákat (például osztály- és szekvenciadiagramokat) használni.
+
+Amennyiben a dolgozat inkább kutatás jellegű, úgy itt lehet konkretizálni a kutatási módszertant, a kutatás tervezett lépéseit, az indoklást, hogy mit, miért és miért pont úgy érdemes csinálni, ahogyan az a későbbiekben majd részletezésre kerül.
+
+Ebben a fejezetben az implementáció nem kell, hogy túl nagy szerepet kapjon.
+Ez még csak a tervezési fázis.
+(Nyilván ha olyan a téma, hogy magának az implementációnak a módjával foglalkozik, adott formális nyelvet mutat be, úgy a kódpéldákat már innen sem lehet kihagyni.)
+
+\Section{Táblázatok}
+
+Táblázatokhoz a \texttt{table} környezetet ajánlott használni.
+Erre egy minta \aref{tab:minta}. táblázat.
+A hivatkozáshoz az egyedi \texttt{label} értéke konvenció szerint \texttt{tab:} prefixszel kezdődik.
+
+\begin{table}[h]
+\centering
+\caption{Minta táblázat. A táblázat felirata a táblázat felett kell legyen!}
+\label{tab:minta}
+\begin{tabular}{l|c|c|}
+a & b & c \\
+\hline
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+\hline
+\end{tabular}
+\end{table}
+
+\Section{Ábrák}
+
+Ábrákat a \texttt{figure} környezettel lehet használni.
+A használatára egy példa \aref{fig:cimer}. ábrán látható.
+Az \texttt{includegraphics} parancsba 
+Az ábrák felirata az ábra alatt kell legyen.
+Az ábrák hivatkozásához használt nevet konvenció szerint \texttt{fig:}-el célszerű kezdeni.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.3]{images/me_logo.png}
+\caption{A Miskolci Egyetem címere.}
+\label{fig:cimer}
+\end{figure}
+
+\Section{További környezetek}
+
+A matematikai témájú dolgozatokban szükség lehet tételek és bizonyításaik megadására.
+Ehhez szintén vannak készen elérhető környezetek.
+
+\begin{definition}
+Ez egy definíció
+\end{definition}
+
+\begin{lemma}
+Ez egy lemma
+\end{lemma}
+
+\begin{theorem}
+Ez egy tétel
+\end{theorem}
+
+\begin{proof}
+Ez egy bizonyítás
+\end{proof}
+
+\begin{corollary}
+Ez egy tétel
+\end{corollary}
+
+\begin{remark}
+Ez egy megjegyzés
+\end{remark}
+
+\begin{example}
+Ez egy példa
+\end{example}

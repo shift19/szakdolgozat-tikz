@@ -2,20 +2,96 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-
+    <title>TikZ</title>
+    <link href="css/library/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/css.css" rel="stylesheet">
 </head>
 <body>
-<div>
-    <h1>HELLOOO</h1> <!-- temp placeholder -->
-    <input id="math_input" type="text" name="math_input" value="3*x+sin(x)">
-    <button onclick="drawCanvas()">plot it</button>
+<div class="container">
+    <!-- temp placeholder -->
+    <div class="col-md-12">
+        <h1>TikZ</h1>
+    </div>
+
+    <ul class="nav nav-tabs" id="Tab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button aria-controls="equ-tab" aria-selected="true" class="nav-link active" data-bs-target="#equ" data-bs-toggle="tab"
+                    id="equ-tab" role="tab" type="button">Equation
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button aria-controls="shape-tab" aria-selected="false" class="nav-link" data-bs-target="#shape" data-bs-toggle="tab"
+                    id="shape-tab" role="tab" type="button">Shape
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button aria-controls="graph-tab" aria-selected="false" class="nav-link" data-bs-target="#graph" data-bs-toggle="tab"
+                    id="graph-tab" role="tab" type="button">Graph
+            </button>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="tab-content col-sm-12 col-md-12 col-lg-6 col-lg-push-6" id="tabContent">
+            <div aria-labelledby="equ-tab" class="tab-pane fade show active" id="equ" role="tabpanel">
+                <div id="plot_div">
+                    <form id="plot_form">
+                        <div id="plot_form_wrapper"></div>
+                        <div data-toggle="buttons" class="col-sm-12">
+                            <input autocomplete="off" checked class="btn-check" id="check_axis_equ" type="checkbox">
+                            <label class="btn btn-outline-secondary" for="check_axis_equ">Axis</label>
+
+                            <input autocomplete="off" checked class="btn-check" id="check_grid_equ" type="checkbox">
+                            <label class="btn btn-outline-secondary" for="check_grid_equ">Grid</label>
+
+                            <button class="btn btn-primary" id="add_equ_button">Add new</button>
+                            <button class="btn btn-success" id="plot_equ_button">Plot it!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div aria-labelledby="shape-tab" class="tab-pane fade" id="shape" role="tabpanel">
+                <div id="shape_div">
+                    <form id="shape_form">
+                        <div>TODO</div>
+                        <div id="shape_form_wrapper"></div>
+                        <div data-toggle="buttons">
+                            <input autocomplete="off" checked class="btn-check" id="check_axis_shape" type="checkbox">
+                            <label class="btn btn-outline-secondary" for="check_axis_shape">Axis</label>
+
+                            <input autocomplete="off" checked class="btn-check" id="check_grid_shape" type="checkbox">
+                            <label class="btn btn-outline-secondary" for="check_grid_shape">Grid</label>
+
+                            <button class="btn btn-primary" id="add_shape_button">Add new</button>
+                            <button class="btn btn-success" id="plot_shape_button">Plot it!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div aria-labelledby="graph-tab" class="tab-pane fade" id="graph" role="tabpanel">TODO</div>
+        </div>
+
+        <div id="canvas" class="col-sm-12 col-md-12 col-lg-6 col-lg-push-6" ></div>
+
+        <!-- temp -->
+        <div id="latex_text_output" style="height: 200px"></div>
+    </div>
 </div>
 
-<div id="canvas"></div>
+
 </body>
 
-<script src="./js/p5.min.js"></script>
-<script src="./js/jquery-3.6.0.min.js"></script>
-<script src="./js/main.js"></script>
+
+<!-- libraries -->
+<script src="js/library/p5.min.js"></script>
+<script src="js/library/jquery-3.6.0.min.js"></script>
+<script src="js/library/bootstrap.min.js"></script>
+
+<!--  scripts  -->
+<script src="js/canvas_control.js"></script>
+
+<script src="js/equ_form.js"></script>
+<script src="js/shape_form.js"></script>
+
+<script src="js/variables.js"></script>
+<script src="js/math_functions.js"></script>
 </html>

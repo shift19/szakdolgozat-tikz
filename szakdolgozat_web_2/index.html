@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TikZ</title>
+    <link href="style/library/bootstrap.min.css" rel="stylesheet">
+    <link href="style/library/fontawesome.min.css" rel="stylesheet">
+    <link href="style/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div>
+    <div class="row justify-content-center align-items-center">
+        <div class="btn-group btn-matrix col-2" id="menu">
+                <input autocomplete="off" checked class="btn-check" id="select" name="toolbar_button" type="radio">
+                <label class="btn btn-outline-primary" for="select"><i class="fas fa-mouse-pointer"></i></label>
+                <input autocomplete="off" class="btn-check" id="edit" name="toolbar_button" type="radio">
+                <label class="btn btn-outline-primary" for="edit"><i class="fas fa-pencil-alt"></i></label>
+            <input autocomplete="off" checked class="btn-check" id="point" name="menu_button" type="radio">
+            <label class="btn btn-outline-primary" for="point"><i class="fas fa-circle"></i></label>
+            <input autocomplete="off" class="btn-check" id="line" name="menu_button" type="radio">
+            <label class="btn btn-outline-primary" for="line"><i class="fas fa-minus"></i></label>
+            <input autocomplete="off" class="btn-check" id="arrow" name="menu_button" type="radio">
+            <label class="btn btn-outline-primary" for="arrow"><i class="fas fa-long-arrow-alt-right"></i></label>
+            <input autocomplete="off" class="btn-check" id="ellipse" name="menu_button" type="radio">
+            <label class="btn btn-outline-primary" for="ellipse"><i class="far fa-circle"></i></label>
+            <input autocomplete="off" class="btn-check" id="rectangle" name="menu_button" type="radio">
+            <label class="btn btn-outline-primary" for="rectangle"><i class="far fa-square"></i></label>
+        </div>
+        <div class="vh-100 col-8" id="canvas"></div>
+        <div class="vh-100 col-2" id="properties">
+            <div class="input-group">
+                <label class="input-group-text col-4" for="stroke">Stroke</label>
+                <select class="form-select" id="stroke"></select>
+            </div>
+            <div class="input-group">
+                <label class="input-group-text col-4" for="fill">Fill</label>
+                <select class="form-select" id="fill"></select>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+
+
+<!-- libraries -->
+<script src="scripts/library/p5.min.js"></script>
+<script src="scripts/library/jquery-3.6.0.min.js"></script>
+<script src="scripts/library/bootstrap.min.js"></script>
+
+<!--  scripts  -->
+<script src="scripts/script.js"></script>
+
+</html>

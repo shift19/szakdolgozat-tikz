@@ -1,0 +1,30 @@
+body {
+    margin: -5px 50px; /* top-buttom left-right*/
+}
+
+div {
+    margin-top: 5px;
+}
+
+/* Arrange buttons */
+.btn-matrix {
+    flex-wrap: wrap; /* allow buttons to jump to another row */
+}
+.btn-matrix > .btn {
+    width: 50%; /* force buttons to have the same width regardless of content */
+}
+
+.row > canvas {
+    height:100%;
+}
+.row > * {
+    padding: 0px;
+}
+
+option:hover {
+    background-color: yellow;
+}
+
+#canvas {
+    display: block;
+}

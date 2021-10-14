@@ -3,10 +3,27 @@
 \usepackage{styles/dolgozat}
 
 \usepackage{listings}
-\usepackage{styles/cpp}
-\usepackage{styles/python}
+%\usepackage{styles/cpp}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
 
 \usepackage{hyperref}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{listings,skins}
+
+\newtcblisting{tikzcode}{
+	tikz lower=,
+	listing side text,
+	bicolor,
+	colback=lightgray!30,
+	colbacklower=white,
+	colframe=lightgray!30,
+	righthand width=3cm
+}
+
+\lstdefinestyle{latex}{language=[LaTeX]TeX}
 
 \begin{document}
 

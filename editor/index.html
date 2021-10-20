@@ -5,44 +5,132 @@
     <title>TikZ</title>
     <link href="style/library/bootstrap.min.css" rel="stylesheet">
     <link href="style/library/fontawesome.min.css" rel="stylesheet">
+    <link href="style/library/katex.min.css" rel="stylesheet">
     <link href="style/style.css" rel="stylesheet">
-
 </head>
+
 <body>
 <div>
     <div class="row justify-content-center align-items-center">
-        <div class="btn-group btn-matrix col-2" id="menu">
+        <div class="col-2">
+            <div class="btn-group btn-matrix w-100" id="toolbar_menu">
                 <input autocomplete="off" checked class="btn-check" id="select" name="toolbar_button" type="radio">
                 <label class="btn btn-outline-primary" for="select"><i class="fas fa-mouse-pointer"></i></label>
                 <input autocomplete="off" class="btn-check" id="edit" name="toolbar_button" type="radio">
                 <label class="btn btn-outline-primary" for="edit"><i class="fas fa-pencil-alt"></i></label>
-            <input autocomplete="off" checked class="btn-check" id="point" name="menu_button" type="radio">
-            <label class="btn btn-outline-primary" for="point"><i class="fas fa-circle"></i></label>
-            <input autocomplete="off" class="btn-check" id="line" name="menu_button" type="radio">
-            <label class="btn btn-outline-primary" for="line"><i class="fas fa-minus"></i></label>
-            <input autocomplete="off" class="btn-check" id="arrow" name="menu_button" type="radio">
-            <label class="btn btn-outline-primary" for="arrow"><i class="fas fa-long-arrow-alt-right"></i></label>
-            <input autocomplete="off" class="btn-check" id="ellipse" name="menu_button" type="radio">
-            <label class="btn btn-outline-primary" for="ellipse"><i class="far fa-circle"></i></label>
-            <input autocomplete="off" class="btn-check" id="rectangle" name="menu_button" type="radio">
-            <label class="btn btn-outline-primary" for="rectangle"><i class="far fa-square"></i></label>
+                <input autocomplete="off" class="btn-check" id="move" name="toolbar_button" type="radio">
+                <label class="btn btn-outline-primary" for="move"><i class="fas fa-arrows-alt"></i></label>
+            </div>
+            <div class="btn-group btn-matrix w-100" id="edit_menu">
+                <input autocomplete="off" checked class="btn-check" id="point" name="edit_button" type="radio">
+                <label class="btn btn-outline-primary" for="point"><i class="fas fa-circle"></i></label>
+                <input autocomplete="off" class="btn-check" id="line" name="edit_button" type="radio">
+                <label class="btn btn-outline-primary" for="line"><i class="fas fa-minus"></i></label>
+                <input autocomplete="off" class="btn-check" id="ellipse" name="edit_button" type="radio">
+                <label class="btn btn-outline-primary" for="ellipse"><i class="far fa-circle"></i></label>
+                <input autocomplete="off" class="btn-check" id="rectangle" name="edit_button" type="radio">
+                <label class="btn btn-outline-primary" for="rectangle"><i class="far fa-square"></i></label>
+                <input autocomplete="off" class="btn-check" id="bezier" name="edit_button" type="radio">
+                <label class="btn btn-outline-primary" for="bezier">Bezier</label>
+                <input autocomplete="off" class="btn-check" id="grid" name="edit_button" type="radio">
+                <label class="btn btn-outline-primary" for="grid">Grid</label>
+                <input autocomplete="off" class="btn-check" id="arc" name="edit_button" type="radio">
+                <label class="btn btn-outline-primary" for="arc">Arc</label>
+                <input autocomplete="off" class="btn-check" id="parabola" name="edit_button" type="radio">
+                <label class="btn btn-outline-primary" for="parabola">Parabola</label>
+            </div>
+            <div class="w-100" id="defaultProperties">
+
+                <div class="defaultStroke form-floating">
+                    <input class="form-control color-input" id="defaultStrokeInput" readonly value="Black" type="text">
+                    <label for="defaultStrokeInput">Stroke color:</label>
+                </div>
+                <div class="defaultFill form-floating">
+                    <input class="form-control color-input" id="defaultFillInput" readonly value="None" type="text">
+                    <label for="defaultFillInput">Fill color:</label>
+                </div>
+                <div class="defaultLinewidth form-floating">
+                    <select class="form-select" id="defaultLinewidthInput"></select>
+                    <label for="defaultLinewidthInput">Line width:</label>
+                </div>
+                <div class="defaultLinedash form-floating">
+                    <select class="form-select" id="defaultLinedashInput"></select>
+                    <label for="defaultLinedashInput">Line dash style:</label>
+                </div>
+                <!---
+                <div id="defaultStroke" class="input-group">
+                    <label class="input-group-text col-6" for="defaultStrokeInput">Stroke</label>
+                    <input class="form-control color-input" id="defaultStrokeInput" readonly value="Black" type="text">
+                </div>
+
+                <div id="defaultFill" class="input-group">
+                    <label class="input-group-text col-6" for="defaultFillInput">Fill</label>
+                    <input class="form-control color-input" id="defaultFillInput" readonly value="None" type="text">
+                </div>
+                <div id="defaultLinewidth" class="input-group">
+                    <label class="input-group-text col-6" for="defaultLinewidthInput">Width</label>
+                    <select class="form-select" id="defaultLinewidthInput"></select>
+                </div>
+                <div id="defaultLinedash" class="input-group">
+                    <label class="input-group-text col-6" for="defaultLinedashInput">Dash</label>
+                    <select class="form-select" id="defaultLinedashInput"></select>
+                </div>
+                --->
+                <div id="arrowProperties">
+                    <div class="defaultArrow form-floating">
+                        <select class="form-select" id="defaultArrowInput"></select>
+                        <label for="defaultArrowInput">Arrows appear on:</label>
+                    </div>
+                    <div class="defaultArrowTipHead form-floating">
+                        <select class="form-select" id="defaultArrowTipHeadInput"></select>
+                        <label for="defaultArrowTipHeadInput">Head style:</label>
+                    </div>
+                    <div class="defaultArrowTipTail form-floating">
+                        <select class="form-select" id="defaultArrowTipTailInput"></select>
+                        <label for="defaultArrowTipTailInput">Tail style:</label>
+                    </div>
+                    <!---
+                    <div id="defaultArrow" class="input-group">
+                        <label class="input-group-text col-6" for="defaultArrowInput">Arrow</label>
+                        <select class="form-select" id="defaultArrowInput"></select>
+                    </div>
+                    <div id="defaultArrowTipStart" class="input-group">
+                        <label class="input-group-text col-6" for="defaultArrowTipStartInput">Starting tip</label>
+                        <select class="form-select" id="defaultArrowTipStartInput"></select>
+                    </div>
+                    <div id="defaultArrowTipEnd" class="input-group">
+                        <label class="input-group-text col-6" for="defaultArrowTipEndInput">Ending tip</label>
+                        <select class="form-select" id="defaultArrowTipEndInput"></select>
+                    </div>
+                    --->
+                </div>
+                <div id="arcProperties">
+                    <div class="form-floating">
+                        <input type="number" class="form-control" id="defaultArcStartInput" value="0">
+                        <label for="defaultArcStartInput">Starting angle of arc:</label>
+                    </div>
+                    <div class="defaultLinewidth form-floating">
+                        <input type="number" class="form-control" id="defaultArcEndInput" value="180">
+                        <label for="defaultArcEndInput">Ending angle of arc:</label>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="vh-100 col-8" id="canvas"></div>
         <div class="vh-100 col-2" id="properties">
             <div class="input-group">
-                <label class="input-group-text col-4" for="stroke">Stroke</label>
-                <select class="form-select" id="stroke"></select>
+                <label class="input-group-text col-4" for="propertyStroke">Stroke</label>
+                <input class="form-control color-input" id="propertyStroke" readonly value="NONE" type="text">
             </div>
             <div class="input-group">
-                <label class="input-group-text col-4" for="fill">Fill</label>
-                <select class="form-select" id="fill"></select>
+                <label class="input-group-text col-4" for="propertyFill">Stroke</label>
+                <input class="form-control color-input" id="propertyFill" readonly value="NONE" type="text">
+            </div>
+            <div class="row text-center" id="shapes">
             </div>
         </div>
     </div>
-
 </div>
-
-
 </body>
 
 
@@ -50,6 +138,7 @@
 <script src="scripts/library/p5.min.js"></script>
 <script src="scripts/library/jquery-3.6.0.min.js"></script>
 <script src="scripts/library/bootstrap.min.js"></script>
+<script src="scripts/library/katex.min.js"></script>
 
 <!--  scripts  -->
 <script src="scripts/script.js"></script>

@@ -21,10 +21,29 @@ div {
     padding: 0px;
 }
 
-option:hover {
-    background-color: yellow;
-}
 
 #canvas {
     display: block;
+}
+
+.color-input {
+    border-right: 40px solid #ffffff;
+    cursor: default;
+}
+.palette {
+    margin-top: 0px;
+    background: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 1px;
+    display: none;
+    padding: 1px;
+    position: absolute;
+    z-index: 1000;
+}
+.color-option {
+    width: 18px;
+    height: 18px;
+    margin: 3px;
+    cursor:pointer;
+    float: left;
 }

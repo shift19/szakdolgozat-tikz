@@ -3,7 +3,8 @@
 \usepackage{styles/dolgozat}
 
 \usepackage{listings}
-%\usepackage{styles/cpp}
+\usepackage{styles/javascript}
+\usepackage{styles/html}
 
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta}
@@ -12,7 +13,6 @@
 
 \usepackage{tcolorbox}
 \tcbuselibrary{listings,skins}
-
 
 \newtcblisting{tikzcode}{
 	tikz lower=,
@@ -24,7 +24,10 @@
 	righthand width=3cm
 }
 
-\lstdefinestyle{latex}{language=[LaTeX]TeX}
+\lstdefinestyle{latex}{
+	language=[LaTeX]TeX,
+	literate = {-}{-}1
+}
 
 \begin{document}
 

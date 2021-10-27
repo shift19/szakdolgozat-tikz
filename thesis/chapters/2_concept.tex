@@ -31,7 +31,7 @@ Ezután kezdjük el az ábrák létrehozását.
 \SubSection{Szintaxis}
 % Alapvető nyelvi elemek bemutatása
 
-A szabály az, hogy minden TikZ grafikus rajzoló parancsnak a \lstinline{\tikz} parancs argumentumaként vagy a {tikzpicture} környezeten belül kell előfordulnia. 
+A szabály az, hogy minden TikZ grafikus rajzoló parancsnak a \textit{tikz} parancs argumentumaként vagy a {tikzpicture} környezeten belül kell előfordulnia. 
 
 \noindent
 A {tikzpicture} környezet \LaTeX\ változata a következő:
@@ -47,7 +47,7 @@ A {tikzpicture} környezet \LaTeX\ változata a következő:
 A környezeten belül megadott összes opció a teljes képre vonatkozik.
 
 \noindent
-A TikZ-ben minden ábra alapvető építőeleme a vonal. Egy vonalat a kezdőpont koordinátáinak megadásával kezdünk, mint például (0,0), majd hozzáadunk egy vonal bővítő műveletet, a legegyszerűbb csak "\lstinline{--}". A műveletet ezután a következő koordináta követi. Minden útvonalnak pontosvesszővel kell végződnie. Az vonal megrajzolásához a \lstinline{\draw} parancsot használjuk.
+A TikZ-ben minden ábra alapvető építőeleme a vonal. Egy vonalat a kezdőpont koordinátáinak megadásával kezdünk, mint például (0,0), majd hozzáadunk egy vonal bővítő műveletet, a legegyszerűbb csak "\textit{- -}". A műveletet ezután a következő koordináta követi. Minden útvonalnak pontosvesszővel kell végződnie. Az vonal megrajzolásához a \textit{draw} parancsot használjuk.
 
 \noindent
 Például a (0,0), (0,1), (1,0) pontok közötti háromszög megrajzolásához azt írhatjuk, hogy:
@@ -55,6 +55,8 @@ Például a (0,0), (0,1), (1,0) pontok közötti háromszög megrajzolásához a
 \begin{lstlisting}[style=latex]
 \tikz\draw (0,0) -- (0,1) -- (1,0) -- (0,0);
 \end{lstlisting}
+
+\noindent
 vagy
 
 \begin{lstlisting}[style=latex]
@@ -62,7 +64,6 @@ vagy
 	\draw (0,0) -- (0,1) -- (1,0) -- (0,0);
 \end{tikzpicture}
 \end{lstlisting}
-
 
 \begin{tikzcode}
 \draw (0,0) -- (0,1) -- (1,0) -- (0,0);
@@ -223,6 +224,29 @@ Ha a vonal vastagságát akarjuk módosítani, akkor szintén hasonlóképpen j�
 \draw [ultra thick] (0,0) -- (1,0);
 \end{tikzcode}
 
+\noindent
+Ha a vonal stílusát szeretnénk módosítani is jelentős a lehetőségek száma:
+
+\begin{tikzcode}
+\draw [dotted] (0,1) -- (1,1);
+\draw [dashed] (0,0.5) -- (1,0.5);	
+\draw [dashdotted] (0,0) -- (1,0);
+\end{tikzcode}
+
+\noindent
+A pontok és szaggatott vonalak sűrűsége a \textit{loosely} (lazán) és a \textit{densely} (sűrűn) jelzővel adható meg.
+\begin{tikzcode}
+\draw [dashed] (0,1) -- (1,1);
+\draw [loosely dashed] (0,0.5) -- (1,0.5);	
+\draw [densely dashed] (0,0) -- (1,0);
+\end{tikzcode}
+
+\noindent
+Az eddigi testreszabással kapcsolatos paraméterek akár együttesen is szerepelhetnek:
+
+\begin{tikzcode}
+\draw [|-latex, red, thick, dashed] (0,0) -- (1,0);
+\end{tikzcode}
 
 \noindent
 Ahhoz, hogy szöveget adjunk a képhez, csomópontot kell hozzáadnunk az útvonalhoz, mint a következőben:
@@ -295,10 +319,34 @@ A TikzEdt esetében három hasábra osztható a felület: elsőben az előre def
 \end{figure}
 
 \noindent
-A tikzcd-editor klasszikus felülettel nem rendelkezik, csak egy négyzet alapú rendszer fogad megnyitáskor. A rácsok közepére igazítva lehet nyilakat rajzolni, és szövegeket írni, de utólag van lehetőség a fel-le mozgatásra. A stílusok nem testreszabhatók, csak pár alap stílusból lehet választani, mint a szaggatott vagy dupla vonal, módosítható a nyíl eleje, illetve vége. Az elemek színei nem módosíthatók, csak az alap fekete érhető el. A rétegződés a lerakás sorrendjében van. Kijelölés csak egyesével működik, nincs lehetőség téglalap vagy esetleg lasszó alapú kijelölésre. A program rendelkezik Undo-Redo funkciókkal, de mentésre nincs lehetőség, csak a \LaTeX\ kód kimásolására, és az ábrához tartozó link utólagos betöltésére.
+A tikzcd-editor klasszikus felülettel nem rendelkezik, csak egy négyzet alapú rendszer fogad megnyitáskor. A rácsok közepére igazítva lehet nyilakat rajzolni, és szövegeket írni, de utólag van lehetőség a fel-le mozgatásra. A stílusok nem testreszabhatók, csak pár alap stílusból lehet választani, mint a szaggatott vagy dupla vonal, módosítható a nyíl eleje, illetve vége. Az elemek színei nem módosíthatók, csak az alap fekete érhető el. A rétegződés a lerakás sorrendjében van. Kijelölés csak egyesével működik, nincs lehetőség téglalap vagy esetleg lasszó alapú kijelölésre. A szerkesztő rendelkezik Undo-Redo funkciókkal, de mentésre nincs lehetőség, csak a \LaTeX\ kód kimásolására, és az ábrához tartozó link utólagos betöltésére.
 
+
+\SubSection{Összefoglalás}
+
+Szempontok, ami alapján összefoglalom:
+
+\begin{description}
+	\item[Elrendezés:] Az elrendezés az, amit a felhasználó először lát a szerkesztővel kapcsolatban, fontos, hogy átlátható, és egyszerűen kezelhető legyen.
+	\item[Alapelemek megjelenítése:] Az alapelemek helyzete is épp ilyen fontos, a felhasználó szempontjából kifejezetten előnyös, ha valamilyen szempontból csoportosítva vannak az alapelemek, és nemcsak egymás után fel vannak sorolva, akár csak egy mátrix alapú felépítésben.
+	\item[Tulajdonságok szerkesztése:] Ha már leraktunk egy objektumot, akkor elvárható az, hogy a lent lévő elem szerkeszthető is legyen: ez érinti a helyzetet, színeket, és a stílusokat is.
+	\item[Szövegek szerkesztése:] Elérhetővé kell tenni a felhasználó számára a szövegek szerkesztését valamilyen formában: szabadon, vagy a csomópontokon belüli megjelenítést.
+	\item[Színek megadási módja:] Az ábrák színezhetők, így a szerkesztőnek is tudni kell kezelni a színeket: legalább az előre definiált színeket kiválaszthatóvá kell tenni.
+	\item[Objektumok összekapcsolási módja:] A már kész objektumokat milyen módon lehet összekötni: fix helyeken vagy az körvonalain bárhol összeköthetőek.
+	\item[Objektumok automatikus igazítása:] Rendelkezik-e a szerkesztő olyan funkcióval, amely az objektum pontjait automatikusan a vászon bizonyos pontjaira illeszti.
+	\item[Rétegek kezelése:] Van-e lehetőség rétegek létrehozására, vagy sem, az elemek sorrendje a mérvadó, vagy van lehetőség utólag rendezni az objektumokat. 
+	\item[Kijelölés:] Milyen formában van lehetőség objektumok kijelölésére: téglalap, lasszó, kattintás alapú kijelölés vagy egyáltalán nincs lehetőség objektumok kijelölésére.
+	\item[Másolás:] A kijelölt objektumot van-e lehetőség másolni valamilyen formában a vászonra.
+	\item[Zoom-olás:] A vászont lehet-e valamilyen formában nagyítani a precízebb rajzolás miatt vagy esetleg kicsinyíteni a nagyobb rajzolási felület reményében.
+	\item[Undo-redo funciók:] Az elvégzett objektum rajzolást vagy módosítást van-e lehetőség visszavonni. A véletlenül visszavont szerkesztések megismétlésére milyen lehetőségek vannak.
+	\item[Automatikus mentés:] A szerkesztő menti-e a rajzolás közben a munkamenetet, vagy teljes mértékben a felhasználóra van bízva a mentés folyamata.
+\end{description}
 
 \begin{table}[]
+	\caption{Szerkesztőeszközök összefoglalása az előző szempontok szerint}
+	\label{tab:editors}
+	\medspace
+	
 	\centering
 	\begin{tabular}{|l|c|c|c|c|}
 		\hline
@@ -306,15 +354,18 @@ A tikzcd-editor klasszikus felülettel nem rendelkezik, csak egy négyzet alapú
 		
 		Elrendezés  & \multicolumn{3}{c|}{hasáb felépítés} & alul\\ \hline
 		
-		\begin{tabular}[c]{@{}l@{}}Property-k \\ szerkesztése\end{tabular}& \multicolumn{2}{c|}{előre definiált stílusok}& \begin{tabular}[c]{@{}c@{}}csak kód \\ szinten\end{tabular}& \begin{tabular}[c]{@{}c@{}}kijelölés \\ után\end{tabular} \\ \hline
-		
-		\begin{tabular}[c]{@{}l@{}}Színek megadási \\ módjai\end{tabular}& \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}előre definiált színek, \\ RGB, és HEX  megadás\end{tabular}} & \begin{tabular}[c]{@{}c@{}}csak kód \\ szinten\end{tabular}& nem \\ \hline
-		
 		\begin{tabular}[c]{@{}l@{}}Alapelemek \\ megjelenítése\end{tabular}& \begin{tabular}[c]{@{}c@{}}mátrix alapú, \\ csoportosítva\end{tabular} & sorban & \begin{tabular}[c]{@{}c@{}}lenyíló listás \\ rendezés\end{tabular} & sorban \\ \hline
+		
+		\begin{tabular}[c]{@{}l@{}}Tulajdonságok \\ szerkesztése\end{tabular} & \multicolumn{2}{c|}{előre definiált stílusok}& \begin{tabular}[c]{@{}c@{}}csak kód \\ szinten\end{tabular} & \begin{tabular}[c]{@{}c@{}}kijelölés \\ után\end{tabular} \\ \hline
 		
 		\begin{tabular}[c]{@{}l@{}}Szövegek \\ szerkesztése\end{tabular}& igen & \multicolumn{2}{c|}{csak csomópontokon} &  \begin{tabular}[c]{@{}c@{}}rácsok \\ közepén\end{tabular} \\ \hline
 		
+		\begin{tabular}[c]{@{}l@{}}Színek megadási \\ módjai\end{tabular}& \multicolumn{2}{c|}{\begin{tabular}[c]{@{}c@{}}előre definiált színek, \\ RGB, és HEX  megadás\end{tabular}} & \begin{tabular}[c]{@{}c@{}}csak kód \\ szinten\end{tabular}& nem \\ \hline
+		
+		
 		\begin{tabular}[c]{@{}l@{}}Objektumok\\ összekapcsolási\\ módjai\end{tabular} & bárhol & \multicolumn{2}{c|}{középen} & nem \\ \hline
+		
+		\begin{tabular}[c]{@{}l@{}}Objektumok\\ automatikus \\ igazítása\end{tabular} & igen & \multicolumn{2}{c|}{nem} & igen \\ \hline
 		
 		Rétegek kezelése & \multicolumn{4}{c|}{rajzolási sorrend} \\ \hline
 		
@@ -322,12 +373,11 @@ A tikzcd-editor klasszikus felülettel nem rendelkezik, csak egy négyzet alapú
 		
 		Másolás & \multicolumn{2}{c|}{igen} & \begin{tabular}[c]{@{}c@{}}csak kód \\ szinten\end{tabular} & nem \\ \hline
 		
+		Zoom-olás & \multicolumn{3}{c|}{igen} & nem \\ \hline
+		
 		\begin{tabular}[c]{@{}l@{}}Undo-redo \\ funkciók\end{tabular} & \multicolumn{4}{c|}{igen} \\ \hline
 		
 		\begin{tabular}[c]{@{}l@{}}Automatikus \\ mentés\end{tabular} & igen & \multicolumn{3}{c|}{nem} \\ \hline
-		
-		Zoom-olás & \multicolumn{3}{c|}{igen} & nem \\ \hline
-		
-		\begin{tabular}[c]{@{}l@{}}Objektumok\\ automatikus \\ igazítása\end{tabular} & igen & \multicolumn{2}{c|}{nem} & igen \\ \hline
 	\end{tabular}
 \end{table}
+

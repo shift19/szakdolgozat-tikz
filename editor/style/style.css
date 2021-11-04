@@ -1,24 +1,37 @@
 body {
-    margin: -5px 50px; /* top-buttom left-right*/
+    max-height: 100vh;
+    margin: -5px 50px; /* top-bottom left-right*/
 }
 
-div {
-    margin-top: 5px;
+
+.menu > div {
+    margin: 5px 0;
 }
 
 /* Arrange buttons */
 .btn-matrix {
     flex-wrap: wrap; /* allow buttons to jump to another row */
 }
+
 .btn-matrix > .btn {
     width: 50%; /* force buttons to have the same width regardless of content */
 }
 
-.row > canvas {
-    height:100%;
+.menu {
+    margin-top: 20px;
 }
+
+#properties {
+    margin: 5% 0;
+    max-height: 80vh;
+}
+
+.row > canvas {
+    height: 90%;
+}
+
 .row > * {
-    padding: 0px;
+    padding: 5px;
 }
 
 
@@ -30,8 +43,9 @@ div {
     border-right: 40px solid #ffffff;
     cursor: default;
 }
+
 .palette {
-    margin-top: 0px;
+    margin-top: 0;
     background: #e9ecef;
     border: 1px solid #ced4da;
     border-radius: 1px;
@@ -40,10 +54,27 @@ div {
     position: absolute;
     z-index: 1000;
 }
+
 .color-option {
     width: 18px;
     height: 18px;
     margin: 3px;
-    cursor:pointer;
+    cursor: pointer;
     float: left;
 }
+
+* {
+    -webkit-user-select: none; /* Chrome all / Safari all */
+    -moz-user-select: none; /* Firefox all */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none; /* Likely future */
+}
+/*
+p {
+    border: 1px solid red;
+}
+
+span, p {
+    white-space: nowrap;
+}
+*/

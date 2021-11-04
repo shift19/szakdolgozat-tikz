@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TikZ</title>
+    <title>TikZ Editor</title>
     <link href="style/library/bootstrap.min.css" rel="stylesheet">
     <link href="style/library/fontawesome.min.css" rel="stylesheet">
     <link href="style/library/katex.min.css" rel="stylesheet">
@@ -11,127 +11,250 @@
 
 <body>
 <div>
-    <div class="row justify-content-center align-items-center">
-        <div class="col-2">
+    <div class="row justify-content-center">
+        <div class="overflow-auto menu col-2">
+
+            <div class="btn-group btn-matrix w-100" id="function_menu">
+                <input autocomplete="off" class="btn-check" data-bs-target="#newModal" data-bs-toggle="modal" id="new"
+                       name="function_button" type="button">
+                <label class="btn btn-outline-primary" for="new">New</label>
+                <input autocomplete="off" checked class="btn-check" id="options" type="button">
+                <label class="btn btn-outline-primary" for="options">Options</label>
+                <input autocomplete="off" class="btn-check" data-bs-target="#saveModal" data-bs-toggle="modal" id="save"
+                       name="function_button" type="button">
+                <label class="btn btn-outline-primary" for="save">Save</label>
+                <input autocomplete="off" class="btn-check" data-bs-target="#loadModal" data-bs-toggle="modal" id="load"
+                       name="function_button" type="button">
+                <label class="btn btn-outline-primary" for="load">Load</label>
+            </div>
+
+            <div class="btn-group btn-matrix w-100" id="options_menu">
+                <div class="d-grid gap-2">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="options_preview">
+                        <label class="form-check-label" for="options_preview">Show preview</label>
+                    </div>
+                </div>
+            </div>
             <div class="btn-group btn-matrix w-100" id="toolbar_menu">
                 <input autocomplete="off" checked class="btn-check" id="select" name="toolbar_button" type="radio">
-                <label class="btn btn-outline-primary" for="select"><i class="fas fa-mouse-pointer"></i></label>
+                <label class="btn btn-outline-primary" for="select">Canvas</label>
+                <input autocomplete="off" class="btn-check" id="draw" name="toolbar_button" type="radio">
+                <label class="btn btn-outline-primary" for="draw">Draw</label>
                 <input autocomplete="off" class="btn-check" id="edit" name="toolbar_button" type="radio">
-                <label class="btn btn-outline-primary" for="edit"><i class="fas fa-pencil-alt"></i></label>
+                <label class="btn btn-outline-primary" for="edit">Edit</label>
                 <input autocomplete="off" class="btn-check" id="move" name="toolbar_button" type="radio">
-                <label class="btn btn-outline-primary" for="move"><i class="fas fa-arrows-alt"></i></label>
+                <label class="btn btn-outline-primary" for="move">Move</label>
             </div>
+
             <div class="btn-group btn-matrix w-100" id="edit_menu">
                 <input autocomplete="off" checked class="btn-check" id="point" name="edit_button" type="radio">
-                <label class="btn btn-outline-primary" for="point"><i class="fas fa-circle"></i></label>
-                <input autocomplete="off" class="btn-check" id="line" name="edit_button" type="radio">
-                <label class="btn btn-outline-primary" for="line"><i class="fas fa-minus"></i></label>
+                <label class="btn btn-outline-primary" for="point">Point</label>
                 <input autocomplete="off" class="btn-check" id="ellipse" name="edit_button" type="radio">
-                <label class="btn btn-outline-primary" for="ellipse"><i class="far fa-circle"></i></label>
-                <input autocomplete="off" class="btn-check" id="rectangle" name="edit_button" type="radio">
-                <label class="btn btn-outline-primary" for="rectangle"><i class="far fa-square"></i></label>
+                <label class="btn btn-outline-primary" for="ellipse">Ellipse</label>
+                <input autocomplete="off" class="btn-check" id="line" name="edit_button" type="radio">
+                <label class="btn btn-outline-primary" for="line">Line</label>
                 <input autocomplete="off" class="btn-check" id="bezier" name="edit_button" type="radio">
                 <label class="btn btn-outline-primary" for="bezier">Bezier</label>
+                <input autocomplete="off" class="btn-check" id="rectangle" name="edit_button" type="radio">
+                <label class="btn btn-outline-primary" for="rectangle">Rectangle</label>
                 <input autocomplete="off" class="btn-check" id="grid" name="edit_button" type="radio">
                 <label class="btn btn-outline-primary" for="grid">Grid</label>
                 <input autocomplete="off" class="btn-check" id="arc" name="edit_button" type="radio">
                 <label class="btn btn-outline-primary" for="arc">Arc</label>
                 <input autocomplete="off" class="btn-check" id="parabola" name="edit_button" type="radio">
                 <label class="btn btn-outline-primary" for="parabola">Parabola</label>
+                <input autocomplete="off" class="btn-check" id="text" name="edit_button" type="radio">
+                <label class="btn btn-outline-primary" for="text">Text</label>
+                <input autocomplete="off" class="btn-check" id="math" name="edit_button" type="radio">
+                <label class="btn btn-outline-primary" for="math">Math</label>
             </div>
+
             <div class="w-100" id="defaultProperties">
 
-                <div class="defaultStroke form-floating">
-                    <input class="form-control color-input" id="defaultStrokeInput" readonly value="Black" type="text">
-                    <label for="defaultStrokeInput">Stroke color:</label>
+                <div class="form-floating">
+                    <input class="form-control color-input" id="defaultStroke" readonly type="text" value="Black">
+                    <label for="defaultStroke">Stroke color:</label>
                 </div>
-                <div class="defaultFill form-floating">
-                    <input class="form-control color-input" id="defaultFillInput" readonly value="None" type="text">
-                    <label for="defaultFillInput">Fill color:</label>
+                <div class="form-floating">
+                    <input class="form-control color-input" id="defaultFill" readonly type="text" value="None">
+                    <label for="defaultFill">Fill color:</label>
                 </div>
-                <div class="defaultLinewidth form-floating">
-                    <select class="form-select" id="defaultLinewidthInput"></select>
-                    <label for="defaultLinewidthInput">Line width:</label>
+                <div class="form-floating">
+                    <select class="form-select" id="defaultLinewidth"></select>
+                    <label for="defaultLinewidth">Line width:</label>
                 </div>
-                <div class="defaultLinedash form-floating">
-                    <select class="form-select" id="defaultLinedashInput"></select>
-                    <label for="defaultLinedashInput">Line dash style:</label>
+                <div class="form-floating">
+                    <select class="form-select" id="defaultLinedash"></select>
+                    <label for="defaultLinedash">Line dash style:</label>
                 </div>
-                <!---
-                <div id="defaultStroke" class="input-group">
-                    <label class="input-group-text col-6" for="defaultStrokeInput">Stroke</label>
-                    <input class="form-control color-input" id="defaultStrokeInput" readonly value="Black" type="text">
-                </div>
-
-                <div id="defaultFill" class="input-group">
-                    <label class="input-group-text col-6" for="defaultFillInput">Fill</label>
-                    <input class="form-control color-input" id="defaultFillInput" readonly value="None" type="text">
-                </div>
-                <div id="defaultLinewidth" class="input-group">
-                    <label class="input-group-text col-6" for="defaultLinewidthInput">Width</label>
-                    <select class="form-select" id="defaultLinewidthInput"></select>
-                </div>
-                <div id="defaultLinedash" class="input-group">
-                    <label class="input-group-text col-6" for="defaultLinedashInput">Dash</label>
-                    <select class="form-select" id="defaultLinedashInput"></select>
-                </div>
-                --->
                 <div id="arrowProperties">
-                    <div class="defaultArrow form-floating">
-                        <select class="form-select" id="defaultArrowInput"></select>
-                        <label for="defaultArrowInput">Arrows appear on:</label>
+                    <div class="form-floating">
+                        <select class="form-select" id="defaultArrow"></select>
+                        <label for="defaultArrow">Arrows appear on:</label>
                     </div>
-                    <div class="defaultArrowTipHead form-floating">
-                        <select class="form-select" id="defaultArrowTipHeadInput"></select>
-                        <label for="defaultArrowTipHeadInput">Head style:</label>
+                    <div class="form-floating">
+                        <select class="form-select" id="defaultArrowTipHead"></select>
+                        <label for="defaultArrowTipHead">Head style:</label>
                     </div>
-                    <div class="defaultArrowTipTail form-floating">
-                        <select class="form-select" id="defaultArrowTipTailInput"></select>
-                        <label for="defaultArrowTipTailInput">Tail style:</label>
+                    <div class="form-floating">
+                        <select class="form-select" id="defaultArrowTipTail"></select>
+                        <label for="defaultArrowTipTail">Tail style:</label>
                     </div>
-                    <!---
-                    <div id="defaultArrow" class="input-group">
-                        <label class="input-group-text col-6" for="defaultArrowInput">Arrow</label>
-                        <select class="form-select" id="defaultArrowInput"></select>
-                    </div>
-                    <div id="defaultArrowTipStart" class="input-group">
-                        <label class="input-group-text col-6" for="defaultArrowTipStartInput">Starting tip</label>
-                        <select class="form-select" id="defaultArrowTipStartInput"></select>
-                    </div>
-                    <div id="defaultArrowTipEnd" class="input-group">
-                        <label class="input-group-text col-6" for="defaultArrowTipEndInput">Ending tip</label>
-                        <select class="form-select" id="defaultArrowTipEndInput"></select>
-                    </div>
-                    --->
                 </div>
                 <div id="arcProperties">
                     <div class="form-floating">
-                        <input type="number" class="form-control" id="defaultArcStartInput" value="0">
-                        <label for="defaultArcStartInput">Starting angle of arc:</label>
+                        <input class="form-control" id="defaultArcStart" type="number" value="0">
+                        <label for="defaultArcStart">Starting angle of arc:</label>
                     </div>
-                    <div class="defaultLinewidth form-floating">
-                        <input type="number" class="form-control" id="defaultArcEndInput" value="180">
-                        <label for="defaultArcEndInput">Ending angle of arc:</label>
+                    <div class="form-floating">
+                        <input class="form-control" id="defaultArcEnd" type="number" value="180">
+                        <label for="defaultArcEnd">Ending angle of arc:</label>
+                    </div>
+                </div>
+                <div id="latexProperties">
+                    <div class="form-floating">
+                        <textarea class="form-control" id="defaultLatex" rows="3" style="height:100%"></textarea>
+                        <label for="defaultLatex">Math expression:</label>
+                    </div>
+                </div>
+                <div id="textProperties">
+                    <div class="form-floating">
+                        <textarea class="form-control" id="defaultText" rows="3" style="height:100%"></textarea>
+                        <label for="defaultText">Text:</label>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="vh-100 col-8" id="canvas"></div>
-        <div class="vh-100 col-2" id="properties">
-            <div class="input-group">
-                <label class="input-group-text col-4" for="propertyStroke">Stroke</label>
-                <input class="form-control color-input" id="propertyStroke" readonly value="NONE" type="text">
-            </div>
-            <div class="input-group">
-                <label class="input-group-text col-4" for="propertyFill">Stroke</label>
-                <input class="form-control color-input" id="propertyFill" readonly value="NONE" type="text">
-            </div>
-            <div class="row text-center" id="shapes">
+
+        <div class="overflow-auto col-2" id="properties">
+            <div class="accordion accordion-flush" id="aProperties">
+                <!---
+                <div class="accordion-item" id="commonProperties">
+                    <h2 class="accordion-header" id="head_commonproperties">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#content_commonproperties" aria-expanded="true"
+                                aria-controls="content_commonproperties">
+                            Common properties
+                        </button>
+                    </h2>
+                    <div id="content_commonproperties" class="accordion-collapse collapse"
+                         aria-labelledby="head_commonproperties" data-bs-parent="#aProperties">
+                        <div class="form-floating">
+                            <input class="form-control color-input" id="stroke_common" readonly type="text"
+                                   value="Black">
+                            <label for="stroke_common">Stroke color:</label>
+                        </div>
+                        <div class="form-floating">
+                            <input class="form-control color-input" id="fill_common" readonly type="text"
+                                   value="None">
+                            <label for="fill_common">Fill color:</label>
+                        </div>
+                        <div class="form-floating">
+                            <select class="form-select" id="linewidth_common"></select>
+                            <label for="linewidth_common">Line width:</label>
+                        </div>
+                        <div class="form-floating">
+                            <select class="form-select" id="linedash_common"></select>
+                            <label for="linedash_common">Line dash style:</label>
+                        </div>
+                    </div>
+                </div>
+                 --->
             </div>
         </div>
     </div>
 </div>
-</body>
+
+<!--                    New Canvas  Modal                  -->
+<div aria-hidden="true" aria-labelledby="newModalLabel" class="modal fade" data-bs-backdrop="static"
+     data-bs-keyboard="false"
+     id="newModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newModalLabel">Warning!</h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <p>You selected new document. All your current progress <strong>will be lost</strong>.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Back</button>
+                <button class="btn btn-primary" data-bs-dismiss="modal" id="newCanvas" type="button">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--                    Load Canvas  Modal                  -->
+<div aria-hidden="true" aria-labelledby="loadModalLabel" class="modal fade" data-bs-backdrop="static"
+     data-bs-keyboard="false"
+     id="loadModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loadModalLabel">Enter your reference code below!</h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-floating">
+                    <textarea class="form-control" id="loadModalReference" rows="15" style="height:100%"></textarea>
+                    <label for="loadModalReference">Reference code:</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Back</button>
+                <button class="btn btn-primary" data-bs-dismiss="modal" id="loadCanvas" type="button">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--                    Save Canvas  Modal                  -->
+<div aria-hidden="true" aria-labelledby="saveModalLabel" class="modal fade" data-bs-backdrop="static"
+     data-bs-keyboard="false"
+     id="saveModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="saveModalLabel">Your code is done!</h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-floating">
+                    <textarea class="form-control" id="saveModalReference" rows="3" style="height:100%"
+                              readonly></textarea>
+                    <label for="saveModalReference">Reference code:</label>
+                    <div class="d-grid">
+                        <button id="saveModalReferenceCopy" type="button" name="copy_button"
+                                class="btn btn-primary btn-block">Copy to clipboard
+                        </button>
+                    </div>
+                </div>
+                <div class="form-floating">
+                    <textarea class="form-control" id="saveModalLatex" rows="15" style="height:100%"
+                              readonly></textarea>
+                    <label for="saveModalLatex">Latex code:</label>
+                    <div class="d-grid gap-2">
+                        <button id="saveModalLatexCopy" type="button" name="copy_button"
+                                class="btn btn-primary btn-block">Copy to clipboard
+                        </button>
+                        <button id="saveModalLatexDownload" type="button" name="download_button"
+                                class="btn btn-primary btn-block">Download .tex file
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- libraries -->
@@ -140,7 +263,10 @@
 <script src="scripts/library/bootstrap.min.js"></script>
 <script src="scripts/library/katex.min.js"></script>
 
-<!--  scripts  -->
-<script src="scripts/script.js"></script>
+
+<!--  script loader  -->
+<script type="module" src="scripts/main.js"></script>
+
+</body>
 
 </html>

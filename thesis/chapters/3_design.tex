@@ -11,14 +11,14 @@ A felhasználói felület kialakításának egy részét befolyásolja az oldal 
 Az elkészült webes alkalmazás elrendezés szempontjából átláthatónak kell lennie, ehhez a legegyszerűbb megvalósítás a hasáb alapú elrendezés: két, esetleg három hasáb. Egyikben az alkalmazás menüje, másik hasábban pedig maga a szerkesztő foglal helyet, a harmadik hasábban a funkciókhoz tartozó ablak jelenjen meg. 
 
 \begin{figure}[!h]
+	\label{fig:block}
 	\includegraphics[width=\textwidth]{images/block.png}
 	\caption{Az alkalmazás felépítése}
-	\label{fig:block}
 \end{figure}
 
 Az alkalmazás legyen reszponzív akár a felület, akár a funkciók megjelenítése szempontjából. A reszponzív webdesign egy újabb megközelítés, amely a \textit{CSS3}-on és a \textit{CSS @media} szabály továbbfejlesztett használatán keresztül az oldal stíluslapján belül a készülékenkénti specifikáció mélyebb szintjén alapul. 
 
-\Section{Alapelemek megjelenítése, és kiválasztása}
+\Section{Alapelemek megjelenítése és kiválasztása}
 
 Az alapelemek megjelenése és kiválasztása egyaránt fontos a felhasználó megragadásában. Ha ezek átláthatók, és jól használhatók, akkor nagyobb célközönséghez juthat el az alkalmazásunk.
 
@@ -52,9 +52,9 @@ A színek kiválasztásához célszerű valamilyen lenyíló menüt használni, 
 
 \begin{figure}[!h]
 	\centering
+	\label{fig:cp}
 	\includegraphics[]{images/colorpicker.png}
 	\caption{Példa a színek kiválasztására}
-	\label{fig:cp}
 \end{figure}
 
 Ebben az esetben megjelenítésre kerül a módosított tulajdonság, a kiválasztott szín, és a választható színek egyaránt. Az első elem a címek között jelöli azt, amikor nem kerül szín kiválasztásra: használható a körvonal eltüntetésére, vagy az ábra fehérrel történő kitöltés elkerülésére.

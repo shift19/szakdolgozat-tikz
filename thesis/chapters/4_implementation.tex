@@ -30,7 +30,7 @@ A p5 függvénykönyvtár telepítéséhez csak hozzá kell adni a fájlunkhoz:
 
 \SubSection{Használat}
 
-A p5.js függvényhívások a \textit{sketch.js}-ben kapnak helyet globális névtér használata esetében:
+A p5.js függvényhívások a \textit{sketch.js}-ben kapnak helyet globális névtér használat esetében:
 
 \begin{lstlisting}[style=es6]
 function setup() {
@@ -45,10 +45,65 @@ function draw() {
 
 A \textit{setup} függvény a \textit{sketch.js} betöltésekor fut le, célszerű iderakni a p5 vászon létrehozását (\textit{createCanvas} függvényhívás, mely paraméterként várja a magasságot és a szélességet). A \textit{draw} függvény a futás során folyamatosan meghívódik.
 
+A dolgozatban a \textit{p5.js} példányosított módban fut a modulok miatt.
 
 \Section{Az alkalmazás felépítése}
 
 % Blokkdiagram féle, hogy mi hol helyezkedik el az alkalmazásban.
+
+Az alkalmazás a \ref{fig:block}. ábrán lévő blokkdiagram alapján készült el. Az ábrán lévő elemek nem minden funkcióban jelennek meg. A következő fejezetekben az egyes funkciók képernyői láthatók. 
+
+A fejezetben megjelenő képernyő mintaképeken a vászon ötszörös nagyításban van a jobb átláthatóság miatt.
+
+\SubSection{Kezdőképernyő}
+
+Ez a képernyő jelenik meg az alkalmazás betöltésekor. A bal oldali menüben automatikusan ki van választva a vászon mozgatására alkalmas funkció.
+
+Az egér bal gombjával tudjuk pozicionálni még görgővel kicsinyíteni vagy nagyítani a vásznat. Az egér középső gombját lenyomva pedig az alapértelmezett pozíció és nagyításra visszaáll a vászon.
+
+\begin{figure}[!h]
+	\label{fig:canvas}
+	\includegraphics[width=\textwidth]{images/editor_canvas.png}
+	\caption{Az elkészült alkalmazás kezdőképernyője}
+\end{figure}
+
+\SubSection{Rajzolás}
+
+A rajzolás mód kiválasztásával megjelenik a vezérlőelemek alatt az alapelemek mátrix alapú felsorolásban és a kijelölt elemhez tartozó tulajdonságok.
+
+A megfelelő tulajdonságok beállítása után a rajzolás az egérrel történik. A pont, szöveg és matek kifejezések kirajzolása kattintásra történnek, még a maradék alapelem "drag and drop" (\textit{fogd és vidd}) megoldással kerül kirajzolásra, vagyis a kezdőpont a kattintás helye, és a végpont az egér gombjának felengedésének a pozíciója lesz.
+
+Amennyiben az előnézet be van kapcsolva a beállításokban, úgy megjelenik az egér helyén egy körvonal, amely jelzi a rajzolandó elem kezdőpontját, valamint a szöveg és a matematikai kifejezések esetében a teljes tartalom megjelenik a beállított tulajdonságok szerint.
+
+\begin{figure}[!h]
+	\label{fig:draw}
+	\includegraphics[width=\textwidth]{images/editor_draw.png}
+	\caption{A rajzolás funkciói rajzolt elemmel a vásznon}
+\end{figure}
+
+\SubSection{Szerkesztés}
+
+A szerkesztés funkcióban lehetőség van a már lent lévő elemek kiválasztására. A kijelölés téglalap alakú, és a kezdő- és végpont szintén "drag and drop" módszerrel kerül megállapításra. A kijelölés közben egy világosszürke téglalap jelzi az aktuális kijelölt területet, így látszódik mely alapelemek esnek bele.
+
+A kijelölés véglegesítése után a rajtoló felület jobb oldalán megjelennek a kijelölt területbe beleeső alapelemek. Itt lehetőség van egyenként szerkeszteni a már lent lévő elemek tulajdonságait. A jelenlegi tulajdonságok automatikusan betöltődnek, módosításkor a vásznon automatikusan megjelenik, nincs szükség a módosítás mentésére.
+
+Kijelölés után lehetőségünk van a másolásra, beillesztésre és törlésre egyaránt, ezek mindegyike billentyű lenyomásra működnek. A másolás a  \textit{CTRL + C}, a beillesztés a \textit{CTRL + V}, még a törlés a \textit{CTRL + X} billentyűkombinációval, és a \textit{DELETE} billentyűvel egyaránt működik.
+
+\begin{figure}[!h]
+	\label{fig:edit}
+	\includegraphics[width=\textwidth]{images/editor_edit.png}
+	\caption{A szerkesztés képernyő kiválasztott elem után}
+\end{figure}
+
+\SubSection{Mozgatás}
+
+A mozgatás funkcióban lehet a már lent lévő ábrák pontjait kijelölés után mozgatni. A mozgatandó elem kijelölése kattintásra történik, \textit{CTRL} billentyű lenyomása közben van lehetőség több pont kijelölésére. A mozgatás szintén "drag and drop" megoldással működik.
+
+\begin{figure}[!h]
+	\label{fig:move}
+	\includegraphics[width=\textwidth]{images/editor_move.png}
+	\caption{A mozgatásra alkalmas pontok megjelenítése a vásznon}
+\end{figure}
 
 \Section{Definiált osztályok bemutatása}
 
@@ -59,9 +114,182 @@ A \textit{setup} függvény a \textit{sketch.js} betöltésekor fut le, célszer
 \begin{figure}[!h]
 	\includegraphics[width=\textwidth]{images/uml.png}
 	\caption{Az osztályok UML diagrammja}
-	\label{fig:uml1}
+	\label{fig:uml}
+\end{figure}
+
+\SubSection{Alapelemek osztályai}
+
+Ebben a részben kerülnek a menüben kiválasztható alapelemek osztályai, valamint az aktuális elem \textit{p5.js} és \textit{TikZ} kódrészletei. 
+
+\SubSubSection{Shape osztály}
+
+A \textit{Shape} osztály minden alapelem szülője, itt kerül beállításra a majdnem az összes elemnél előforduló szín, betűszín, vonal vastagság és mintázat. A \textit{draw} metódus beállítja a megadott tulajdonságokat a rajzolás előtt. A \textit{toLatex} és a \textit{fromJSON} metódusok még itt üres, értékeket a származtatott osztályokban kapnak.
+
+\SubSubSection{Point osztály}
+
+A \textit{Point} osztály egy pont tulajdonságait tárolja. Példányosítás során meg kell adni a pont két koordinátáját, és a tulajdonságokat tömb formájában. A jobb láthatóság érdekében \textit{p5.js} és \textit{TikZ} esetében egy kis méretű kör kerül kirajzolásra. 
+
+\SubSubSection{Ellipse osztály}
+
+Az \textit{Ellipse} osztály ellipszis rajzolását teszi lehetővé. A példányosításhoz meg kell adni két koordinátapárt (egy x és egy y koordinátát), valamint a tulajdonságokat. A \textit{p5.js} és a \textit{TikZ} is ugyanúgy támogatja az ellipszis rajzolását: meg kell adni a középpontot és a sugár méretét, így szükséges egy metódus, ami ezt kiszámolja. A \textit{getCenterDiameter} metódus ezt teszi lehetővé:
+
+\begin{lstlisting}[style=es6]
+static getCenterDiameter(start, end) {
+	let center = {
+		x: start.x + (end.x - start.x) / 2,
+		y: start.y + (end.y - start.y) / 2
+	};
+	let diameter = {
+		x: end.x - start.x,
+		y: end.y - start.y
+	};
+	return {center, diameter}
+}
+\end{lstlisting}
+
+\SubSubSection{Line osztály}
+
+A \textit{Line} osztályban vannak definiálva a vonal rajzolásához szükséges metódusok. A példányosításhoz meg kell adni két koordinátapárt (egy x és egy y koordinátát), valamint a tulajdonságokat. A nyilak rajzolását is ez az osztály végzi, ugyanis tulajdonságként megkapja, hogy hol és milyen típusú nyíl kirajzolása szükséges. 
+
+A \textit{p5.js} megvalósítás kicsit komplikáltabb, mint a \textit{Tikz} megoldás. A \textit{p5.js} esetében a \textit{positionHead} metódus a kiválasztott végpontra lép, a \textit{drawArrowHead} metódus pedig az aktuális pontra kirajzolja a kiválasztott nyílhegyet. A \textit{drawArrowLine} metódus csak egyszerűen összeköti a két végpontot a nyílhegy függvényében.
+
+A \textit{TikZ} esetében pedig csak a \textit{draw} paramétereként meg kell adni a nyílhegyet.
+
+\SubSubSection{Bezier osztály}
+
+A \textit{Bezier} osztály egy harmadfokú Bézier-görbe kirajzolását teszi lehetővé. A példányosításhoz meg kell adni két koordinátapárt (egy x és egy y koordinátát), valamint a tulajdonságokat. A program automatikusan számol lerakáskor két kontrollpontot a harmadolópontok helyére, mely utólag természetesen módosítható. A vonalaknál látott nyílhegyek itt is elérhetők.
+
+A \textit{p5.js} és a \textit{TikZ} megadás rendre megegyezik: először meg kell adni a kezdőpontot, majd a két kontrollpontot és végül a végpontot.
+
+\SubSubSection{Rectangle osztály}
+
+A \textit{Rectangle} osztály egy tetszőleges téglalap létrehozására szolgál. A példányosításhoz meg kell adni két koordinátapárt (egy x és egy y koordinátát), valamint a tulajdonságokat. 
+
+A \textit{p5.js} és a \textit{TikZ} megadás megegyezik: meg kell adni a kezdő- és a végpontot, amennyiben a \textit{p5.js} esetében megadjuk előtte, hogy a pontok a szemközti sarkakat jelölik a kezdőpont, a magasság és szélesség helyett. Erre szolgál a \textit{rectMode(CORNERS);} metódus és paramétere.
+
+\SubSubSection{Grid osztály}
+
+A \textit{Grid} osztály egy rácsháló létrehozását teszi lehetővé.  A példányosításhoz meg kell adni két koordinátapárt (egy x és egy y koordinátát), valamint a tulajdonságokat. 
+
+A \textit{p5.js} nem rendelkezik rácsháló kirajzolásához beépített függvénnyel, így saját megoldással történik a kirajzolás: a kezdőpont és a végpont között függőlegesen és vízszintesen is vonalak kerülnek kirajzolásra így megkapva a hálót.
+
+A \textit{TikZ} alapból rendelkezik ezzel a funkcióval, ebben az esetben csak a két pont megadása szükséges.
+
+A rácsháló kirajzolását végző kódrészlet:
+
+\begin{lstlisting}[style=es6]
+for (let i = Math.min(this.dimension.start.x, this.dimension.end.x); 
+     i <= Math.max(this.dimension.start.x, this.dimension.end.x); 
+     i += grid_density) {
+         P5.line(i, this.dimension.start.y, i, this.dimension.end.y)
+}
+
+for (let i = Math.min(this.dimension.start.y, this.dimension.end.y); 
+    i <= Math.max(this.dimension.start.y, this.dimension.end.y); 
+    i += grid_density) {
+        P5.line(this.dimension.start.x, i, this.dimension.end.x, i)
+}
+\end{lstlisting}
+
+\SubSubSection{Arc osztály}
+
+Az \textit{Arc} osztály egy körív rajzolását teszi lehetővé. A példányosításhoz meg kell adni két koordinátapárt (egy x és egy y koordinátát), valamint a tulajdonságokat. A tulajdonságok között szerepel az ív kezdő és végpontja fokban az adott sugarú körön.
+
+A kezdőpont és a sugár meghatározásához itt is a \textit{Ellipse} osztálynál megismert \textit{getCenterDiameter} metódus szolgál. 
+
+A \textit{p5.js} és a \textit{TikZ} egyaránt rendelkezik beépített megoldással körív rajzolására, azonban máshogy kerülnek kirajzolásra. A \textit{p5.js} esetében a középpont és az azon lévő köríven a megadott fokok, míg a \textit{Tikz} esetében a megadott pont a kezdőpont, és onnan kerül a körív kirajzolásra, nem a középpont a mérvadó. Az exportált \textit{TikZ} a \textit{p5.js} megoldásával egyezik meg, vagyis a kezdőpontba el van tolva a megfelelő irányba.
+
+\SubSubSection{Parabola osztály}
+
+A \textit{Parabola} osztályban vannak definiálva egy parabola kirajzolásához szükséges metódusok. A példányosításhoz meg kell adni két koordinátapárt (egy x és egy y koordinátát), valamint a tulajdonságokat.
+
+A \textit{p5.js} nem rendelkezik parabola kirajzolásához beépített függvénnyel, így saját megoldással történik a \textit{TikZ}-ben szereplő parabola kirajzolása. 
+
+A \textit{TikZ} parabola egyenlete: 
+
+$$\displaystyle y = \frac{y_1 - y_0}{(x_1 - x_0)^2}(x - x_0)^2 + y_0, \qquad x\in[x_0, y_0]$$
+
+A kódrészlet, amely a vászonra rajzolja ennek az egyenletnek a képét:
+
+\begin{lstlisting}[style=es6]
+let a = (this.dimension.end.y - this.dimension.start.y) / 
+    Math.pow(this.dimension.end.x - this.dimension.start.x, 2)
+
+if (isFinite(a)) {
+	P5.beginShape();
+	for (let i = Math.min(this.dimension.start.x, this.dimension.end.x); 
+	    i <= Math.max(this.dimension.start.x, this.dimension.end.x); 
+	    i += 0.25) {
+		    P5.vertex(i, a * (Math.pow(i - this.dimension.start.x, 2)) +
+		        this.dimension.start.y)
+	}
+	P5.endShape();
+} else {
+	P5.line(this.dimension.start.x, this.dimension.start.y, 
+	    this.dimension.end.x, this.dimension.end.y)
+}
+\end{lstlisting}
+
+\SubSubSection{LMath osztály}
+
+A \textit{LMath} osztály matematikai kifejezések létrehozását teszi lehetővé. Példányosítás során meg kell adni a pont két koordinátáját, és a tulajdonságokat, mely között szerepel a kirajzolandó kifejezés. 
+
+A \textit{p5.js} nem támogatja a \LaTeX\ kifejezések megjelenítését a vásznon, így egy másik függvénykönyvtár használatával kellett megoldani: ez pedig a KaTeX{\cite{katex}}, mely egy gyors, könnyen használható JavaScript könyvtár a \LaTeX\ matematikai kifejezések webes megjelenítéséhez.
+
+A \textit{renderToCanvas} függvénnyel lehet a KaTeX által generált kifejezéseket a vászonra rakni, paraméterként meg kell adni a kirajzolandó kifejezést, magát a vásznat, mint kirajzolási hely, valamint a kifejezés pozícióját (az x és y koordinátát egyaránt).
+
+\begin{lstlisting}[style=es6]
+let canvas = document.getElementById(P5.canvas.id);
+katex.renderToCanvas(this.latex, canvas, 
+    this.x + grid_density / 8, this.y - grid_density / 2.5, {
+	    fontSize: 19.5
+});
+\end{lstlisting}
+
+A \textit{TikZ} megoldás egyszerűbb, ott egy \textbackslash \textit{node} parancs paramétereként kell megadni a kifejezést matematikai módban.
+
+\SubSubSection{Text osztály}
+
+A \textit{Text} osztály szöveg vászonra helyezését teszi levetővé. Példányosítás ugyanúgy zajlik, mint a matematikai kifejezések esetében.
+
+Annak ellenére, hogy a \textit{p5.js} rendelkezik olyan funkciókkal ezek "kirajzolása" szintén a KaTeX függvénykönyvtár segítségével történik, annyi eltéréssel, hogy a kirajzolandó szöveg megkapja a \textbackslash text\{\} paramétert, hogy ne érvényesüljön a matematikai mód.
+
+\begin{lstlisting}[style=ES6]
+let canvas = document.getElementById(P5.canvas.id);
+katex.renderToCanvas(`\\text{${this.text}}`, canvas, 
+    this.x + grid_density / 8, this.y - grid_density / 2.5, {
+	    fontSize: 19.5
+});
+\end{lstlisting}
+
+A \textit{TikZ} megoldás hasonlóan a \textbackslash \textit{node} parancs paramétereként kell megadni a szöveget.
+
+\SubSection{Funkciók osztályai}
+
+Itt a két funkció kerül bemutatásra, ami osztályba lett szedve a könnyebb elérés miatt. A funkciók jelentős része modulként szerepel az alkalmazásban, nem osztályokba csoportosítva.
+
+\SubSubSection{Controls osztály}
+
+Ez az osztály felelős a vászon mozgatásáért és a nagyításért. Az osztályban eseménykezelők kerültek létrehozásra: kezelésre kerül az egér kattintása, húzása, felengedése valamint a görgetés. A vászon mozgatása szintén a "drag and drop" elvet követi.
+
+Az eseménykezelők beállítása a \textit{p5.js} példányára, amely a \textit{sketch}-ben kerül létrehozásra:
+
+\begin{lstlisting}[style=ES6]
+P5.mousePressed = e => Controls.mousePressed(e)
+P5.mouseDragged = e => Controls.mouseDragged(e);
+P5.mouseReleased = e => Controls.mouseReleased(e);
+P5.mouseWheel = e => Controls.zoomCanvas(e);
+\end{lstlisting}
+
+\SubSubSection{ColorPicker osztály}
+
+Ez az osztály kezeli az alkalmazásban szereplő színválasztó megfelelő működését. Itt kerül kezelésre az adott színválasztó kiválasztása, a színpaletta megjelenítésére és eltüntetésére, az adott szín kijelölése. 
+
+\begin{figure}[!h]
+	\centering
+	\label{fig:cp2}
+	\includegraphics[]{images/colorpicker.png}
+	\caption{Példa a színek kiválasztására}
 \end{figure}
 
 
-%\begin{lstlisting}[style=ES6]
-%\end{lstlisting}

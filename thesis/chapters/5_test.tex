@@ -1,7 +1,84 @@
 \Chapter{Példák ábrák szerkesztésére}
 
-% Kb. 6 oldal
+Ebben a fejezetben már az szerkesztőprogrammal elkészített ábrák kerülnek bemutatásra. 
 
-% 4-5 példával bemutatni, hogy milyen esetekre hogyan használható az elkészült szerkesztő.
+\Section{Hasse-diagram}
 
-% Jó, hogy ha változatosak a példák, tehát lehet benne Hasse diagram, általános gráf, egyenletek, függvények, folyamatábra.
+A rendezettségelméletben a Hasse-diagram egy olyan matematikai diagramtípus, amelyet egy véges, részben rendezett halmaz ábrázolására használnak, annak tranzitív redukciójának rajza formájában. Konkrétan, egy részlegesen rendezett $(S, \leq)$ halmaz esetében az $S$ minden elemét egy csúcsként ábrázoljuk a síkban, és egy olyan vonalszakaszt vagy görbét rajzolunk, amely $x$-ből $y$ felé halad, amikor $y$ lefedi $x$-et (vagyis amikor $x \leq y$ és nincs olyan $z$, hogy $x \leq z \leq y$). Ezek a görbék keresztezhetik egymást, de a végpontjaikon kívül nem érinthetnek más csúcsot. Egy ilyen diagram, felcímkézett csúcsokkal, egyértelműen meghatározza a részleges rendjét.
+
+Az oszthatóság egy részben rendezett halmaz. Vegyük a 30-as szám osztóit, ebben az esetben az alábbi halmaz adja meg: 
+$$D_{30} = \{1,2,3,5,6,10,15,30\}.$$
+
+\begin{figure*}[!h]
+	\label{fig:hasse}
+	\centering
+	\begin{tabular}{c}
+		\begin{tabular}{c}
+			\includegraphics[width=0.4\textwidth]{images/hasse.png}
+		\end{tabular}
+		\begin{tabular}{c}
+			\input{images/tikz/hasse}
+		\end{tabular}
+	\end{tabular}
+	\caption{Egy Hasse-diagram az alkalmazásban és kimentve}
+\end{figure*}
+
+\Section{Általános gráf}
+
+A gráf (vagy irányítatlan gráf) egy $G = (V, E)$ pár, ahol $V$ egy olyan halmaz, amelynek elemeit csúcsoknak, $E$ pedig párosított csúcsok halmaza, amelynek elemeit éleknek nevezik. Néha a gráfok tartalmazhatnak hurkokat, azaz olyan éleket, amelyek egy csúcsot önmagához kapcsolnak. A hurkok engedélyezéséhez a fenti definíciót úgy kell megváltoztatni, hogy az éleket két csúcsból álló többszörös halmazokként definiáljuk a két halmaz helyett. Az ilyen általánosított gráfokat hurokkal rendelkező gráfoknak vagy egyszerűen gráfoknak nevezzük, ha a kontextusból egyértelmű, hogy a hurok megengedett.
+
+\begin{figure}[!h]
+	\label{fig:graph_editor}
+	\centering
+	\includegraphics[width=0.75\textwidth]{images/graph.png}
+	\caption{Egy gráf képe az alkalmazásban}
+\end{figure}
+
+\begin{figure}[!h]
+	\label{fig:graph_tikz}
+	\centering
+	\input{images/tikz/graph}
+	\caption{Az alkalmazásból kimentett gráf képe}
+\end{figure}
+
+\Section{Folyamatábra}
+
+A folyamatábra egy olyan diagramtípus, amely egy adott folyamatot vagy eljárást ábrázol. A folyamatábra definiálható úgy is, mint egy algoritmus, egy feladat megoldásának lépésről lépésre történő megközelítése.
+
+Az folyamatábra a lépéseket különböző típusú dobozokként, a lépések sorrendjét pedig a dobozok nyilakkal való összekapcsolásával mutatja be. Ez a diagrammszerű ábrázolás egy adott probléma megoldási modelljét szemlélteti. A folyamatábrákat különböző területeken használják egy folyamat vagy program elemzése, tervezése, dokumentálása vagy kezelése során.
+
+\begin{figure*}[!h]
+	\label{fig:flowchart}
+	\centering
+	\begin{tabular}{c}
+		\begin{tabular}{c}
+			\includegraphics[width=0.45\textwidth]{images/flowchart.png}
+		\end{tabular}
+		\begin{tabular}{c}
+				\input{images/tikz/flowchart}
+		\end{tabular}
+	\end{tabular}
+	\caption{Egy folyamatábra képe az alkalmazásban és kimentve}
+\end{figure*}
+
+\Section{Nassi–Shneiderman-diagram}
+
+A Nassi-Shneiderman-diagram a számítógépes programozásban a strukturált programozás grafikus ábrázolása. Isaak Nassi és Ben Shneidermann fejlesztette ki 1972-ben. Ezeket az ábrákat struktogramoknak is nevezik, mivel a program struktúráit mutatják.
+
+A struktogramok a folyamatábra szabadosságát korlátozzák és csak struktúrált szimbólumokat tartalmaznak. Alapelem a téglalap, amit különböző módokon osztunk fel részekre. Maga a program egyetlen partícionált (felosztott) téglalap.
+
+A Nassi-Shneiderman-diagramokat csak ritkán használják a formális programozásban. Absztrakciós szintjük közel áll a strukturált programkódhoz, és a módosítások miatt a teljes diagramot újra kell rajzolni. Az algoritmusokat és a magas szintű terveket egyértelművé teszik, ami az oktatásban is hasznossá teszi őket.
+
+\begin{figure*}[!h]
+	\label{fig:structogram}
+	\centering
+	\begin{tabular}{c}
+		\begin{tabular}{c}
+			\includegraphics[width=0.3\textwidth]{images/structogram.png}
+		\end{tabular}
+		\begin{tabular}{c}
+			\input{images/tikz/structogram}
+		\end{tabular}
+	\end{tabular}
+	\caption{Egy struktogram képe az alkalmazásban és kimentve}
+\end{figure*}

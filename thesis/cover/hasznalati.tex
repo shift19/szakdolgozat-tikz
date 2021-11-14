@@ -1,20 +1,70 @@
 \pagestyle{empty}
 
-\noindent \textbf{\Large CD Használati útmutató}
+\noindent \textbf{\Large A mellékelt CD tartalma}
 
 \vskip 1cm
 
-Ennek a címe lehet például \textit{A mellékelt CD tartalma} vagy \textit{Adathordozó használati útmutató} is.
+\noindent A dolgozathoz tartozó melléklet a következőket tartalmazza:
 
-Ez jellemzően csak egy fél-egy oldalas leírás.
-Arra szolgál, hogy ha valaki kézhez kapja a szakdolgozathoz tartozó CD-t, akkor tudja, hogy mi hol van rajta.
-Jellemzően elég csak felsorolni, hogy milyen jegyzékek vannak, és azokban mi található.
-Az elkészített programok telepítéséhez, futtatásához tartozó instrukciók kerülhetnek ide.
-
-A CD lemezre mindenképpen rá kell tenni
 \begin{itemize}
-\item a dolgozatot egy \texttt{dolgozat.pdf} fájl formájában,
-\item a LaTeX forráskódját a dolgozatnak,
-\item az elkészített programot, fontosabb futási eredményeket (például ha kép a kimenet),
-\item egy útmutatót a CD használatához (ami lehet ez a fejezet külön PDF-be vagy MarkDown fájlként kimentve).
+\item \texttt{thesis.pdf}: a dolgozat PDF formátumban
+\item \texttt{manual.pdf}: a használati útmutató PDF formátumban
+\item \texttt{thesis/}: a dolgozat \LaTeX\ forráskódját tartalmazó jegyzék
+\item \texttt{editor/}: az elkészített szerkesztő jegyzéke
 \end{itemize}
+
+\vskip 0.5cm
+
+\noindent
+A szerkesztő futtatásához egy webszerver szükséges. Amennyiben nem áll rendelkezésre akkor egy \textit{Node.js} telepítés a legegyszerűbb megoldás:
+
+\vskip 0.5cm
+\noindent
+Letölthető az alábbi linken:
+
+\href{https://nodejs.org/en/download/}{\texttt{https://nodejs.org/en/download/}}
+
+\vskip 0.5cm
+\noindent
+A \textit{http-server} telepítése:
+
+\begin{lstlisting}[style=latex]
+>   npm install --global http-server
+\end{lstlisting}
+
+\vskip 0.5cm
+
+\noindent
+Az alkalmazás elindításához ezenkívül egy parancssorra lesz szükség:
+
+\begin{lstlisting}[style=latex]
+>   http-server ./editor/
+\end{lstlisting}
+
+\vskip 0.5cm
+
+\noindent
+A parancs kiadása után már el is érhető al alkalmazás, jelen esetben a \textit{8080}-as port alatt:
+
+\begin{lstlisting}[style=latex]
+>   http-server ./editor/
+Starting up http-server, serving ./editor/
+
+http-server version: 14.0.0
+
+http-server settings:
+CORS: disabled
+Cache: 3600 seconds
+Connection Timeout: 120 seconds
+Directory Listings: visible
+AutoIndex: visible
+Serve GZIP Files: false
+Serve Brotli Files: false
+Default File Extension: none
+
+Available on:
+http://192.168.0.14:8080
+http://127.0.0.1:8080
+	
+Hit CTRL-C to stop the server
+\end{lstlisting}

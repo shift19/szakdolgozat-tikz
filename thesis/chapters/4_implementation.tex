@@ -1,17 +1,12 @@
 \Chapter{JavaScript implementáció}
 
-% Kb. 8-12 oldal
-
 \Section{A p5 függvénykönyvtár}
-
-% Fél-egy oldalas áttekintés a p5-ről.
 
 Az elkészült szerkesztő jelentős mértékben támaszkodik a p5.js függvénykönyvtár adta lehetőségekre. A p5 oldalán az alábbi ismertető olvasható:
 
+"A p5.js egy JavaScript könyvtár a kreatív kódoláshoz, amelynek középpontjában az áll, hogy a kódolást elérhetővé és befogadóvá tegye művészek, tervezők, oktatók, kezdők és bárki más számára! A p5.js ingyenes és nyílt forráskódú, mert hiszünk abban, hogy a szoftvereknek és a tanuláshoz szükséges eszközöknek mindenki számára elérhetőnek kell lenniük.
 
-A p5.js egy JavaScript könyvtár a kreatív kódoláshoz, amelynek középpontjában az áll, hogy a kódolást elérhetővé és befogadóvá tegye művészek, tervezők, oktatók, kezdők és bárki más számára! A p5.js ingyenes és nyílt forráskódú, mert hiszünk abban, hogy a szoftvereknek és a tanuláshoz szükséges eszközöknek mindenki számára elérhetőnek kell lenniük.
-
-A vázlat metaforáját használva a p5.js teljes körű rajzolási funkcionalitással rendelkezik. Azonban nem korlátozódik a rajzvászonra. Az egész böngészőoldalt tekintheted vázlatodnak, beleértve a HTML5-objektumokat a szöveghez, a bevitelhez, a videóhoz, a webkamerához és a hanghoz \cite{p5js}.
+A vázlat metaforáját használva a p5.js teljes körű rajzolási funkcionalitással rendelkezik. Azonban nem korlátozódik a rajzvászonra. Az egész böngészőoldalt tekintheted vázlatodnak, beleértve a HTML5-objektumokat a szöveghez, a bevitelhez, a videóhoz, a webkamerához és a hanghoz\cite{p5js}."
 
 \SubSection{Telepítés}
 
@@ -46,16 +41,37 @@ function draw() {
 A \textit{setup} függvény a \textit{sketch.js} betöltésekor fut le, célszerű iderakni a p5 vászon létrehozását (\textit{createCanvas} függvényhívás, mely paraméterként várja a magasságot és a szélességet). A \textit{draw} függvény a futás során folyamatosan meghívódik.
 
 A dolgozatban a \textit{p5.js} példányosított módban fut a modulok miatt.
+\begin{lstlisting}[style=es6]
+const sketch = s => {
+	
+	s.setup = () => {
+		...
+	}
+	
+	s.draw = () => {
+		...
+	}
+
+...
+
+}
+
+const P5 = new p5(sketch);
+
+export {
+	P5
+}
+\end{lstlisting}
+
+Ebben az esetben a \textit{P5} névtér alá kerül a vászon, és a modulokban importálni kell a névtér hivatkozását, valamint az eddig globális \textit{p5.js} függvényhívások is ezen névtér alá kerülnek.
 
 \Section{Az alkalmazás felépítése}
-
-% Blokkdiagram féle, hogy mi hol helyezkedik el az alkalmazásban.
 
 Az alkalmazás a \ref{fig:block}. ábrán lévő blokkdiagram alapján készült el. Az ábrán lévő elemek nem minden funkcióban jelennek meg. A következő fejezetekben az egyes funkciók képernyői láthatók. 
 
 A fejezetben megjelenő képernyő mintaképeken a vászon ötszörös nagyításban van a jobb átláthatóság miatt.
 
-\SubSection{Kezdőképernyő}
+\SubSection{Kezdőképernyő} 
 
 Ez a képernyő jelenik meg az alkalmazás betöltésekor. A bal oldali menüben automatikusan ki van választva a vászon mozgatására alkalmas funkció.
 
@@ -63,8 +79,53 @@ Az egér bal gombjával tudjuk pozicionálni még görgővel kicsinyíteni vagy 
 
 \begin{figure}[!h]
 	\label{fig:canvas}
+	\centering
 	\includegraphics[width=\textwidth]{images/editor_canvas.png}
 	\caption{Az elkészült alkalmazás kezdőképernyője}
+\end{figure}
+
+Az alkalmazás bármely menüpont alatt támogatja a visszavonás műveleteit: az adott művelet visszavonható a \textit{CTRL + Z} billentyűkombinációval, míg a \textit{CTRL + Y} kombináció lehetőséget biztosít a visszavont művelet megismétlésére. 
+
+\SubSubSection{Vezérlőgombok}
+
+A bal oldalt megjelenő gombok közül a felső mátrix biztosítja az új dokumentum létrehozását, a beállításokat, a meglévő ábra mentését, és visszatöltését.
+
+Az első ikonra 
+(\includegraphics[height=\fontcharht\font`\B]{images/new.png})
+kattintva új dokumentumot hozhatunk létre. Ekkor a már meglévő ábra eltűnik, visszatöltésre nincs lehetőség.
+
+\begin{figure}[!h]
+	\label{fig:new}
+	\centering
+	\includegraphics[width=0.75\textwidth]{images/new_modal.png}
+	\caption{Új dokumentum létrehozásakor megjelenő figyelmeztető üzenet}
+\end{figure}
+
+A fogaskerék ikonnal 
+(\includegraphics[height=\fontcharht\font`\B]{images/settings.png})
+megnyithatjuk a beállításokat, itt van lehetőség az alapértelmezetten bekapcsolt rácsponthoz illeszkedést kikapcsolni, és az előnézetet bekapcsolni.
+
+A következő két ikon felelős a már kész ábra kimentésére 
+(\includegraphics[height=\fontcharht\font`\B]{images/save.png}),
+valamint a letöltött ábra visszamásolására
+(\includegraphics[height=\fontcharht\font`\B]{images/load.png}).
+
+Az ábra kimentésekor egy felugró ablak fogad. Ekkor mentésre kerül a jelenlegi vászon állapota is süti formájában. A hivatkozási kód és a \textit{Tikz} kód kimásolható a mezőből gombnyomásra is, valamint egybefűzve le is tölthetők. Ebben az esetben a letöltött \textit{.tex} fájlban egymás alatt jelenik meg a hivatkozási kód, a \textit{TikZ} ábra kódja, valamint a letöltött állomány létrehozásának időpontja. Ezek a \textit{.tex} fájlok módosítás nélkül importálhatók az \lstinline[style=latex]{\input} paranccsal a meglévő dokumentumokba. 
+
+\begin{figure}[!h]
+	\label{fig:load}
+	\centering
+	\includegraphics[width=0.75\textwidth]{images/save_modal.png}
+	\caption{Az ábra mentésekor megjelenő ablak}
+\end{figure}
+
+Az ábra betöltésekor a már meglévő hivatkozási kód bemásolása után az alkalmazás betölti a kódhoz tartozó ábrát és kezdhetjük is a már meglévő ábra szerkesztését és kibővítését.
+
+\begin{figure}[!h]
+	\label{fig:save}
+	\centering
+	\includegraphics[width=0.75\textwidth]{images/load_modal.png}
+	\caption{Az ábra betöltésekor megjelenő ablak}
 \end{figure}
 
 \SubSection{Rajzolás}
@@ -73,27 +134,30 @@ A rajzolás mód kiválasztásával megjelenik a vezérlőelemek alatt az alapel
 
 A megfelelő tulajdonságok beállítása után a rajzolás az egérrel történik. A pont, szöveg és matek kifejezések kirajzolása kattintásra történnek, még a maradék alapelem "drag and drop" (\textit{fogd és vidd}) megoldással kerül kirajzolásra, vagyis a kezdőpont a kattintás helye, és a végpont az egér gombjának felengedésének a pozíciója lesz.
 
-Amennyiben az előnézet be van kapcsolva a beállításokban, úgy megjelenik az egér helyén egy körvonal, amely jelzi a rajzolandó elem kezdőpontját, valamint a szöveg és a matematikai kifejezések esetében a teljes tartalom megjelenik a beállított tulajdonságok szerint.
-
 \begin{figure}[!h]
 	\label{fig:draw}
+	\centering
 	\includegraphics[width=\textwidth]{images/editor_draw.png}
 	\caption{A rajzolás funkciói rajzolt elemmel a vásznon}
 \end{figure}
+
+Amennyiben az előnézet be van kapcsolva a beállításokban, úgy megjelenik az egér helyén egy körvonal, amely jelzi a rajzolandó elem kezdőpontját, valamint a szöveg és a matematikai kifejezések esetében a teljes tartalom megjelenik a beállított tulajdonságok szerint.
+
 
 \SubSection{Szerkesztés}
 
 A szerkesztés funkcióban lehetőség van a már lent lévő elemek kiválasztására. A kijelölés téglalap alakú, és a kezdő- és végpont szintén "drag and drop" módszerrel kerül megállapításra. A kijelölés közben egy világosszürke téglalap jelzi az aktuális kijelölt területet, így látszódik mely alapelemek esnek bele.
 
-A kijelölés véglegesítése után a rajtoló felület jobb oldalán megjelennek a kijelölt területbe beleeső alapelemek. Itt lehetőség van egyenként szerkeszteni a már lent lévő elemek tulajdonságait. A jelenlegi tulajdonságok automatikusan betöltődnek, módosításkor a vásznon automatikusan megjelenik, nincs szükség a módosítás mentésére.
-
-Kijelölés után lehetőségünk van a másolásra, beillesztésre és törlésre egyaránt, ezek mindegyike billentyű lenyomásra működnek. A másolás a  \textit{CTRL + C}, a beillesztés a \textit{CTRL + V}, még a törlés a \textit{CTRL + X} billentyűkombinációval, és a \textit{DELETE} billentyűvel egyaránt működik.
-
 \begin{figure}[!h]
 	\label{fig:edit}
+	\centering
 	\includegraphics[width=\textwidth]{images/editor_edit.png}
 	\caption{A szerkesztés képernyő kiválasztott elem után}
 \end{figure}
+
+A kijelölés véglegesítése után a rajtoló felület jobb oldalán megjelennek a kijelölt területbe beleeső alapelemek. Itt lehetőség van egyenként szerkeszteni a már lent lévő elemek tulajdonságait. A jelenlegi tulajdonságok automatikusan betöltődnek, módosításkor a vásznon automatikusan megjelenik, nincs szükség a módosítás mentésére.
+
+Kijelölés után lehetőségünk van a másolásra, beillesztésre és törlésre egyaránt, ezek mindegyike billentyű lenyomásra működnek. A másolás a  \textit{CTRL + C}, a beillesztés a \textit{CTRL + V}, még a törlés a \textit{CTRL + X} billentyűkombinációval, és a \textit{DELETE} billentyűvel egyaránt működik.
 
 \SubSection{Mozgatás}
 
@@ -101,17 +165,15 @@ A mozgatás funkcióban lehet a már lent lévő ábrák pontjait kijelölés ut
 
 \begin{figure}[!h]
 	\label{fig:move}
+	\centering
 	\includegraphics[width=\textwidth]{images/editor_move.png}
 	\caption{A mozgatásra alkalmas pontok megjelenítése a vásznon}
 \end{figure}
 
 \Section{Definiált osztályok bemutatása}
 
-% UML osztálydiagram.
-% Minden osztályról érdemes legalább 1-2 mondatot írni.
-% A megvalósítással kapcsolatos tapasztalatokat is lehet itt részletezni.
-
 \begin{figure}[!h]
+	\centering
 	\includegraphics[width=\textwidth]{images/uml.png}
 	\caption{Az osztályok UML diagrammja}
 	\label{fig:uml}
@@ -119,11 +181,11 @@ A mozgatás funkcióban lehet a már lent lévő ábrák pontjait kijelölés ut
 
 \SubSection{Alapelemek osztályai}
 
-Ebben a részben kerülnek a menüben kiválasztható alapelemek osztályai, valamint az aktuális elem \textit{p5.js} és \textit{TikZ} kódrészletei. 
+Ebben a részben kerülnek a menüben kiválasztható alapelemek osztályai, valamint az aktuális elem esetében a  \textit{p5.js} és \textit{TikZ} közötti különbségek és megoldásuk. 
 
 \SubSubSection{Shape osztály}
 
-A \textit{Shape} osztály minden alapelem szülője, itt kerül beállításra a majdnem az összes elemnél előforduló szín, betűszín, vonal vastagság és mintázat. A \textit{draw} metódus beállítja a megadott tulajdonságokat a rajzolás előtt. A \textit{toLatex} és a \textit{fromJSON} metódusok még itt üres, értékeket a származtatott osztályokban kapnak.
+A \textit{Shape} osztály minden alapelem szülője, itt kerül beállításra a majdnem az összes elemnél előforduló szín, betűszín, vonal vastagság és mintázat. A \textit{draw} metódus beállítja a megadott tulajdonságokat a rajzolás előtt. A \textit{toLatex} és a \textit{fromJson} metódusok még itt üres, értékeket a származtatott osztályokban kapnak.
 
 \SubSubSection{Point osztály}
 
@@ -139,6 +201,7 @@ static getCenterDiameter(start, end) {
 		x: start.x + (end.x - start.x) / 2,
 		y: start.y + (end.y - start.y) / 2
 	};
+
 	let diameter = {
 		x: end.x - start.x,
 		y: end.y - start.y
@@ -214,7 +277,6 @@ A kódrészlet, amely a vászonra rajzolja ennek az egyenletnek a képét:
 \begin{lstlisting}[style=es6]
 let a = (this.dimension.end.y - this.dimension.start.y) / 
     Math.pow(this.dimension.end.x - this.dimension.start.x, 2)
-
 if (isFinite(a)) {
 	P5.beginShape();
 	for (let i = Math.min(this.dimension.start.x, this.dimension.end.x); 
@@ -268,17 +330,17 @@ A \textit{TikZ} megoldás hasonlóan a \textbackslash \textit{node} parancs para
 
 Itt a két funkció kerül bemutatásra, ami osztályba lett szedve a könnyebb elérés miatt. A funkciók jelentős része modulként szerepel az alkalmazásban, nem osztályokba csoportosítva.
 
-\SubSubSection{Controls osztály}
+\SubSubSection{Control osztály}
 
 Ez az osztály felelős a vászon mozgatásáért és a nagyításért. Az osztályban eseménykezelők kerültek létrehozásra: kezelésre kerül az egér kattintása, húzása, felengedése valamint a görgetés. A vászon mozgatása szintén a "drag and drop" elvet követi.
 
 Az eseménykezelők beállítása a \textit{p5.js} példányára, amely a \textit{sketch}-ben kerül létrehozásra:
 
 \begin{lstlisting}[style=ES6]
-P5.mousePressed = e => Controls.mousePressed(e)
-P5.mouseDragged = e => Controls.mouseDragged(e);
-P5.mouseReleased = e => Controls.mouseReleased(e);
-P5.mouseWheel = e => Controls.zoomCanvas(e);
+P5.mousePressed = e => Control.mousePressed(e)
+P5.mouseDragged = e => Control.mouseDragged(e);
+P5.mouseReleased = e => Control.mouseReleased(e);
+P5.mouseWheel = e => Control.zoomCanvas(e);
 \end{lstlisting}
 
 \SubSubSection{ColorPicker osztály}

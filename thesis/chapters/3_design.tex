@@ -1,12 +1,10 @@
 \Chapter{Követelmények a saját szerkesztővel szemben}
 
-% Kb. 8 oldal
-
-Egy weboldal tartalmának felhasználói megértése gyakran attól függ, hogy a felhasználó hogyan érti meg a weboldal működését. Ez a felhasználói élménytervezés része. A felhasználói élmény az elrendezéssel, az egyértelmű utasításokkal és a címkézéssel függ össze egy weboldalon. Az, hogy a felhasználó mennyire érti meg, hogyan tud interakcióba lépni egy webhelyen, szintén függhet a webhely interaktív kialakításától. Ha a felhasználó érzékeli a weboldal hasznosságát, nagyobb valószínűséggel fogja azt továbbra is használni. Azok a felhasználók, akik gyakorlottak és jártasak a webhelyek használatában, ennek ellenére hasznosnak találhatnak egy markánsabb, de kevésbé intuitív vagy kevésbé felhasználóbarát webhelyfelületet. A kevésbé tapasztalt felhasználók azonban kisebb valószínűséggel látják a kevésbé intuitív weboldal-felület előnyeit vagy hasznosságát. Ez a tendencia az univerzálisabb felhasználói élmény és a könnyebb hozzáférés irányába mutat, hogy a lehető legtöbb felhasználónak megfeleljen, függetlenül a felhasználói készségektől. A felhasználói élménytervezés és az interaktív tervezés nagy részét figyelembe veszik a felhasználói felület tervezésénél.
+Egy weboldal tartalmának felhasználói megértése gyakran attól függ, hogy a felhasználó hogyan érti meg a weboldal működését. Ez a felhasználói élménytervezés része. A felhasználói élmény  egy weboldalon az elrendezéssel, az egyértelmű utasításokkal és a címkézéssel függ össze. Az, hogy a felhasználó mennyire érti meg, hogyan tud interakcióba lépni egy webhelyen, szintén függhet a webhely interaktív kialakításától. Ha a felhasználó érzékeli a weboldal hasznosságát, nagyobb valószínűséggel fogja azt továbbra is használni. Azok a felhasználók, akik gyakorlottak és jártasak a webhelyek használatában, ennek ellenére hasznosnak találhatnak egy markánsabb, de kevésbé intuitív vagy kevésbé felhasználóbarát webhelyfelületet. A kevésbé tapasztalt felhasználók azonban kisebb valószínűséggel látják a kevésbé intuitív weboldal-felület előnyeit vagy hasznosságát. Ez a tendencia az univerzálisabb felhasználói élmény és a könnyebb hozzáférés irányába mutat, hogy a lehető legtöbb felhasználónak megfeleljen, függetlenül a felhasználói készségektől. A felhasználói élménytervezés és az interaktív tervezés nagy részét figyelembe veszik a felhasználói felület tervezésénél.
 
 \Section{Tipikus elrendezések vizsgálata}
 
-A felhasználói felület kialakításának egy részét befolyásolja az oldal elrendezésének minősége. Az elrendezés tervezésekor például figyelembe kell venni, hogy a webhely oldalelrendezésének a különböző oldalakon konzisztensnek kell-e maradnia. Az oldal pixelszélessége szintén létfontosságúnak tekinthető az objektumok igazításához az elrendezés tervezésében. A legnépszerűbb fix szélességű weboldalak általában ugyanolyan beállított szélességgel rendelkeznek, hogy megfeleljenek az aktuálisan legnépszerűbb böngészőablaknak, az aktuálisan legnépszerűbb képernyőfelbontás mellett, az aktuálisan legnépszerűbb monitorméreten.
+A felhasználói felület kialakításának egy részét befolyásolja az oldal elrendezésének minősége. Az elrendezés tervezésekor például figyelembe kell venni, hogy a webhely oldalelrendezésének a különböző oldalakon konzisztensnek kell-e maradnia. Az oldal pixelszélessége szintén létfontosságúnak tekinthető az objektumok igazításához az elrendezés tervezésében. A legnépszerűbb fix szélességű weboldalak általában ugyanolyan beállított szélességgel rendelkeznek, hogy megfeleljenek az aktuálisan legnépszerűbb böngészőablaknak, a képernyőfelbontás ls a monitorméret mellett.
 
 Az elkészült webes alkalmazás elrendezés szempontjából átláthatónak kell lennie, ehhez a legegyszerűbb megvalósítás a hasáb alapú elrendezés: két, esetleg három hasáb. Egyikben az alkalmazás menüje, másik hasábban pedig maga a szerkesztő foglal helyet, a harmadik hasábban a funkciókhoz tartozó ablak jelenjen meg. 
 
@@ -48,7 +46,7 @@ A már lent lévő elemek esetében kijelölés után minden tulajdonságnak sze
 
 A szerkesztőnek tudnia kell kezelni a színeket, és ezeknek kiválaszthatónak kell lenniük. Az \LaTeX\ által előre definiált színeket elérhetővé kell tenni a felhasználónak. 
 
-A színek kiválasztásához célszerű valamilyen lenyíló menüt használni, ezzel megkönnyítve ezeknek az elérését. 
+A színek kiválasztásához célszerű lenyíló menüt használni, ezzel megkönnyítve ezeknek az elérését. 
 
 \begin{figure}[!h]
 	\centering
@@ -85,11 +83,11 @@ A "\textit{másolás és beillesztés}" kifejezés a szöveg vagy más adatok fo
 
 \SubSection{Másolás}
 
-A kijelölt elemek másolása billentyű lenyomásra működjön, megszokott alapon a \textit{C} billentyűre vagy a \textit{CTRL + C} billentyűkombinációra. A kijelölt elemek tulajdonságai (pozíció, szín, kitöltési szín...) kerüljenek mentésre egyaránt. 
+A kijelölt elemek másolása billentyű lenyomásra működjön, a szokásnak megfelelően a \textit{C} billentyűre vagy a \textit{CTRL + C} billentyűkombinációra. A kijelölt elemek tulajdonságai (pozíció, szín, kitöltési szín...) kerüljenek mentésre egyaránt. 
 
 \SubSection{Beillesztés}
 
-A másolt elemek beillesztése szintén billentyű lenyomásra működjön, megszokott alapon a \textit{V} billentyűre vagy a \textit{CTRL + V} billentyűkombinációra. 
+A másolt elemek beillesztése szintén billentyű lenyomásra működjön, a szokott módon a \textit{V} billentyűre vagy a \textit{CTRL + V} billentyűkombinációra. 
 
 A beillesztett elemek ne a másolt elemeken, hanem kicsit eltolva jelenleg meg az átláthatóság és könnyebb szerkeszthetőség érdekében.
 
@@ -104,7 +102,7 @@ Az oldal nagyításának két különböző módja van:
 
 Az alkalmazásnak támogatnia kell a kicsinyítését és nagyítását, legalább a vásznon megjelenő alapelemek méretének nagyításával vagy csökkentésével. Ezt célszerű az egér görgőjére hivatkozva módosítani: ha felfelé görgetünk, akkor nagyítsuk a vásznak, ellenkező esetben kicsinyítjük.
 
-\Section{Undo-redo funkciók}
+\Section{Undo-Redo funkciók}
 
 Az elkészült alkalmazásnak biztosítani kell a visszavonás és az újra lerakás funkcióit. Sokszor fordul az elő, hogy a felhasználó véletlenül más elemet rajzol a vászonra, vagy esetleg más elem tulajdonságait módosítja, így a felhasználói élmény növelése céljából szükség van ezeknek a hibáknak a visszavonására.
 
@@ -114,7 +112,7 @@ Az elkészült alkalmazásnak biztosítani kell a visszavonás és az újra lera
 
 Mentés során a felhasználó megkapja a szerkesztett ábrát \LaTeX\-be visszailleszthető állapotba. Ez egyaránt jelenti a \LaTeX\ kódot, valamint egy opcionálisan letölthető \textit{.tex} formátumú fájlt, amely az \textit{input} paranccsal betölthető tetszőleges \LaTeX\ állományba.
 
-A mentés során a felhasználó kap egy hivatkozási kódot is, amely a későbbi betöltéshez szükséges. Ez egy \textit{BASE64} kódolású szöveg lenne, amelynek az a jelentősége, hogy elfedje a háttérben lévő "adatbázist", amelyből a kimentéshez szükséges \textit{JSON} objektumot kapjuk.
+A mentés során a felhasználó kap egy hivatkozási kódot is, amely a későbbi betöltéshez szükséges. Ez egy kódolt szöveg lenne, amelynek az a jelentősége, hogy elfedje a háttérben lévő "adatbázist", amelyből a kimentéshez szükséges \textit{JSON} objektumot kapjuk.
 
 \SubSection{Automatikus mentés}
 

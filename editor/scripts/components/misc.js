@@ -4,6 +4,8 @@
 import {P5} from "./sketch.js";
 import {ARROW, ARROW_TIPS, COLOR, grid_density, isNormalize, LINE_DASH, LINE_WIDTH, ZOOM_CONTROLS} from "./global.js";
 
+//======================================================================================================================
+
 const calcRPos = () => {
     let ctlX = -ZOOM_CONTROLS.VIEW.x / ZOOM_CONTROLS.VIEW.zoom;
     let ctlY = -ZOOM_CONTROLS.VIEW.y / ZOOM_CONTROLS.VIEW.zoom;
@@ -13,6 +15,8 @@ const calcRPos = () => {
 
     return {x: mouseRealX, y: mouseRealY};
 }
+
+//======================================================================================================================
 
 // get default properties from inputs for future use
 const getDefaultProperties = () => {
@@ -35,6 +39,8 @@ const getDefaultProperties = () => {
     };
 }
 
+//======================================================================================================================
+
 const loadOptions = (dom, obj, def) => {
     Object.keys(obj).forEach(key => {
         let option = $(`<option value="${key}">${capitalize(key)}</option>`);
@@ -47,11 +53,13 @@ const loadOptions = (dom, obj, def) => {
     });
 }
 
+//======================================================================================================================
+
 // oneliners
 const normalize = point => (!isNormalize) ? {
     x: point.x,
     y: point.y
-} : {x: Math.round(point.x / grid_density) * grid_density, y: Math.round(point.y / grid_density) * grid_density};
+} : {x: Math.round(point.x / (grid_density/2)) * (grid_density/2), y: Math.round(point.y / (grid_density/2)) * (grid_density/2)};
 
 const getKey = (keyof, value) => Object.keys(keyof).find(key => JSON.stringify(keyof[key]) === JSON.stringify(value));
 const getKeyLC = (keyof, value) => Object.keys(keyof).find(key => JSON.stringify(keyof[key]) === JSON.stringify(value)).toLowerCase().replace("_", " ");
@@ -61,6 +69,8 @@ const capitalize = ([first, ...rest]) => first.toUpperCase() + rest.join('').toL
 const toHex = rgb => '#' + rgb.slice(4, -1).split(',').map(x => (+x).toString(16).padStart(2, "0")).join('').toUpperCase();
 
 const isBetween = (val, min, max, inc) => inc ? val >= min && val <= max : val > min && val < max;
+
+//======================================================================================================================
 
 export {
     calcRPos,

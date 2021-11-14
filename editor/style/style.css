@@ -18,7 +18,7 @@ body {
 }
 
 .menu {
-    margin-top: 20px;
+    margin-top: 5%;
 }
 
 #properties {
@@ -69,12 +69,11 @@ body {
     -ms-user-select: none; /* IE 10+ */
     user-select: none; /* Likely future */
 }
-/*
-p {
-    border: 1px solid red;
-}
 
-span, p {
-    white-space: nowrap;
+
+.btn i {
+    display: block;
+    align-items: center;
+    font-size: 24px;
+    height: 1em;
 }
-*/

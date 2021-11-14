@@ -37,34 +37,34 @@ const parse2Class = (json) => {
     parsed_json.forEach(element => {
         switch (element.type.toLowerCase()) {
             case DRAWABLE_SHAPES.POINT:
-                SHAPES_DATABASE.push(Point.fromJSON(element.content));
+                SHAPES_DATABASE.push(Point.fromJson(element.content));
                 break;
             case DRAWABLE_SHAPES.LINE:
-                SHAPES_DATABASE.push(Line.fromJSON(element.content));
+                SHAPES_DATABASE.push(Line.fromJson(element.content));
                 break;
             case DRAWABLE_SHAPES.ELLIPSE:
-                SHAPES_DATABASE.push(Ellipse.fromJSON(element.content));
+                SHAPES_DATABASE.push(Ellipse.fromJson(element.content));
                 break;
             case DRAWABLE_SHAPES.RECTANGLE:
-                SHAPES_DATABASE.push(Rectangle.fromJSON(element.content));
+                SHAPES_DATABASE.push(Rectangle.fromJson(element.content));
                 break;
             case DRAWABLE_SHAPES.BEZIER:
-                SHAPES_DATABASE.push(Bezier.fromJSON(element.content));
+                SHAPES_DATABASE.push(Bezier.fromJson(element.content));
                 break;
             case DRAWABLE_SHAPES.GRID:
-                SHAPES_DATABASE.push(Grid.fromJSON(element.content));
+                SHAPES_DATABASE.push(Grid.fromJson(element.content));
                 break;
             case DRAWABLE_SHAPES.ARC:
-                SHAPES_DATABASE.push(Arc.fromJSON(element.content));
+                SHAPES_DATABASE.push(Arc.fromJson(element.content));
                 break;
             case DRAWABLE_SHAPES.PARABOLA:
-                SHAPES_DATABASE.push(Parabola.fromJSON(element.content));
+                SHAPES_DATABASE.push(Parabola.fromJson(element.content));
                 break;
             case DRAWABLE_SHAPES.TEXT:
-                SHAPES_DATABASE.push(Text.fromJSON(element.content));
+                SHAPES_DATABASE.push(Text.fromJson(element.content));
                 break;
             case "lmath":
-                SHAPES_DATABASE.push(LMath.fromJSON(element.content));
+                SHAPES_DATABASE.push(LMath.fromJson(element.content));
                 break;
         }
     });
@@ -72,16 +72,8 @@ const parse2Class = (json) => {
 
 // =====================================================================================================================
 
-const parse2BASE64 = str => btoa(unescape(encodeURIComponent(str)));
-const parseBASE64 = b64 => decodeURIComponent(escape(atob(b64)));
-
-// =====================================================================================================================
-
-const getReferenceCode = () => parse2BASE64(parse2String());
-
-// =====================================================================================================================
-
-const processReferralCode = ref => parse2Class(parseBASE64(ref));
+const getReferenceCode = () => JSONC.pack(parse2String());
+const processReferralCode = ref => parse2Class(JSONC.unpack(ref));
 
 // =====================================================================================================================
 
@@ -97,5 +89,7 @@ const getTikzCode = () => {
 export {
     processReferralCode,
     getReferenceCode,
-    getTikzCode
+    getTikzCode,
+    parse2Class,
+    parse2String
 }

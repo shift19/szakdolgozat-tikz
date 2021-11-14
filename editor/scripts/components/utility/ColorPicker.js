@@ -4,8 +4,9 @@
         COLORPICKER
  */
 
-import {COLOR, COLORPICKERS, getShapes, SHAPES_DATABASE} from "../global.js";
+import {COLOR, COLORPICKERS, SHAPES_DATABASE} from "../global.js";
 import {capitalize, getKey, toHex} from "../misc.js";
+import {addUndo} from "../undo.js";
 
 class ColorPicker {
 
@@ -69,9 +70,10 @@ const refreshColorPickerHandlers = () => {
                 cp.colorPalette.css("display", "none")
                 cp.colorPalette.isShown = false
 
-                if(cp.colorInput.hasClass("property-element")){
+                if (cp.colorInput.hasClass("property-element")) {
                     let split_id = e.target.id.split("_")
                     let {target, id} = {target: split_id[0], id: split_id[1]}
+                    addUndo();
                     SHAPES_DATABASE[id][target] = color;
                 }
             }

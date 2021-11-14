@@ -16,6 +16,9 @@ import {cMouseOut, cMousePressed, cMouseReleased} from "./handler.js";
 import {drawCurrentShape, drawPreview} from "../draw.js";
 import {moveSelectedPoints} from "../move.js";
 import {deleteSelectedElements, endSelectingArea, fillCopiedElements, pasteCopiedElements} from "../edit.js";
+import {addUndo, processRedo, processUndo} from "../undo.js";
+
+//======================================================================================================================
 
 let canvas;
 
@@ -56,7 +59,7 @@ const draw = () => {
 
     if (TOOLBAR.SELECTED_MODE === MODES.DRAW) {
         if (enablePreview && !DRAW_CONTROLS.STARTING_POINT)
-            drawPreview()
+            drawPreview();
 
         drawCurrentShape();
     }
@@ -92,18 +95,38 @@ const keyPressed = () => {
         EDIT_CONTROLS.KEY_PRESSED = P5.keyCode;
 
         if (EDIT_CONTROLS.SELECTED_ELEMENTS.length !== 0 && P5.keyIsDown(P5.CONTROL)) { // check if control is down
+
             if (EDIT_CONTROLS.KEY_PRESSED === 67) { // for key "c"
                 EDIT_CONTROLS.COPIED = true;
                 fillCopiedElements();
             }
 
             if (EDIT_CONTROLS.KEY_PRESSED === 86) { // for key "v"
+                addUndo();
                 pasteCopiedElements();
             }
+
+            if (EDIT_CONTROLS.KEY_PRESSED === 88) { // for key "x"
+                addUndo();
+                deleteSelectedElements();
+            }
+
         }
 
         if (EDIT_CONTROLS.SELECTED_ELEMENTS.length !== 0 && EDIT_CONTROLS.KEY_PRESSED === P5.DELETE) {
+            addUndo();
             deleteSelectedElements();
+        }
+    }
+
+    // undo-redo to work on all window
+    if (P5.keyIsDown(P5.CONTROL)) {
+        if (P5.keyCode === 90) { // for key "z"
+            processUndo();
+        }
+
+        if (P5.keyCode === 89) { // for key "y"
+            processRedo();
         }
     }
 

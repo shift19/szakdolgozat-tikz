@@ -13,10 +13,7 @@ class Point extends Shape {
         this.y = y;
     }
 
-    static fromJSON(content) {
-        // properties from shape
-        //Shape.setProperties(point, content)
-
+    static fromJson(content) {
         return new Point(content.x, content.y, content);
     }
 
@@ -30,9 +27,9 @@ class Point extends Shape {
     toLatex() {
         //      \draw[draw=blue, fill=red] (-1,2) circle (5pt)
         if (this.fill === COLOR.NONE) {
-            return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}] (${this.x / grid_density},${-this.y / grid_density}) circle (${5 / grid_density});`
+            return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}] (${(this.x / grid_density).toFixed(2)},${(-this.y / grid_density).toFixed(2)}) circle (${5 / grid_density});`
         }
-        return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, fill=${getKeyLC(COLOR, this.fill)}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}] (${this.x / grid_density},${-this.y / grid_density}) circle (${5 / grid_density});`
+        return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, fill=${getKeyLC(COLOR, this.fill)}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}] (${(this.x / grid_density).toFixed(2)},${(-this.y / grid_density).toFixed(2)}) circle (${5 / grid_density});`
     }
 }
 

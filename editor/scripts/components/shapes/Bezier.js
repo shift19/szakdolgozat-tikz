@@ -19,8 +19,6 @@ class Bezier extends Shape {
             head: properties.tips.head,
             tail: properties.tips.tail
         }
-        //this.start = start;
-        //this.end = end;
 
         // add controls points for bezier curve (normalize if necessary)
         let p1 = normalize({
@@ -37,7 +35,7 @@ class Bezier extends Shape {
         }
     }
 
-    static fromJSON(content) {
+    static fromJson(content) {
         const bezier = new Bezier({
                 x: content.dimension.start.x,
                 y: content.dimension.start.y
@@ -47,14 +45,12 @@ class Bezier extends Shape {
             },
             content
         );
-        // properties from shape
-        //Shape.setProperties(bezier, content)
-        this.arrow = content.arrow;
-        this.tips = {
+
+        bezier.arrow = content.arrow;
+        bezier.tips = {
             head: content.tips.head,
             tail: content.tips.tail
         }
-        // properties from bezier
         bezier.controls.p1 = {
             x: content.controls.p1.x,
             y: content.controls.p1.y
@@ -73,39 +69,48 @@ class Bezier extends Shape {
 
         let size = 8 * (this.linewidth / 2);
 
-        // todo maybe temp fix drawing
         P5.bezier(this.dimension.start.x, this.dimension.start.y, this.controls.p1.x, this.controls.p1.y, this.controls.p2.x, this.controls.p2.y, this.dimension.end.x, this.dimension.end.y)
-
 
         switch (this.arrow) {
             case ARROW.HEAD:
                 P5.push();
-                Line.positionHead(this.controls.p2, this.dimension.end, this.tips.tail, this.stroke);
+                if (JSON.stringify(this.dimension.end) === JSON.stringify(this.controls.p2)) {
+                    Line.positionHead(this.controls.p1, this.dimension.end, this.tips.tail, this.stroke);
+                } else {
+                    Line.positionHead(this.controls.p2, this.dimension.end, this.tips.tail, this.stroke);
+                }
                 Line.drawArrowHead(this.tips.head, size)
                 P5.pop();
-                //this.drawArrowLine(this.dimension.end, this.dimension.start, this.arrow, this.tips.tail, size);
                 break;
             case ARROW.TAIL:
                 P5.push();
-                Line.positionHead(this.controls.p1, this.dimension.start, this.tips.head, this.stroke);
+                if (JSON.stringify(this.dimension.start) === JSON.stringify(this.controls.p1)) {
+                    Line.positionHead(this.controls.p2, this.dimension.start, this.tips.head, this.stroke);
+                } else {
+                    Line.positionHead(this.controls.p1, this.dimension.start, this.tips.head, this.stroke);
+                }
                 Line.drawArrowHead(this.tips.tail, size)
                 P5.pop();
-                //this.drawArrowLine(this.dimension.start, this.dimension.end, this.arrow, this.tips.head, size);
                 break;
             case ARROW.BOTH:
                 P5.push();
-                Line.positionHead(this.controls.p2, this.dimension.end, this.tips.tail, this.stroke);
+                if (JSON.stringify(this.dimension.end) === JSON.stringify(this.controls.p2)) {
+                    Line.positionHead(this.controls.p1, this.dimension.end, this.tips.tail, this.stroke);
+                } else {
+                    Line.positionHead(this.controls.p2, this.dimension.end, this.tips.tail, this.stroke);
+                }
                 Line.drawArrowHead(this.tips.head, size)
                 P5.pop();
                 P5.push();
-                Line.positionHead(this.controls.p1, this.dimension.start, this.tips.head, this.stroke);
+                if (JSON.stringify(this.dimension.start) === JSON.stringify(this.controls.p1)) {
+                    Line.positionHead(this.controls.p2, this.dimension.start, this.tips.head, this.stroke);
+                } else {
+                    Line.positionHead(this.controls.p1, this.dimension.start, this.tips.head, this.stroke);
+                }
                 Line.drawArrowHead(this.tips.tail, size)
-                //this.drawArrowLine(this.dimension.start, this.dimension.end, this.arrow, this.tips, size);
                 P5.pop();
                 break;
             case ARROW.NONE:
-                // draw the line between the points
-                //P5.line(this.dimension.start.x, this.dimension.start.y, this.dimension.end.x, this.dimension.end.y);
                 break;
         }
 
@@ -116,9 +121,9 @@ class Bezier extends Shape {
         let arrow = this.arrow === ARROW.NONE ? "" : ", " + this.arrow.replace(">", this.tips.head).replace("<", this.tips.tail)
         //       \draw [draw=black] (0,0) .. controls (1,2) and (2,-2) .. (3,0);
         if (this.fill === COLOR.NONE) {
-            return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, ${getKeyLC(LINE_WIDTH, this.linewidth)}${arrow}, ${getKeyLC(LINE_DASH, this.linedash)}] (${this.dimension.start.x / grid_density},${-this.dimension.start.y / grid_density}) .. controls (${this.controls.p1.x / grid_density}, ${-this.controls.p1.y / grid_density}) and (${this.controls.p2.x / grid_density}, ${-this.controls.p2.y / grid_density}) .. (${this.dimension.end.x / grid_density},${-this.dimension.end.y / grid_density});`
+            return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, ${getKeyLC(LINE_WIDTH, this.linewidth)}${arrow}, ${getKeyLC(LINE_DASH, this.linedash)}] (${(this.dimension.start.x / grid_density).toFixed(2)},${(-this.dimension.start.y / grid_density).toFixed(2)}) .. controls (${(this.controls.p1.x / grid_density).toFixed(2)}, ${(-this.controls.p1.y / grid_density).toFixed(2)}) and (${(this.controls.p2.x / grid_density).toFixed(2)}, ${(-this.controls.p2.y / grid_density).toFixed(2)}) .. (${(this.dimension.end.x / grid_density).toFixed(2)},${(-this.dimension.end.y / grid_density).toFixed(2)});`
         }
-        return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, fill=${getKeyLC(COLOR, this.fill)}${arrow}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}] (${this.dimension.start.x / grid_density},${-this.dimension.start.y / grid_density}) .. controls (${this.controls.p1.x / grid_density}, ${-this.controls.p1.y / grid_density}) and (${this.controls.p2.x / grid_density}, ${-this.controls.p2.y / grid_density}) .. (${this.dimension.end.x / grid_density},${-this.dimension.end.y / grid_density});`
+        return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, fill=${getKeyLC(COLOR, this.fill)}${arrow}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}] (${(this.dimension.start.x / grid_density).toFixed(2)},${(-this.dimension.start.y / grid_density).toFixed(2)}) .. controls (${(this.controls.p1.x / grid_density).toFixed(2)}, ${(-this.controls.p1.y / grid_density).toFixed(2)}) and (${(this.controls.p2.x / grid_density).toFixed(2)}, ${(-this.controls.p2.y / grid_density).toFixed(2)}) .. (${(this.dimension.end.x / grid_density).toFixed(2)},${(-this.dimension.end.y / grid_density).toFixed(2)});`
     }
 }
 

@@ -16,7 +16,9 @@ import {Parabola} from "./shapes/Parabola.js";
 import {Point} from "./shapes/Point.js";
 import {Text} from "./shapes/Text.js";
 import {LMath} from "./shapes/LMath.js";
+import {addUndo} from "./undo.js";
 
+//======================================================================================================================
 
 const drawCurrentShape = () => {
 
@@ -60,17 +62,34 @@ const enableDrawing = () => {
     DRAW_CONTROLS.STARTING_POINT = normalize(calcRPos());
     const PROPERTIES = getDefaultProperties();
     if (TOOLBAR.SELECTED_SHAPE === DRAWABLE_SHAPES.POINT) {
+        addUndo();
         SHAPES_DATABASE.push(new Point(DRAW_CONTROLS.STARTING_POINT.x, DRAW_CONTROLS.STARTING_POINT.y, PROPERTIES))
         DRAW_CONTROLS.STARTING_POINT = undefined;
     } else if (TOOLBAR.SELECTED_SHAPE === DRAWABLE_SHAPES.TEXT) {
         if (PROPERTIES.text.length) {
-            SHAPES_DATABASE.push(new Text(DRAW_CONTROLS.STARTING_POINT.x, DRAW_CONTROLS.STARTING_POINT.y, PROPERTIES))
-            DRAW_CONTROLS.STARTING_POINT = undefined;
+            try {
+                katex.render(PROPERTIES.text, document);
+            } catch (e) {
+                if (e.name !== "ParseError") {
+                    addUndo();
+                    SHAPES_DATABASE.push(new Text(DRAW_CONTROLS.STARTING_POINT.x, DRAW_CONTROLS.STARTING_POINT.y, PROPERTIES))
+                    DRAW_CONTROLS.STARTING_POINT = undefined;
+                }
+            }
         }
     } else if (TOOLBAR.SELECTED_SHAPE === DRAWABLE_SHAPES.MATH) {
         if (PROPERTIES.latex.length) {
-            SHAPES_DATABASE.push(new LMath(DRAW_CONTROLS.STARTING_POINT.x, DRAW_CONTROLS.STARTING_POINT.y, PROPERTIES))
-            DRAW_CONTROLS.STARTING_POINT = undefined;
+            try {
+                katex.render(PROPERTIES.latex, document);
+            } catch (e) {
+                if (e.name !== "ParseError") {
+
+                    addUndo();
+                    SHAPES_DATABASE.push(new LMath(DRAW_CONTROLS.STARTING_POINT.x, DRAW_CONTROLS.STARTING_POINT.y, PROPERTIES))
+                    DRAW_CONTROLS.STARTING_POINT = undefined;
+                }
+            }
+
         }
     } else {
         DRAW_CONTROLS.CURRENTLY_DRAWING = true;
@@ -90,6 +109,7 @@ const pushDrawing = () => {
         //check if not undefined
         if (DRAW_CONTROLS.LAST_DRAW) {
             DRAW_CONTROLS.STARTING_POINT = undefined;
+            addUndo();
             SHAPES_DATABASE.push(DRAW_CONTROLS.LAST_DRAW)
         }
     }
@@ -117,6 +137,8 @@ const drawPreview = () => {
         DRAW_CONTROLS.PREVIEW.draw();
 
 }
+
+//======================================================================================================================
 
 export {
     enableDrawing,

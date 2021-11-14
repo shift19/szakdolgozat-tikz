@@ -1,36 +1,49 @@
 'use strict';
 
-/*
-       CANVAS HANDLERS
- */
-
 import {P5} from "../sketch.js";
-import {DRAW_CONTROLS, DRAWABLE_SHAPES, EDIT_CONTROLS, MODES, MOVE_CONTROLS, TOOLBAR} from "../global.js";
+import {
+    DRAW_CONTROLS,
+    DRAWABLE_SHAPES,
+    EDIT_CONTROLS,
+    MODES,
+    MOVE_CONTROLS,
+    SHAPES_DATABASE,
+    TOOLBAR,
+    UNDOS
+} from "../global.js";
 import {enableDrawing, pushDrawing} from "../draw.js";
 import {addPropertiesAccordions, fillSelectedElements, startSelectingArea} from "../edit.js";
 import {fillSelectedPoints} from "../move.js";
+import {addUndo, popUndo} from "../undo.js";
 
 // =====================================================================================================================
+
+let prevSD = null;
 
 const cMousePressed = () => {
 
     if (P5.mouseButton === P5.RIGHT) return;
 
     // mouse handler for move
-    if (TOOLBAR.SELECTED_MODE === MODES.MOVE && P5.mouseButton === P5.LEFT) {
-        fillSelectedPoints();
-    }
+    if (P5.mouseButton === P5.LEFT) {
 
-    if (TOOLBAR.SELECTED_MODE === MODES.DRAW) {
-
-        if (P5.mouseButton === P5.LEFT) {
+        if (TOOLBAR.SELECTED_MODE === MODES.DRAW) {
             enableDrawing();
+        }
+
+        if (TOOLBAR.SELECTED_MODE === MODES.EDIT) {
+            startSelectingArea();
+        }
+
+        if (TOOLBAR.SELECTED_MODE === MODES.MOVE) {
+            if (JSON.stringify(SHAPES_DATABASE) !== JSON.stringify(UNDOS[UNDOS.length - 1])) {
+                addUndo();
+                prevSD = JSON.stringify(SHAPES_DATABASE);
+            }
+            fillSelectedPoints();
         }
     }
 
-    if (TOOLBAR.SELECTED_MODE === MODES.EDIT && P5.mouseButton === P5.LEFT) {
-        startSelectingArea();
-    }
     // prevent default
     return false;
 }
@@ -52,11 +65,21 @@ const cMouseReleased = () => {
         DRAW_CONTROLS.CURRENTLY_DRAWN = undefined;
     }
 
+    if (MOVE_CONTROLS.DRAGGABLE) {
+        if (JSON.stringify(SHAPES_DATABASE) === prevSD)
+            popUndo();
+    }
+
     MOVE_CONTROLS.DRAGGABLE = false;
     MOVE_CONTROLS.DRAGGED_POINT = undefined;
 
     if (EDIT_CONTROLS.CURRENTLY_SELECTING) {
+
         EDIT_CONTROLS.CURRENTLY_SELECTING = false;
+
+        if (JSON.stringify(EDIT_CONTROLS.SELECTED_AREA.STARTING_POINT) === JSON.stringify(EDIT_CONTROLS.SELECTED_AREA.ENDING_POINT)) {
+            return;
+        }
 
         fillSelectedElements();
 

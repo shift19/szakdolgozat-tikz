@@ -2,6 +2,8 @@
 
 import {getReferenceCode, getTikzCode} from "./load.js";
 
+//======================================================================================================================
+
 const download = (text, filename = "figure.tex") => {
     let element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -15,9 +17,9 @@ const download = (text, filename = "figure.tex") => {
 // =====================================================================================================================
 
 const makeFileContent = () => {
-    return `%Your reference code for future use:\n%${getReferenceCode()}\n%\n` +
-        `%Your TikZ code:\n${getTikzCode()}\n` +
-        `%File created at ${new Date().toLocaleString().replace(',', '')}`
+    return `%Your reference code for the next loading is:\n%Note! There is a percentage sign at the beginning of the line!\n\n%${getReferenceCode()}\n\n` +
+        `%Your TikZ code is as follows:\n${getTikzCode()}\n\n` +
+        `%File was created at ${new Date().toLocaleString().replace(',', '')}`
 }
 
 // =====================================================================================================================

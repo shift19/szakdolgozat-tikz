@@ -24,7 +24,7 @@ class Line extends Shape {
         }
     }
 
-    static fromJSON(content) {
+    static fromJson(content) {
         const line = new Line({
                 x: content.dimension.start.x,
                 y: content.dimension.start.y
@@ -155,7 +155,7 @@ class Line extends Shape {
     toLatex() {
         //      \draw[draw=blue] (-1,2) -- (2,-4);
         let arrow = this.arrow === ARROW.NONE ? "" : ", " + this.arrow.replace(">", this.tips.head).replace("<", this.tips.tail)
-        return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}${arrow}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}] (${this.dimension.start.x / grid_density},${-this.dimension.start.y / grid_density}) -- (${this.dimension.end.x / grid_density},${-this.dimension.end.y / grid_density});`
+        return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}${arrow}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}] (${(this.dimension.start.x / grid_density).toFixed(2)},${(-this.dimension.start.y / grid_density).toFixed(2)}) -- (${(this.dimension.end.x / grid_density).toFixed(2)},${(-this.dimension.end.y / grid_density).toFixed(2)});`
     }
 
     drawArrowLine(start, end, arrow, tip, size) {

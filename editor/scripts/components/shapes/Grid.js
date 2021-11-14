@@ -17,7 +17,7 @@ class Grid extends Shape {
         }
     }
 
-    static fromJSON(content) {
+    static fromJson(content) {
         // properties from shape
         //Shape.setProperties(grid, content)
 
@@ -46,7 +46,7 @@ class Grid extends Shape {
     }
 
     toLatex() {
-        return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}]  (${this.dimension.start.x / grid_density},${-this.dimension.start.y / grid_density}) grid (${this.dimension.end.x / grid_density},${-this.dimension.end.y / grid_density});`
+        return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}]  (${(this.dimension.start.x / grid_density).toFixed(2)},${(-this.dimension.start.y / grid_density).toFixed(2)}) grid (${(this.dimension.end.x / grid_density).toFixed(2)},${(-this.dimension.end.y / grid_density).toFixed(2)});`
     }
 
 }

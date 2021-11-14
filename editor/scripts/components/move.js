@@ -1,9 +1,5 @@
 'use strict';
 
-/*
-        MOVE mode functions
- */
-
 import {COLOR, LINE_DASH, MOVE_CONTROLS, SHAPES_DATABASE} from "./global.js";
 import {P5} from "./sketch.js";
 import {calcRPos, normalize} from "./misc.js";
@@ -11,6 +7,8 @@ import {Point} from "./shapes/Point.js";
 import {Bezier} from "./shapes/Bezier.js";
 import {Text} from "./shapes/Text.js";
 import {LMath} from "./shapes/LMath.js";
+
+//======================================================================================================================
 
 const moveSetup = () => {
 
@@ -66,11 +64,14 @@ const moveSetup = () => {
     });
 }
 
+//======================================================================================================================
+
 const moveSelectedPoints = () => {
     if (MOVE_CONTROLS.DRAGGABLE && P5.mouseIsPressed) {
 
         const POINT_DIAMETER = 10
-        const MOUSE_POSITION = normalize(calcRPos());
+        //const MOUSE_POSITION = normalize(calcRPos());
+        let MOUSE_POSITION = calcRPos();
 
         if (!MOVE_CONTROLS.DRAGGED_POINT) {
             MOVE_CONTROLS.POINT_MAPPING.forEach(points => {
@@ -87,11 +88,11 @@ const moveSelectedPoints = () => {
             });
         }
 
+        MOUSE_POSITION = normalize(MOUSE_POSITION);
         const DELTA = {
             x: MOUSE_POSITION.x - MOVE_CONTROLS.DRAGGED_POINT.x,
             y: MOUSE_POSITION.y - MOVE_CONTROLS.DRAGGED_POINT.y
         };
-
 
         MOVE_CONTROLS.SELECTED_POINTS.forEach(selected_point => {
 
@@ -114,11 +115,14 @@ const moveSelectedPoints = () => {
             MOVE_CONTROLS.POINT_MAPPING[selected_point.index][selected_point.which].y += DELTA.y;
 
         });
+
     }
 
     drawBezierGuideLines();
     drawCircles();
 }
+
+//======================================================================================================================
 
 const drawCircles = () => {
     const POINT_DIAMETER = 10
@@ -140,6 +144,8 @@ const drawCircles = () => {
     P5.pop();
 }
 
+//======================================================================================================================
+
 const drawBezierGuideLines = () => {
     P5.push();
     SHAPES_DATABASE.filter(shape => (shape instanceof Bezier)).forEach(bezier => {
@@ -151,9 +157,11 @@ const drawBezierGuideLines = () => {
     P5.pop();
 }
 
+//======================================================================================================================
+
 const fillSelectedPoints = () => {
     const MOUSE_POSITION = calcRPos();
-    const POINT_DIAMETER = 10
+    const POINT_DIAMETER = 10;
     const PREV_SELECTED_POINTS = MOVE_CONTROLS.SELECTED_POINTS;
 
     MOVE_CONTROLS.POINT_MAPPING.forEach(points => {
@@ -165,7 +173,7 @@ const fillSelectedPoints = () => {
                     if (MOVE_CONTROLS.KEY_PRESSED !== P5.CONTROL)
                         MOVE_CONTROLS.SELECTED_POINTS.length = 0;
 
-                    const SELECTED_POINT_EXISTS = MOVE_CONTROLS.SELECTED_POINTS.filter(sp => sp.index === points['index'] && sp.which === point)
+                    const SELECTED_POINT_EXISTS = MOVE_CONTROLS.SELECTED_POINTS.filter(sp => sp.index === points['index'] && sp.which === point);
 
                     if (!SELECTED_POINT_EXISTS.length) {
                         MOVE_CONTROLS.SELECTED_POINTS.push({index: points['index'], which: point});
@@ -189,6 +197,8 @@ const fillSelectedPoints = () => {
         });
     }
 }
+
+//======================================================================================================================
 
 export {
     moveSetup,

@@ -1,7 +1,7 @@
 'use strict';
 
 import {P5} from "./components/sketch.js";
-import {Controls} from "./components/utility/Controls.js";
+import {Control} from "./components/utility/Control.js";
 import {ARROW, ARROW_TIPS, LINE_DASH, LINE_WIDTH, TOOLBAR} from "./components/global.js";
 import {loadOptions} from "./components/misc.js";
 import {
@@ -20,6 +20,8 @@ import {
 } from "./components/handlers/modal.js";
 import {loadReferralCode, setReferralHandler} from "./components/cookie/handler.js";
 
+//======================================================================================================================
+
 // hide all conditional html elements
 $("#edit_menu").hide();
 $("#options_menu").hide();
@@ -29,6 +31,8 @@ $("#arrowProperties").hide();
 $("#arcProperties").hide();
 $("#textProperties").hide();
 $("#latexProperties").hide();
+
+//======================================================================================================================
 
 // $(document).ready...
 $(() => {
@@ -53,10 +57,10 @@ $(() => {
     setReferralHandler();
     loadReferralCode();
 
-    P5.mousePressed = e => Controls.mousePressed(e)
-    P5.mouseDragged = e => Controls.mouseDragged(e);
-    P5.mouseReleased = e => Controls.mouseReleased(e);
-    P5.mouseWheel = e => Controls.zoomCanvas(e);
+    P5.mousePressed = e => Control.mousePressed(e)
+    P5.mouseDragged = e => Control.mouseDragged(e);
+    P5.mouseReleased = e => Control.mouseReleased(e);
+    P5.mouseWheel = e => Control.zoomCanvas(e);
 
     // load default properties selections
     loadOptions($("#defaultLinewidth"), LINE_WIDTH, "THIN");

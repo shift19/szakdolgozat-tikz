@@ -13,15 +13,14 @@ class Arc extends Shape {
             start: start,
             end: end
         }
-        //this.start = start;
-        //this.end = end;
+
         this.angles = {
             start: properties.angles.start,
             end: properties.angles.end
         }
     }
 
-    static fromJSON(content) {
+    static fromJson(content) {
         return new Arc({
                 x: content.dimension.start.x,
                 y: content.dimension.start.y
@@ -45,10 +44,10 @@ class Arc extends Shape {
         let {center, diameter} = Ellipse.getCenterDiameter(this.dimension.start, this.dimension.end)
         //      \draw (0,0) arc (2cm and 1cm);
         if (this.fill === COLOR.NONE) {
-            return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}] ([shift=(${this.angles.start}:${diameter.x / (2 * grid_density)} and ${diameter.y / (2 * grid_density)})]${center.x / grid_density},${-center.y / grid_density}) arc (${this.angles.start}:${this.angles.end}:${diameter.x / (2 * grid_density)} and ${diameter.y / (2 * grid_density)});`
+            return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}] ([shift=(${this.angles.start}:${(diameter.x / (2 * grid_density)).toFixed(2)} and ${(diameter.y / (2 * grid_density)).toFixed(2)})]${(center.x / grid_density).toFixed(2)},${(-center.y / grid_density).toFixed(2)}) arc (${this.angles.start}:${this.angles.end}:${(diameter.x / (2 * grid_density)).toFixed(2)} and ${(diameter.y / (2 * grid_density)).toFixed(2)});`
 
         }
-        return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, fill=${getKeyLC(COLOR, this.fill)}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}] ([shift=(${this.angles.start}:${diameter.x / (2 * grid_density)} and ${diameter.y / (2 * grid_density)})]${center.x / grid_density},${-center.y / grid_density}) arc (${this.angles.start}:${this.angles.end}:${diameter.x / (2 * grid_density)} and ${diameter.y / (2 * grid_density)});`
+        return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, fill=${getKeyLC(COLOR, this.fill)}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}] ([shift=(${this.angles.start}:${(diameter.x / (2 * grid_density)).toFixed(2)} and ${(diameter.y / (2 * grid_density)).toFixed(2)})]${(center.x / grid_density).toFixed(2)},${(-center.y / grid_density).toFixed(2)}) arc (${this.angles.start}:${this.angles.end}:${(diameter.x / (2 * grid_density)).toFixed(2)} and ${(diameter.y / (2 * grid_density)).toFixed(2)});`
     }
 
 }

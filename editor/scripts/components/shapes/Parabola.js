@@ -16,7 +16,7 @@ class Parabola extends Shape {
         //this.end = end;
     }
 
-    static fromJSON(content) {
+    static fromJson(content) {
         // properties from shape
         //Shape.setProperties(parabola, content)
 
@@ -52,9 +52,9 @@ class Parabola extends Shape {
     toLatex() {
         //       \draw [draw=black, fill=red] (0,0) parabola (1,1);
         if (this.fill === COLOR.NONE) {
-            return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}] (${this.dimension.start.x / grid_density},${-this.dimension.start.y / grid_density}) parabola (${this.dimension.end.x / grid_density},${-this.dimension.end.y / grid_density});`
+            return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}] (${(this.dimension.start.x / grid_density).toFixed(2)},${(-this.dimension.start.y / grid_density).toFixed(2)}) parabola (${(this.dimension.end.x / grid_density).toFixed(2)},${(-this.dimension.end.y / grid_density).toFixed(2)});`
         }
-        return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, fill=${getKeyLC(COLOR, this.fill)}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}] (${this.dimension.start.x / grid_density},${-this.dimension.start.y / grid_density}) parabola (${this.dimension.end.x / grid_density},${-this.dimension.end.y / grid_density});`
+        return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, fill=${getKeyLC(COLOR, this.fill)}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}] (${(this.dimension.start.x / grid_density).toFixed(2)},${(-this.dimension.start.y / grid_density).toFixed(2)}) parabola (${(this.dimension.end.x / grid_density).toFixed(2)},${(-this.dimension.end.y / grid_density).toFixed(2)});`
     }
 }
 

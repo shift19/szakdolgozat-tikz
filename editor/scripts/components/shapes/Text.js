@@ -21,7 +21,7 @@ class Text extends Shape {
         this.text = properties.text.replace("\\", "");
     }
 
-    static fromJSON(content) {
+    static fromJson(content) {
         // properties from shape
         //Shape.setProperties(point, content)
 
@@ -34,19 +34,19 @@ class Text extends Shape {
         P5.fill(this.stroke);  // override shape fill
         // custom katex library w/ canvas
         try {
-            //                                                  to fix \ math expression crash
-            katex.renderToCanvas(`\\text{${this.text}}`, document.getElementById(P5.canvas.id), this.x + grid_density / 8, this.y - grid_density / 2.5, {
+            let canvas = document.getElementById(P5.canvas.id);
+            katex.renderToCanvas(`\\text{${this.text}}`, canvas, this.x + grid_density / 8, this.y - grid_density / 2.5, {
                 fontSize: 19.5
             });
         } catch (e) {
-            console.log(e)
+            //console.log(e)
         }
         P5.pop();
     }
 
     toLatex() {
-        let diff = {x: (grid_density / 4) / grid_density, y: (grid_density / 2.5) / grid_density}
-        return `\\node[${getKeyLC(COLOR, this.stroke)}] at (${this.x / grid_density - diff.x},${-this.y / grid_density + diff.y}) {${this.text}};`
+        let diff = {x: (grid_density / 16) / grid_density, y: (grid_density / 4) / grid_density}
+        return `\\node[${getKeyLC(COLOR, this.stroke)}, anchor=south west] at (${(this.x / grid_density - diff.x).toFixed(2)},${(-this.y / grid_density + diff.y).toFixed(2)}) {${this.text}};`
     }
 }
 

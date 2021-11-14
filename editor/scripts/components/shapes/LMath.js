@@ -20,7 +20,7 @@ class LMath extends Shape {
         //this.latex = "\\dot{\\theta}_{k} = \\omega_{k} + \\frac{K}{N} \\displaystyle\\sum_{j=1}^N \\sin(\\theta_{j} - \\theta_{k})";
     }
 
-    static fromJSON(content) {
+    static fromJson(content) {
         return new LMath(content.x, content.y, content);
     }
 
@@ -30,18 +30,19 @@ class LMath extends Shape {
         P5.fill(this.stroke);  // override shape fill
         // custom katex library w/ canvas
         try {
-            katex.renderToCanvas(this.latex, document.getElementById(P5.canvas.id), this.x + grid_density / 8, this.y - grid_density / 2.5, {
+            let canvas = document.getElementById(P5.canvas.id);
+            katex.renderToCanvas(this.latex, canvas, this.x + grid_density / 8, this.y - grid_density / 2.5, {
                 fontSize: 19.5
             });
         } catch (e) {
-            console.log(e)
+            //console.log(e)
         }
         P5.pop();
     }
 
     toLatex() {
-        let diff = {x: 0, y: Number(((grid_density / 4) / grid_density).toFixed(2))} // todo y pos
-        return `\\node[${getKeyLC(COLOR, this.stroke)}, anchor=south west] at (${this.x / grid_density},${-this.y / grid_density + diff.y}) {$${this.latex}$};`
+        let diff = {x: (grid_density / 16) / grid_density, y: (grid_density / 4) / grid_density}
+        return `\\node[${getKeyLC(COLOR, this.stroke)}, anchor=south west] at (${(this.x / grid_density - diff.x).toFixed(2)},${(-this.y / grid_density + diff.y).toFixed(2)}) {$${this.latex}$};`
     }
 }
 

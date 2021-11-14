@@ -1,9 +1,5 @@
 'use strict';
 
-/*
-        EDIT mode functions
- */
-
 import {
     ARROW,
     ARROW_TIPS,
@@ -29,6 +25,9 @@ import {Point} from "./shapes/Point.js";
 import {Parabola} from "./shapes/Parabola.js";
 import {LMath} from "./shapes/LMath.js";
 import {Text} from "./shapes/Text.js";
+import {addUndo} from "./undo.js";
+
+//======================================================================================================================
 
 const editSetup = () => {
 
@@ -75,6 +74,7 @@ const startSelectingArea = () => {
 const endSelectingArea = () => {
 
     if (P5.mouseIsPressed && P5.mouseButton === P5.LEFT && EDIT_CONTROLS.CURRENTLY_SELECTING) {
+
         let rectangle;
 
         EDIT_CONTROLS.SELECTED_AREA.ENDING_POINT = calcRPos();
@@ -126,12 +126,12 @@ const fillSelectedElements = () => {
 
 const addPropertiesAccordions = () => {
 
-    //$("#aProperties").children().not(':first').remove();
-    //COLORPICKERS.length = 4;
     $("#aProperties").children().remove();
     COLORPICKERS.length = 2;
 
     EDIT_CONTROLS.SELECTED_ELEMENTS.forEach(element => {
+        if (!SHAPES_DATABASE[element.index]) return;
+
         let accordion = $(
             `<div class="accordion-item">
                 <h2 class="accordion-header" id="head_${element.index}">
@@ -279,15 +279,16 @@ const refreshPropertyElementHandler = () => {
                     case "linedash":
                         SHAPES_DATABASE[id][target] = LINE_DASH[value]
                         break;
-                        case "arrow":
+                    case "arrow":
                         SHAPES_DATABASE[id][target] = ARROW[value]
                         break;
-                        case "text":
-                        case "latex":
+                    case "text":
+                    case "latex":
                         SHAPES_DATABASE[id][target] = value
                         break;
                 }
             }
+            addUndo();
         }
     );
 }
@@ -313,34 +314,34 @@ const pasteCopiedElements = () => {
     EDIT_CONTROLS.COPIED_ELEMENTS.forEach(element => {
         switch (element.type.toLowerCase()) {
             case DRAWABLE_SHAPES.POINT:
-                elements.push(Point.fromJSON(element.content));
+                elements.push(Point.fromJson(element.content));
                 break;
             case DRAWABLE_SHAPES.LINE:
-                elements.push(Line.fromJSON(element.content));
+                elements.push(Line.fromJson(element.content));
                 break;
             case DRAWABLE_SHAPES.ELLIPSE:
-                elements.push(Ellipse.fromJSON(element.content));
+                elements.push(Ellipse.fromJson(element.content));
                 break;
             case DRAWABLE_SHAPES.RECTANGLE:
-                elements.push(Rectangle.fromJSON(element.content));
+                elements.push(Rectangle.fromJson(element.content));
                 break;
             case DRAWABLE_SHAPES.BEZIER:
-                elements.push(Bezier.fromJSON(element.content));
+                elements.push(Bezier.fromJson(element.content));
                 break;
             case DRAWABLE_SHAPES.GRID:
-                elements.push(Grid.fromJSON(element.content));
+                elements.push(Grid.fromJson(element.content));
                 break;
             case DRAWABLE_SHAPES.ARC:
-                elements.push(Arc.fromJSON(element.content));
+                elements.push(Arc.fromJson(element.content));
                 break;
             case DRAWABLE_SHAPES.PARABOLA:
-                elements.push(Parabola.fromJSON(element.content));
+                elements.push(Parabola.fromJson(element.content));
                 break;
             case DRAWABLE_SHAPES.TEXT:
-                elements.push(Text.fromJSON(element.content));
+                elements.push(Text.fromJson(element.content));
                 break;
             case "lmath":
-                elements.push(LMath.fromJSON(element.content));
+                elements.push(LMath.fromJson(element.content));
                 break;
         }
     });
@@ -426,16 +427,22 @@ const deleteSelectedElements = () => {
     for (let i = SHAPES_DATABASE.length; i >= 0; i--) {
         if (deletables.includes(i)) {
             SHAPES_DATABASE.splice(i, 1);
-            EDIT_CONTROLS.POINT_MAPPING.splice(i, 1);
         }
     }
+
+    // reset pointmapping
+    EDIT_CONTROLS.POINT_MAPPING = [];
+    editSetup();
 
     $("#aProperties").hide("slow");
 }
 
+//======================================================================================================================
+
 loadOptions($("#linewidth_common"), LINE_WIDTH, "THIN");
 loadOptions($("#linedash_common"), LINE_DASH, "SOLID");
 
+//======================================================================================================================
 
 export {
     editSetup,

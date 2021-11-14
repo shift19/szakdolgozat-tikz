@@ -2,24 +2,33 @@
 
 import {DRAW_MODEL, EDIT_MODEL, MOVE_MODEL, TOOLBAR_MODEL, ZOOM_MODEL} from "./interfaces/models.js";
 
+//======================================================================================================================
+
 // set grid density (higher is less dense)
 let grid_density = 50;
+
+//======================================================================================================================
 
 //  bool to snap to grid (true: snap, false: no)
 let isNormalize = true;
 const setNormalize = n => {
     isNormalize = n
 }
+
+//======================================================================================================================
+
 // bool for preview
 let enablePreview = false;
 const setPreview = p => {
     enablePreview = p
 }
 
+// =====================================================================================================================
+
 // store all shapes to draw to canvas
-const SHAPES_DATABASE = [];
-const getShapes = () => {
-    return SHAPES_DATABASE
+let SHAPES_DATABASE = [];
+const setShapes = sd => {
+    SHAPES_DATABASE = sd;
 }
 
 //store all color pickers
@@ -66,9 +75,26 @@ let EDIT_CONTROLS = {
 const setEditControl = ec => {
     MOVE_CONTROLS = ec;
 }
+// =====================================================================================================================
+
+// max undo size
+const MAX_UNDO_SIZE = 20;
+
+// to store undos
+let UNDOS = [];
+const setUndo = u => {
+    UNDOS = u;
+}
+
+// to store redos
+let REDOS = [];
+const setRedo = r => {
+    REDOS = r;
+}
 
 // =====================================================================================================================
-// colors
+
+// to store predefined colors
 const COLOR = {
     NONE: "#E9ECEF", // for no stroke or fill color
     WHITE: "#FFFFFF",
@@ -92,6 +118,8 @@ const COLOR = {
     TEAL: "#008080"
 }
 
+// =====================================================================================================================
+
 const MODES = {
     SELECT: "select",   // to move canvas
     DRAW: "draw",       // to draw shapes
@@ -111,6 +139,8 @@ const DRAWABLE_SHAPES = {
     TEXT: "text",
     MATH: "math"
 }
+
+// =====================================================================================================================
 
 const LINE_WIDTH = {
     ULTRA_THIN: 0.2,
@@ -175,11 +205,16 @@ export {
     ARROW,
     ARROW_TIPS,
     SHAPES_DATABASE,
-    getShapes,
+    setShapes,
     COLORPICKERS,
     grid_density,
     isNormalize,
     setNormalize,
     enablePreview,
-    setPreview
+    setPreview,
+    MAX_UNDO_SIZE,
+    UNDOS,
+    setUndo,
+    REDOS,
+    setRedo
 }

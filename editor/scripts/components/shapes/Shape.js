@@ -12,6 +12,9 @@ class Shape {
         this.linedash = properties.linedash;
     }
 
+    static fromJson() {
+    }
+
     draw() {
         if (this.stroke)
             this.stroke === COLOR.NONE ? P5.noStroke() : P5.stroke(this.stroke);
@@ -24,8 +27,8 @@ class Shape {
     }
 
     toLatex() {
-
     }
+
 }
 
 export {

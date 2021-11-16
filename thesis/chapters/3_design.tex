@@ -4,7 +4,7 @@ Egy weboldal tartalmának felhasználói megértése gyakran attól függ, hogy 
 
 \Section{Tipikus elrendezések vizsgálata}
 
-A felhasználói felület kialakításának egy részét befolyásolja az oldal elrendezésének minősége. Az elrendezés tervezésekor például figyelembe kell venni, hogy a webhely oldalelrendezésének a különböző oldalakon konzisztensnek kell-e maradnia. Az oldal pixelszélessége szintén létfontosságúnak tekinthető az objektumok igazításához az elrendezés tervezésében. A legnépszerűbb fix szélességű weboldalak általában ugyanolyan beállított szélességgel rendelkeznek, hogy megfeleljenek az aktuálisan legnépszerűbb böngészőablaknak, a képernyőfelbontás ls a monitorméret mellett.
+A felhasználói felület kialakításának egy részét befolyásolja az oldal elrendezésének minősége. Az elrendezés tervezésekor például figyelembe kell venni, hogy a webhely oldalelrendezésének a különböző oldalakon konzisztensnek kell-e maradnia. Az oldal pixelszélessége szintén létfontosságúnak tekinthető az objektumok igazításához az elrendezés tervezésében. A legnépszerűbb fix szélességű weboldalak általában ugyanolyan beállított szélességgel rendelkeznek, hogy megfeleljenek az aktuálisan legnépszerűbb böngészőablaknak, a képernyőfelbontás és a monitorméret mellett.
 
 Az elkészült webes alkalmazás elrendezés szempontjából átláthatónak kell lennie, ehhez a legegyszerűbb megvalósítás a hasáb alapú elrendezés: két, esetleg három hasáb. Egyikben az alkalmazás menüje, másik hasábban pedig maga a szerkesztő foglal helyet, a harmadik hasábban a funkciókhoz tartozó ablak jelenjen meg. 
 
@@ -14,7 +14,7 @@ Az elkészült webes alkalmazás elrendezés szempontjából átláthatónak kel
 	\caption{Az alkalmazás felépítése}
 \end{figure}
 
-Az alkalmazás legyen reszponzív akár a felület, akár a funkciók megjelenítése szempontjából. A reszponzív webdesign egy újabb megközelítés, amely a \textit{CSS3}-on és a \textit{CSS @media} szabály továbbfejlesztett használatán keresztül az oldal stíluslapján belül a készülékenkénti specifikáció mélyebb szintjén alapul. 
+Az alkalmazás legyen reszponzív akár a felület, akár a funkciók megjelenítése szempontjából. A reszponzív webdesign egy újabb megközelítés, amely a \textit{CSS3}-on és a \textit{CSS @media}\cite{css3media} szabály továbbfejlesztett használatán keresztül az oldal stíluslapján belül a készülékenkénti specifikáció mélyebb szintjén alapul. 
 
 \Section{Alapelemek megjelenítése és kiválasztása}
 
@@ -24,7 +24,7 @@ Az alapelemek megjelenése és kiválasztása egyaránt fontos a felhasználó m
 
 A funkciók a weboldal első hasábját foglalja magába, itt találhatók meg az alapelemek is a vezérlőelemeken és a kiválasztott elem tulajdonságainak kiválasztásán felül.  
 
-Az alkotóelemek a kis hely miatt két oszlopban lelhetők fel, tehát az alkalmazás mátrix alapú elrendezést használ. Célszerű az elemeket csoportosítani olyan tulajdonságok alapján, amiben megegyeznek: például a vonal és a görbe jelenleg meg egymás mellett a mátrixban. 
+Az alkotóelemek a kis hely miatt két oszlopban lelhetők fel, tehát az alkalmazás mátrix alapú elrendezést használ. Célszerű az elemeket csoportosítani olyan tulajdonságok alapján, amiben megegyeznek: például a vonal és a görbe jelenjen meg egymás mellett a mátrixban. 
 
 \SubSection{Alapelemek kiválasztása}
 
@@ -110,9 +110,9 @@ Az elkészült alkalmazásnak biztosítani kell a visszavonás és az újra lera
 
 \SubSection{Mentés}
 
-Mentés során a felhasználó megkapja a szerkesztett ábrát \LaTeX\-be visszailleszthető állapotba. Ez egyaránt jelenti a \LaTeX\ kódot, valamint egy opcionálisan letölthető \textit{.tex} formátumú fájlt, amely az \textit{input} paranccsal betölthető tetszőleges \LaTeX\ állományba.
+Mentés során a felhasználó megkapja a szerkesztett ábrát \LaTeX\-be visszailleszthető állapotban. Ez egyaránt jelenti a \LaTeX\ kódot, valamint egy opcionálisan letölthető \textit{.tex} formátumú fájlt, amely az \textit{input} paranccsal betölthető tetszőleges \LaTeX\ állományba.
 
-A mentés során a felhasználó kap egy hivatkozási kódot is, amely a későbbi betöltéshez szükséges. Ez egy kódolt szöveg lenne, amelynek az a jelentősége, hogy elfedje a háttérben lévő "adatbázist", amelyből a kimentéshez szükséges \textit{JSON} objektumot kapjuk.
+A mentés során a felhasználó kap egy hivatkozási kódot is, amely a későbbi betöltéshez szükséges. Ez egy kódolt szöveg lenne, amelynek az a jelentősége, hogy elfedje a háttérben lévő "adatbázist", amelyből a kimentéshez szükséges \textit{JSON}\cite{json} objektumot kapjuk. A JSON egy könnyű, szövegalapú, nyelvfüggetlen szintaxis az adatcsere-formátumok definiálására. Az ECMAScript\cite{ecmascript} programozási nyelvből származik, de nyelvtől független. A JSON a strukturált adatok hordozható ábrázolására szolgáló strukturálási szabályok kis halmazát határozza meg.
 
 \SubSection{Automatikus mentés}
 

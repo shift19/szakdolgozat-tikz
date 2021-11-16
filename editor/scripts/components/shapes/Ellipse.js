@@ -57,6 +57,7 @@ class Ellipse extends Shape {
         return `\\draw[draw=${getKeyLC(COLOR, this.stroke)}, fill=${getKeyLC(COLOR, this.fill)}, ${getKeyLC(LINE_WIDTH, this.linewidth)}, ${getKeyLC(LINE_DASH, this.linedash)}] (${(center.x / grid_density).toFixed(2)},${(-center.y / grid_density).toFixed(2)}) ellipse (${(diameter.x / (2 * grid_density)).toFixed(2)} and ${(diameter.y / (2 * grid_density)).toFixed(2)});`
     }
 }
+// =====================================================================================================================
 
 export {
     Ellipse

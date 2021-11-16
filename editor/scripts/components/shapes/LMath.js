@@ -17,7 +17,6 @@ class LMath extends Shape {
         this.x = x;
         this.y = y;
         this.latex = properties.latex;
-        //this.latex = "\\dot{\\theta}_{k} = \\omega_{k} + \\frac{K}{N} \\displaystyle\\sum_{j=1}^N \\sin(\\theta_{j} - \\theta_{k})";
     }
 
     static fromJson(content) {
@@ -45,6 +44,8 @@ class LMath extends Shape {
         return `\\node[${getKeyLC(COLOR, this.stroke)}, anchor=south west] at (${(this.x / grid_density - diff.x).toFixed(2)},${(-this.y / grid_density + diff.y).toFixed(2)}) {$${this.latex}$};`
     }
 }
+
+// =====================================================================================================================
 
 export {
     LMath

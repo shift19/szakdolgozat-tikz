@@ -4,7 +4,7 @@ Ebben a fejezetben már az szerkesztőprogrammal elkészített ábrák kerülnek
 
 \Section{Hasse-diagram}
 
-A rendezettségelméletben a Hasse-diagram egy olyan matematikai diagramtípus, amelyet egy véges, részben rendezett halmaz ábrázolására használnak, annak tranzitív redukciójának rajza formájában. Konkrétan, egy részlegesen rendezett $(S, \leq)$ halmaz esetében az $S$ minden elemét egy csúcsként ábrázoljuk a síkban, és egy olyan vonalszakaszt vagy görbét rajzolunk, amely $x$-ből $y$ felé halad, amikor $y$ lefedi $x$-et (vagyis amikor $x \leq y$ és nincs olyan $z$, hogy $x \leq z \leq y$). Ezek a görbék keresztezhetik egymást, de a végpontjaikon kívül nem érinthetnek más csúcsot. Egy ilyen diagram, felcímkézett csúcsokkal, egyértelműen meghatározza a részleges rendjét.
+A rendezettségelméletben a Hasse-diagram egy olyan matematikai diagramtípus, amelyet egy véges, részben rendezett halmaz ábrázolására használnak, annak tranzitív redukciójának rajza formájában. Konkrétan, egy részlegesen rendezett $(S, \leq)$ halmaz esetében az $S$ minden elemét egy csúcsként ábrázoljuk a síkban, és egy olyan vonalszakaszt vagy görbét rajzolunk, amely $x$-ből $y$ felé halad, amikor $y$ lefedi $x$-et (vagyis amikor $x \leq y$ és nincs olyan $z$, hogy $x \leq z \leq y$). Ezek a görbék keresztezhetik egymást, de a végpontjaikon kívül nem érinthetnek más csúcsot. Egy ilyen diagram, felcímkézett csúcsokkal, egyértelműen meghatározza a részleges rendet.
 
 Az oszthatóság egy részben rendezett halmaz. Vegyük a 30-as szám osztóit, ebben az esetben az alábbi halmaz adja meg: 
 $$D_{30} = \{1,2,3,5,6,10,15,30\}.$$
@@ -25,7 +25,7 @@ $$D_{30} = \{1,2,3,5,6,10,15,30\}.$$
 
 \Section{Általános gráf}
 
-A gráf (vagy irányítatlan gráf) egy $G = (V, E)$ pár, ahol $V$ egy olyan halmaz, amelynek elemeit csúcsoknak, $E$ pedig párosított csúcsok halmaza, amelynek elemeit éleknek nevezik. Néha a gráfok tartalmazhatnak hurkokat, azaz olyan éleket, amelyek egy csúcsot önmagához kapcsolnak. A hurkok engedélyezéséhez a fenti definíciót úgy kell megváltoztatni, hogy az éleket két csúcsból álló többszörös halmazokként definiáljuk a két halmaz helyett. Az ilyen általánosított gráfokat hurokkal rendelkező gráfoknak vagy egyszerűen gráfoknak nevezzük, ha a kontextusból egyértelmű, hogy a hurok megengedett.
+A gráf (vagy irányítatlan gráf) egy $G = (V, E)$ pár, ahol $V$ egy olyan halmaz, amelynek elemeit csúcsoknak, $E$ pedig a (rendezett) csúcspárok halmaza, amelynek elemeit éleknek nevezzük. Néha a gráfok tartalmazhatnak hurkokat, azaz olyan éleket, amelyek egy csúcsot önmagához kapcsolnak. Az ilyen általánosított gráfokat hurokkal rendelkező gráfoknak vagy egyszerűen gráfoknak nevezzük, ha a kontextusból egyértelmű, hogy a hurok megengedett.
 
 \begin{figure}[!h]
 	\label{fig:graph_editor}

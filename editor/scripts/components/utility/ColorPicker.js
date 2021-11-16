@@ -1,9 +1,5 @@
 'use strict';
 
-/*
-        COLORPICKER
- */
-
 import {COLOR, COLORPICKERS, SHAPES_DATABASE} from "../global.js";
 import {capitalize, getKey, toHex} from "../misc.js";
 import {addUndo} from "../undo.js";
@@ -18,10 +14,10 @@ class ColorPicker {
         this.colorInput.parent().append(this.colorPalette);
 
         this.colorInput.on('click', () => this.showColorPalette());
-        this.colorInput.on('focusout', e => this.hideColorPalette());
+        this.colorInput.on('focusout', () => this.hideColorPalette());
 
-        this.colorPalette.on("mouseover", e => this.mouseOver());
-        this.colorPalette.on('mouseout', e => this.mouseOut());
+        this.colorPalette.on("mouseover", () => this.mouseOver());
+        this.colorPalette.on('mouseout', () => this.mouseOut());
         this.colorPalette.mouseIsOver = false;
         this.colorPalette.isShown = false;
 
@@ -59,6 +55,8 @@ class ColorPicker {
     }
 }
 
+// =====================================================================================================================
+
 // color pick handler
 const refreshColorPickerHandlers = () => {
     $(".color-option").off('click').on('click', (e) => {
@@ -81,11 +79,15 @@ const refreshColorPickerHandlers = () => {
     });
 }
 
+// =====================================================================================================================
+
 // initialize color pickers
 for (let colorpicker of $(".color-input")) {
     COLORPICKERS.push(new ColorPicker(colorpicker.id))
     refreshColorPickerHandlers();
 }
+
+// =====================================================================================================================
 
 export {
     ColorPicker,

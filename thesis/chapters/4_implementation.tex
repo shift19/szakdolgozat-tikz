@@ -2,7 +2,7 @@
 
 \Section{A p5 függvénykönyvtár}
 
-Az elkészült szerkesztő jelentős mértékben támaszkodik a p5.js függvénykönyvtár adta lehetőségekre. A p5 oldalán az alábbi ismertető olvasható:
+Az elkészült szerkesztő jelentős mértékben támaszkodik a \textit{p5.js} függvénykönyvtár adta lehetőségekre. A \textit{p5} oldalán az alábbi ismertető olvasható:
 
 "A p5.js egy JavaScript könyvtár a kreatív kódoláshoz, amelynek középpontjában az áll, hogy a kódolást elérhetővé és befogadóvá tegye művészek, tervezők, oktatók, kezdők és bárki más számára! A p5.js ingyenes és nyílt forráskódú, mert hiszünk abban, hogy a szoftvereknek és a tanuláshoz szükséges eszközöknek mindenki számára elérhetőnek kell lenniük.
 
@@ -41,15 +41,15 @@ function draw() {
 A \textit{setup} függvény a \textit{sketch.js} betöltésekor fut le, célszerű iderakni a p5 vászon létrehozását (\textit{createCanvas} függvényhívás, mely paraméterként várja a magasságot és a szélességet). A \textit{draw} függvény a futás során folyamatosan meghívódik.
 
 A dolgozatban a \textit{p5.js} példányosított módban fut a modulok miatt.
-\begin{lstlisting}[style=es6]
+\begin{lstlisting}[style=es6, morekeywords={P5}]
 const sketch = s => {
 	
 	s.setup = () => {
-		...
+		setup();
 	}
 	
 	s.draw = () => {
-		...
+		draw();
 	}
 
 ...
@@ -63,7 +63,20 @@ export {
 }
 \end{lstlisting}
 
-Ebben az esetben a \textit{P5} névtér alá kerül a vászon, és a modulokban importálni kell a névtér hivatkozását, valamint az eddig globális \textit{p5.js} függvényhívások is ezen névtér alá kerülnek.
+Ebben az esetben a \textit{P5} névtér alá kerül a vászon, és a modulokban importálni kell a névtér hivatkozását, valamint az eddig globális \textit{p5.js} függvényhívások is ezen névtér alá kerülnek. Ebben az esetben a fenti példa így kerül definiálása:
+
+\begin{lstlisting}[style=es6, morekeywords={P5}]
+import {P5} from "../sketch.js";
+
+const setup = () => {
+	P5.createCanvas(400, 400);
+}
+
+const draw = () => {
+	P5.background(220);
+	P5.ellipse(50, 50, 80, 80);
+}
+\end{lstlisting}
 
 \Section{Az alkalmazás felépítése}
 
@@ -75,7 +88,7 @@ A fejezetben megjelenő képernyő mintaképeken a vászon ötszörös nagyítá
 
 Ez a képernyő jelenik meg az alkalmazás betöltésekor. A bal oldali menüben automatikusan ki van választva a vászon mozgatására alkalmas funkció.
 
-Az egér bal gombjával tudjuk pozicionálni még görgővel kicsinyíteni vagy nagyítani a vásznat. Az egér középső gombját lenyomva pedig az alapértelmezett pozíció és nagyításra visszaáll a vászon.
+Az egér bal gombjával tudjuk pozicionálni míg görgővel kicsinyíteni vagy nagyítani a vásznat. Az egér középső gombját lenyomva pedig az alapértelmezett pozícióra és nagyításra visszaáll a vászon.
 
 \begin{figure}[!h]
 	\label{fig:canvas}
@@ -130,9 +143,9 @@ Az ábra betöltésekor a már meglévő hivatkozási kód bemásolása után az
 
 \SubSection{Rajzolás}
 
-A rajzolás mód kiválasztásával megjelenik a vezérlőelemek alatt az alapelemek mátrix alapú felsorolásban és a kijelölt elemhez tartozó tulajdonságok.
+A rajzolás mód kiválasztásával megjelennek a vezérlőelemek alatt az alapelemek mátrix alapú felsorolásban és a kijelölt elemhez tartozó tulajdonságok.
 
-A megfelelő tulajdonságok beállítása után a rajzolás az egérrel történik. A pont, szöveg és matek kifejezések kirajzolása kattintásra történnek, még a maradék alapelem "drag and drop" (\textit{fogd és vidd}) megoldással kerül kirajzolásra, vagyis a kezdőpont a kattintás helye, és a végpont az egér gombjának felengedésének a pozíciója lesz.
+A megfelelő tulajdonságok beállítása után a rajzolás az egérrel történik. A pont, szöveg és matematikai kifejezések kirajzolása kattintásra történnek, míg a maradék alapelem "drag and drop" (\textit{fogd és vidd}) megoldással kerül kirajzolásra, vagyis a kezdőpont a kattintás helye, és a végpont az egér gombjának felengedésének a pozíciója lesz.
 
 \begin{figure}[!h]
 	\label{fig:draw}
@@ -155,7 +168,7 @@ A szerkesztés funkcióban lehetőség van a már lent lévő elemek kiválaszt�
 	\caption{A szerkesztés képernyő kiválasztott elem után}
 \end{figure}
 
-A kijelölés véglegesítése után a rajtoló felület jobb oldalán megjelennek a kijelölt területbe beleeső alapelemek. Itt lehetőség van egyenként szerkeszteni a már lent lévő elemek tulajdonságait. A jelenlegi tulajdonságok automatikusan betöltődnek, módosításkor a vásznon automatikusan megjelenik, nincs szükség a módosítás mentésére.
+A kijelölés véglegesítése után a rajzoló felület jobb oldalán megjelennek a kijelölt területbe beleeső alapelemek. Itt lehetőség van egyenként szerkeszteni a már lent lévő elemek tulajdonságait. A jelenlegi tulajdonságok automatikusan betöltődnek, módosításkor a vásznon automatikusan megjelenik, nincs szükség a módosítás mentésére.
 
 Kijelölés után lehetőségünk van a másolásra, beillesztésre és törlésre egyaránt, ezek mindegyike billentyű lenyomásra működnek. A másolás a  \textit{CTRL + C}, a beillesztés a \textit{CTRL + V}, még a törlés a \textit{CTRL + X} billentyűkombinációval, és a \textit{DELETE} billentyűvel egyaránt működik.
 
@@ -181,11 +194,11 @@ A mozgatás funkcióban lehet a már lent lévő ábrák pontjait kijelölés ut
 
 \SubSection{Alapelemek osztályai}
 
-Ebben a részben kerülnek a menüben kiválasztható alapelemek osztályai, valamint az aktuális elem esetében a  \textit{p5.js} és \textit{TikZ} közötti különbségek és megoldásuk. 
+Ebbe a részbe kerülnek a menüben kiválasztható alapelemek osztályai, valamint az aktuális elem esetében a  \textit{p5.js} és \textit{TikZ} közötti különbségek és megoldásuk. 
 
 \SubSubSection{Shape osztály}
 
-A \textit{Shape} osztály minden alapelem szülője, itt kerül beállításra a majdnem az összes elemnél előforduló szín, betűszín, vonal vastagság és mintázat. A \textit{draw} metódus beállítja a megadott tulajdonságokat a rajzolás előtt. A \textit{toLatex} és a \textit{fromJson} metódusok még itt üres, értékeket a származtatott osztályokban kapnak.
+A \textit{Shape} osztály minden alapelem szülője, itt kerül beállításra a majdnem az összes elemnél előforduló szín, betűszín, vonal vastagság és mintázat. A \textit{draw} metódus beállítja a megadott tulajdonságokat a rajzolás előtt. A \textit{toLatex} és a \textit{fromJson} metódusok még itt üresek, értékeket a származtatott osztályokban kapnak.
 
 \SubSubSection{Point osztály}
 
@@ -240,7 +253,7 @@ A \textit{TikZ} alapból rendelkezik ezzel a funkcióval, ebben az esetben csak 
 
 A rácsháló kirajzolását végző kódrészlet:
 
-\begin{lstlisting}[style=es6]
+\begin{lstlisting}[style=es6, morekeywords={P5}]
 for (let i = Math.min(this.dimension.start.x, this.dimension.end.x); 
      i <= Math.max(this.dimension.start.x, this.dimension.end.x); 
      i += grid_density) {
@@ -274,7 +287,7 @@ $$\displaystyle y = \frac{y_1 - y_0}{(x_1 - x_0)^2}(x - x_0)^2 + y_0, \qquad x\i
 
 A kódrészlet, amely a vászonra rajzolja ennek az egyenletnek a képét:
 
-\begin{lstlisting}[style=es6]
+\begin{lstlisting}[style=es6, morekeywords={P5}]
 let a = (this.dimension.end.y - this.dimension.start.y) / 
     Math.pow(this.dimension.end.x - this.dimension.start.x, 2)
 if (isFinite(a)) {
@@ -298,9 +311,16 @@ A \textit{LMath} osztály matematikai kifejezések létrehozását teszi lehető
 
 A \textit{p5.js} nem támogatja a \LaTeX\ kifejezések megjelenítését a vásznon, így egy másik függvénykönyvtár használatával kellett megoldani: ez pedig a KaTeX{\cite{katex}}, mely egy gyors, könnyen használható JavaScript könyvtár a \LaTeX\ matematikai kifejezések webes megjelenítéséhez.
 
+\begin{figure}[!h]
+	\label{fig:math}
+	\centering
+	\includegraphics[width=0.75\textwidth]{images/math.png}
+	\caption{Példa egy matematikai kifejezés megjelenítésére}
+\end{figure}
+
 A \textit{renderToCanvas} függvénnyel lehet a KaTeX által generált kifejezéseket a vászonra rakni, paraméterként meg kell adni a kirajzolandó kifejezést, magát a vásznat, mint kirajzolási hely, valamint a kifejezés pozícióját (az x és y koordinátát egyaránt).
 
-\begin{lstlisting}[style=es6]
+\begin{lstlisting}[style=es6, morekeywords={document, P5, katex}]
 let canvas = document.getElementById(P5.canvas.id);
 katex.renderToCanvas(this.latex, canvas, 
     this.x + grid_density / 8, this.y - grid_density / 2.5, {
@@ -316,7 +336,7 @@ A \textit{Text} osztály szöveg vászonra helyezését teszi levetővé. Péld�
 
 Annak ellenére, hogy a \textit{p5.js} rendelkezik olyan funkciókkal ezek "kirajzolása" szintén a KaTeX függvénykönyvtár segítségével történik, annyi eltéréssel, hogy a kirajzolandó szöveg megkapja a \textbackslash text\{\} paramétert, hogy ne érvényesüljön a matematikai mód.
 
-\begin{lstlisting}[style=ES6]
+\begin{lstlisting}[style=es6, morekeywords={document, P5, katex}]
 let canvas = document.getElementById(P5.canvas.id);
 katex.renderToCanvas(`\\text{${this.text}}`, canvas, 
     this.x + grid_density / 8, this.y - grid_density / 2.5, {
@@ -336,7 +356,7 @@ Ez az osztály felelős a vászon mozgatásáért és a nagyításért. Az oszt�
 
 Az eseménykezelők beállítása a \textit{p5.js} példányára, amely a \textit{sketch}-ben kerül létrehozásra:
 
-\begin{lstlisting}[style=ES6]
+\begin{lstlisting}[style=es6, morekeywords={P5, Control}]
 P5.mousePressed = e => Control.mousePressed(e)
 P5.mouseDragged = e => Control.mouseDragged(e);
 P5.mouseReleased = e => Control.mouseReleased(e);
@@ -345,7 +365,7 @@ P5.mouseWheel = e => Control.zoomCanvas(e);
 
 \SubSubSection{ColorPicker osztály}
 
-Ez az osztály kezeli az alkalmazásban szereplő színválasztó megfelelő működését. Itt kerül kezelésre az adott színválasztó kiválasztása, a színpaletta megjelenítésére és eltüntetésére, az adott szín kijelölése. 
+Ez az osztály kezeli az alkalmazásban szereplő színválasztó megfelelő működését. Itt kerül kezelésre az adott színválasztó kiválasztása, a színpaletta megjelenítésé és eltüntetésé, az adott szín kijelölése. 
 
 \begin{figure}[!h]
 	\centering
@@ -354,4 +374,36 @@ Ez az osztály kezeli az alkalmazásban szereplő színválasztó megfelelő mű
 	\caption{Példa a színek kiválasztására}
 \end{figure}
 
+A színválasztó előredefiniált színek alapján dolgozik, ezek megegyeznek a \LaTeX\ által definiáltakkal:
+
+\begin{lstlisting}[style=es6]
+const COLOR = {
+	NONE: "#E9ECEF", // for no stroke or fill color
+	WHITE: "#FFFFFF",
+	LIGHTGRAY: "#BFBFBF",
+	GRAY: "#808080",
+	DARKGRAY: "#404040",
+	BLACK: "#000000",
+	RED: "#FF0000",
+	VIOLET: "#800080",
+	PURPLE: "#BF0040",
+	MAGENTA: "#FF00FF",
+	PINK: "#FFBFBF",
+	GREEN: "#00FF00",
+	LIME: "#BFFF00",
+	OLIVE: "#808000",
+	BROWN: "#BF8040",
+	ORANGE: "#FF8000",
+	YELLOW: "#FFFF00",
+	BLUE: "#0000FF",
+	CYAN: "#00FFFF",
+	TEAL: "#008080"
+}
+\end{lstlisting}
+
+Azért ilyen formában kerülnek tárolásra a színkódok, mert a \textit{p5.js} tudja kezelni a hexadecimális színkódokat. A \textit{COLOR}-ra hivatkozva meg tudjuk adni a színeket. Például piros körvonal, és világosszürke kitöltés esetében:
+\begin{lstlisting}[style=es6, morekeywords={P5, COLOR}]
+P5.stroke(COLOR.RED);
+P5.fill(COLOR.LIGHTGRAY);
+\end{lstlisting}
 

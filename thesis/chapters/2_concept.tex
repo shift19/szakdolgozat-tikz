@@ -2,9 +2,13 @@
 
 \Section{Ábrák szerkesztése LaTeX-ben}
 
-A rajzolás megkönnyítése érdekében a TikZ-t használjuk, amely egy frontend réteg a PGF-hez. Egy ábrát létrehozni azt jelenti, hogy egyenes vagy görbe vonalak sorozatát rajzoljuk meg. A TikZ parancsaira és szintaxisára olyan források voltak hatással, mint a METAFONT, a PSTricks és még sokan mások.
+A rajzolás megkönnyítése érdekében a \textit{TikZ}-t\cite{tikzmanual}\cite{tikzmanual2} használjuk, amely egy frontend réteg a \textit{PGF}-hez. A \textit{PGF} a "\textit{Portable Graphics Format}" rövidítése. A \textit{PGF} egy alacsonyabb szintű nyelv, míg a \textit{TikZ} egy \textit{PGF}-et használó magasabb szintű makrókészlet. A \textit{PGF} és a \textit{TikZ} parancsok \TeX\ makróként hívhatók meg. A \textit{TikZ} a \textit{PGF} 0.95-ös verziójában jelent meg.
 
-A pontokat és koordinátákat a TikZ egy speciális szintaxissal adja meg. A legegyszerűbb, ha kerek zárójelben vesszővel elválasztott két dimenziót használunk, például (4pt, 6pt). Ha az egység nincs megadva, akkor az xy-koordináta rendszerének alapértelmezett értékeit használjuk. Ez azt jelenti, hogy az egységnyi x-vektor 1 cm-rel jobbra, az egységnyi y-vektor pedig 1 cm-rel felfelé halad. 
+Egy ábrát létrehozni azt jelenti, hogy egyenes vagy görbe vonalak sorozatát rajzoljuk meg. A \textit{TikZ} parancsaira és szintaxisára olyan források voltak hatással, mint a \textit{MetaPost}\cite{metapost}, vagy a \textit{PSTricks}\cite{pstricks}.
+
+A \textit{MetaPost} egy programozási nyelvre és a \textit{MetaPost} interpreterére egyaránt utal. Mindkettő Donald Knuth nevéhez köthető. A \textit{MetaPost} geometriai vagy algebrai leírásból vektorgrafikus diagramokat készít. A nyelv osztozik a Metafont deklaratív szintaxisán a vonalak, görbék, pontok és geometriai transzformációk manipulálásához.
+
+A \textit{PSTricks} olyan makrók gyűjteménye, amelyek lehetővé teszik a PostScript grafikák \TeX\-be vagy \LaTeX\ -be való beágyazását. Eredetileg Timothy Van Zandt fejlesztette ki. Napjainkban a tudomány és a technológia számos területén nagy jelentőséggel bír a publikációkban. 
 
 \Section{A TikZ elemei}
 
@@ -25,7 +29,9 @@ Ezután kezdhetjük el az ábrák létrehozását.
 
 \SubSection{Szintaxis}
 
-A szabály az, hogy minden TikZ grafikus rajzoló parancsnak a \textit{tikz} parancs argumentumaként vagy a \textit{tikzpicture} környezeten belül kell előfordulnia. A környezeten belül megadott összes opció a teljes képre vonatkozik.
+A pontokat és koordinátákat a \textit{TikZ} egy speciális szintaxissal adja meg. A legegyszerűbb, ha kerek zárójelben vesszővel elválasztott két dimenziót használunk, például (4pt, 6pt). Ha az egység nincs megadva, akkor az xy-koordináta rendszerének alapértelmezett értékeit használjuk. Ez azt jelenti, hogy az egységnyi x-vektor 1 cm-rel jobbra, az egységnyi y-vektor pedig 1 cm-rel felfelé halad. 
+
+A szabály az, hogy minden \textit{TikZ} grafikus rajzoló parancsnak a \textit{tikz} parancs argumentumaként vagy a \textit{tikzpicture} környezeten belül kell előfordulnia. A környezeten belül megadott összes opció a teljes képre vonatkozik.
 
 A \textit{tikzpicture} környezet \LaTeX\ változata a következő:
 
@@ -36,7 +42,7 @@ A \textit{tikzpicture} környezet \LaTeX\ változata a következő:
 \end{lstlisting}
 
 
-A TikZ-ben minden ábra alapvető építőeleme a vonal. Egy vonalat a kezdőpont koordinátáinak megadásával kezdünk, mint például (0,0), majd hozzáadunk egy vonal bővítő műveletet, erre a legkézenfekvőbb módszer csak a "\textit{- -}" használata. A műveletet ezután a következő koordináta követi. Minden útvonalnak pontosvesszővel kell végződnie. Az vonal megrajzolásához a \textit{draw} parancsot használjuk.
+A \textit{TikZ}-ben minden ábra alapvető építőeleme a vonal. Egy vonalat a kezdőpont koordinátáinak megadásával kezdünk, mint például (0,0), majd hozzáadunk egy vonal bővítő műveletet, erre a legkézenfekvőbb módszer csak a "\textit{- -}" használata. A műveletet ezután a következő koordináta követi. Minden útvonalnak pontosvesszővel kell végződnie. A vonal megrajzolásához a \textit{draw} parancsot használjuk.
 
 Például a (0,0), (0,1), (1,0)  pontok közötti háromszög felrajzolásához (egyik lehetséges módjaként) az alábbi parancsokat kell alkalmazni:
 
@@ -196,6 +202,13 @@ A vonalakat végpontjait testreszabhatjuk, így nyilakat hozhatunk létre:
 \draw [|-|] (0,0) -- (1,0);
 \end{tikzcode}
 
+Hasonlóan tudunk görbét is rajzolni. A \textit{TikZ} Bézier-görbe rajzolását teszi lehetővé. A lenti példában egy harmadfokú Bézier-görbe szerepel, így négy paraméter található: a kezdőpont, a két kontrollpont, és a végpont. A kontrollpontok a \textit{.. controls} kulcsszó után adhatók meg \textit{and} szóval elválasztva, és a két paraméter után szintén szükséges a két pont kirakása.
+
+\begin{tikzcode}
+\draw [latex-latex] 
+    (0,0) .. controls (0,1) and (1,0) .. (1,1);
+\end{tikzcode}
+
 A nyílhegyek esetében is rengeteg lehetséges opció van, a két végponton lévő nyílhegy szabadon variálható. Egy pár ezek közül:
 \begin{tikzcode}
 \draw [stealth-stealth reversed] (0,1.5) -- (1,1.5);
@@ -204,11 +217,11 @@ A nyílhegyek esetében is rengeteg lehetséges opció van, a két végponton l�
 \draw [|-|] (0,0) -- (1,0);
 \end{tikzcode}
 
-Az \textit{arrows.meta} könxvtár további nyílhegyeket tartalmaz, ebből két darabot emelnék ki, melyek jól használhatók a fentiekkel kombinálva:
+Az \textit{arrows.meta} könyvtár további nyílhegyeket tartalmaz, ebből két darabot emelnék ki, melyek jól használhatók a fentiekkel kombinálva:
 
 \begin{tikzcode}
-\draw [{Stealth[open]}-stealth reversed] (0,0.5) -- (1,0.5);
-\draw [{Latex[open]}-latex reversed] (0,0) -- (1,0);
+\draw [{Stealth[open]}-stealth] (0,0.5) -- (1,0.5);
+\draw [{Latex[open]}-latex] (0,0) -- (1,0);
 \end{tikzcode}
 
 Ha több szegmenst rajzolunk, a nyilak az első és az utolsó szegmens végpontjainál helyezkednek el. Ez, többek között, a tengelyek rajzolásához kényelmes:
@@ -265,11 +278,7 @@ Ahhoz, hogy szöveget adjunk a képhez, csomópontot kell hozzáadnunk az útvon
 
 A csomópontok az útvonal aktuális pozíciójába kerülnek, a [\textit{circle,draw}] opció a szöveget egy körrel veszi körül, amely az aktuális pozícióba rajzolódik.
 
-Adott esetben szükség lehet rá, ha a csomópont az aktuális koordináta jobb oldalán vagy fölött lenne. Ehhez viszont már szükséges a \textit{positioning} könyvtár hozzáadása is a fájlunkhoz az alábbi szerint:
-
-\begin{lstlisting}[style=latex]
-\usetikzlibrary{positioning}
-\end{lstlisting}
+Adott esetben szükség lehet rá, ha a csomópont az aktuális koordináta jobb oldalán vagy fölött lenne. Ehhez az \textit{anchor} attribútumot kell megadni, és a megfelelő oldal nevét:
 
 \begin{tikzcode}
 \draw 
@@ -295,15 +304,15 @@ A következőkben a már meglévő, és népszerű szerkesztőkörnyezetek kerü
 
 \SubSection{draw.io}
 
-A kezelőfelület fejlécében az általános menüpontok szerepelnek. Az alkalmazás közepén van maga a felület, ahol az ábrák szerkeszthetők. Ezt fogja körbe a bal oldalról az ábrákkal kapcsolatos, míg jobb oldalon a diagram beállításai, és előre definiált stílusok közül lehet választani. 
-
-Az alapelemek csoportosítva vannak kinézetük alapján lenyitható menüpontokként. 
-
 \begin{figure}[!h]
 	\includegraphics[width=\textwidth]{images/drawio.png}
 	\caption{A draw.io kezelőfelülete \cite{drawio}}
 	\label{fig:drawio}
 \end{figure}
+
+A kezelőfelület fejlécében az általános menüpontok szerepelnek. Az alkalmazás közepén van maga a felület, ahol az ábrák szerkeszthetők. Ezt fogja körbe a bal oldalról az ábrákkal kapcsolatos, míg jobb oldalon a diagram beállításai, és előre definiált stílusok közül lehet választani. 
+
+Az alapelemek csoportosítva vannak kinézetük alapján lenyitható menüpontokként. 
 
 Az ábra kiválasztása után rögtön megjelenik a felület közepén, ezt követően lehet elhelyezni. Az ábrák szerkesztésénél több lehetőség áll rendelkezésünkre. Az előre definiált pár stíluson felül többféleképpen is meg lehet adni saját színeket is: RGB színválasztóval, hexakódokkal, és gyakran használt színekkel egyaránt. Be lehet állítani az adott ábrára kitöltőszínt, betűszínt, vízszintes és függőleges igazítást, árnyékot, bemetszést.
 
@@ -316,7 +325,7 @@ Az elkészített diagram menthető különböző fájlformátumokban, automatiku
 
 \SubSection{TikZiT}
 
-A TikZiT leginkább gráfok rajzolására használható. A vezérlő elemek az alkalmazás fejlécében helyezkednek el. A grafikus alapelemek szintén itt találhatóak, számuk nem kiemelkedő: a kijelölésen kívül van egy gráf csomópont lerakásához és egy gráf éleinek berajzolásához egy gomb. 
+A \textit{TikZiT} leginkább gráfok rajzolására használható. A vezérlő elemek az alkalmazás fejlécében helyezkednek el. A grafikus alapelemek szintén itt találhatóak, számuk nem kiemelkedő: a kijelölésen kívül van egy gráf csomópont lerakásához és egy gráf éleinek berajzolásához egy gomb. 
 
 Mind a csomópont, mind a gráf stílusa módosítható, fájlként menthető, és betölthető, a programon belül és kívül is (a kód ismeretében) szerkeszthetők. Három lehetőség van: alak, szín, kitöltés. 
 
@@ -342,9 +351,9 @@ A kész ábrák mentése fájlba történik, ezek betölthetők későbbi szerke
 \label{fig:tikzedt}
 \end{figure}
 
-A TikzEdt esetében három hasábra osztható a felület: elsőben az előre definiált \LaTeX\ kódrészletek, másodikban a LaTeX kódszerkesztő, és végül a harmadikban a lefordított kód előnézete jelenik meg. 
+A \textit{TikzEdt} esetében három hasábra osztható a felület: elsőben az előre definiált \LaTeX\ kódrészletek, másodikban a LaTeX kódszerkesztő, és végül a harmadikban a lefordított kód előnézete jelenik meg. 
 
-Az alapelemek a felső sávban jelennek meg: főleg gráfokkal és egyszerűbb elemeket tartalmaz. Az elemek, gráfok, egyenletek, szövegek stílusa és színei csak kód szinten szerkeszthetők, de vannak választható opciók. 
+Az alapelemek a felső sávban jelennek meg: főleg gráfokat és egyszerűbb elemeket tartalmaz. Az elemek, gráfok, egyenletek, szövegek stílusa és színei csak kód szinten szerkeszthetők, de vannak választható opciók. 
 
 A rétegződés a lerakás sorrendjében jön létre, utólagos módosításra nincs lehetőség. Az elemek automatikusan rácspontokhoz igazodnak. 
 
@@ -377,7 +386,7 @@ Szempontok, amik alapján az összehasonlítást végzem:
 
 \begin{description}
 	\item[Elrendezés:] Az elrendezés az, amivel a szerkesztő megnyitásakor a felhasználó először találkozik. Fontos, hogy átlátható, és egyszerűen kezelhető legyen. A leggyakoribb alkalmazás elrendezések közül kettőt emelnék ki: egyik az fejléc és maga a szerkesztőfelület, a másik a hasáb alapú felépítés, ahol az alkalmazás részei egymás mellett jelennek meg. 
-	\item[Alapelemek megjelenítése:] Az alapelemek helyzete is épp ilyen fontos, a felhasználó szempontjából kifejezetten előnyös, ha Megfelelő (logikus) szempontok alapján csoportosítva vannak az alapelemek, és nem csak egymás után fel vannak sorolva, akár egy mátrix alapú felépítésben.
+	\item[Alapelemek megjelenítése:] Az alapelemek helyzete is épp ilyen fontos, a felhasználó szempontjából kifejezetten előnyös, ha megfelelő (logikus) szempontok alapján csoportosítva vannak az alapelemek, és nem csak egymás után fel vannak sorolva, akár egy mátrix alapú felépítésben.
 	\item[Tulajdonságok szerkesztése:] Ha már leraktunk egy objektumot, akkor elvárható az, hogy a lent lévő elem szerkeszthető is legyen: ez érinti a helyzetet, színeket, és a stílusokat is. Itt szükséges lehetőséget adni a szerkesztendő elemek kiválasztására, akár magán a rajzolófelületen, akár egy listában kijelölve.
 	\item[Szövegek szerkesztése:] Elérhetővé kell tenni a felhasználó számára a szövegek szerkesztését: szabadon, vagy a csomópontokon belüli megjelenítést. Ebben az esetben is kiválaszthatónak kell lennie a szerkesztendő szövegeknek.
 	\item[Színek megadási módja:] Az ábrák színezhetők, így a szerkesztőnek is tudni kell kezelni a színeket: legalább az előre definiált színeket kiválaszthatóvá kell tenni.

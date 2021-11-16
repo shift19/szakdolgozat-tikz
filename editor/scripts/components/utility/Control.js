@@ -88,11 +88,15 @@ class Control {
     }
 }
 
+// =====================================================================================================================
+
 const resetCanvasZoom = () => {
     ZOOM_CONTROLS.VIEW = {x: P5.width / 2, y: P5.height / 2, zoom: 2}
     ZOOM_CONTROLS.VIEW_POSITION = {prevX: null, prevY: null, isDragging: false}
     P5.resetMatrix();
 }
+
+// =====================================================================================================================
 
 export {
     Control

@@ -1,13 +1,9 @@
 'use strict';
 
-/*
-        ZOOM CONTROLS
- */
-
 import {P5} from "../sketch.js";
 import {MODES, TOOLBAR, ZOOM_CONTROLS} from "../global.js";
 
-// add zoom event listeners
+// =====================================================================================================================
 
 class Control {
 

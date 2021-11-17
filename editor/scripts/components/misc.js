@@ -55,11 +55,12 @@ const loadOptions = (dom, obj, def) => {
 
 //======================================================================================================================
 
-// oneliners
+const middlepoints = 2; // actual middlepoints is less by 1
+
 const normalize = point => (!isNormalize) ? {
     x: point.x,
     y: point.y
-} : {x: Math.round(point.x / (grid_density/2)) * (grid_density/2), y: Math.round(point.y / (grid_density/2)) * (grid_density/2)};
+} : {x: Math.round(point.x / (grid_density/middlepoints)) * (grid_density/middlepoints), y: Math.round(point.y / (grid_density/middlepoints)) * (grid_density/middlepoints)};
 
 const getKey = (keyof, value) => Object.keys(keyof).find(key => JSON.stringify(keyof[key]) === JSON.stringify(value));
 const getKeyLC = (keyof, value) => Object.keys(keyof).find(key => JSON.stringify(keyof[key]) === JSON.stringify(value)).toLowerCase().replace("_", " ");

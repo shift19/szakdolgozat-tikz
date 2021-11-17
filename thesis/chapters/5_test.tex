@@ -82,3 +82,36 @@ A Nassi-Shneiderman-diagramokat csak ritkán használják a formális programoz�
 	\end{tabular}
 	\caption{Egy struktogram képe az alkalmazásban és kimentve}
 \end{figure*}
+
+\Section{Aranymetszés}
+
+A matematikában két mennyiség aranymetszésben van, ha arányuk megegyezik összegük és a két mennyiség közül a nagyobbik arányával. Algebrailag kifejezve, az $a$ és a $b$ esetében, ha $a>b>0$, akkor
+$$\frac{a+b}{a} = \frac{a}{b} = \varphi$$
+ahol a $\varphi$ az aranymetszést jelenti. Ez egy olyan irracionális szám, amely a $x^{2}-x-1=0$ kvadratikus egyenlet megoldása, amelynek értéke
+
+$$\varphi =\frac{1+\sqrt{5}}{2}=1.618033988749\dots$$
+
+
+Az aranymetszés és a Fibonacci-sorozat matematikája szorosan összefügg egymással. A Fibonacci-sorozat:
+
+$$1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, \dots$$
+
+A Fibonacci-sorozat kifejezése az aranymetszést foglalja magában:
+
+$$F(n)=\frac{\varphi^{n}-(1-\varphi )^{n}}{\sqrt{5}} = \frac{{\varphi ^{n}-(-\varphi )^{-n}}}{\sqrt {5}}$$
+
+Az aranymetszés alkalmazásával a webfejlesztésben a weloldal vonzóvá válik a felhasználó számára, és az elrendezése tudat alatt tökéletesnek és ismerősnek tűnik számukra. Ezáltal sokkal valószínűbbé válik, hogy továbbolvassák és alaposan megnézik a webhelyet. Az aranymetszést a webtervezésben arra is használják, hogy kiegyensúlyozzák a szöveges tartalmakat, hierarchiát hozzanak létre, és a felhasználók szemét bizonyos területekre irányítsák.
+
+\begin{figure}[!h]
+	\label{fig:gr_editor}
+	\centering
+	\includegraphics[width=0.75\textwidth]{images/goldenratio.png}
+	\caption{Az aranymetszés képe az alkalmazásban}
+\end{figure}
+
+\begin{figure}[!h]
+	\label{fig:gr_tikz}
+	\centering
+	\scalebox{1.4}{\input{images/tikz/goldenratio}}
+	\caption{Az alkalmazásból kimentett aranymetszés képe}
+\end{figure}

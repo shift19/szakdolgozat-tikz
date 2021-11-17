@@ -119,7 +119,7 @@ class Line extends Shape {
         P5.push();
         super.draw();
 
-        let size = 8 * (this.linewidth / 2);
+        let size = 12 * (this.linewidth / 2);
 
         switch (this.arrow) {
             case ARROW.HEAD:

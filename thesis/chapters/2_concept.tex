@@ -2,9 +2,9 @@
 
 \Section{Ábrák szerkesztése LaTeX-ben}
 
-A rajzolás megkönnyítése érdekében a \textit{TikZ}-t\cite{tikzmanual}\cite{tikzmanual2} használjuk, amely egy frontend réteg a \textit{PGF}-hez. A \textit{PGF} a "\textit{Portable Graphics Format}" rövidítése. A \textit{PGF} egy alacsonyabb szintű nyelv, míg a \textit{TikZ} egy \textit{PGF}-et használó magasabb szintű makrókészlet. A \textit{PGF} és a \textit{TikZ} parancsok \TeX\ makróként hívhatók meg. A \textit{TikZ} a \textit{PGF} 0.95-ös verziójában jelent meg.
+A rajzolás megkönnyítése érdekében a \textit{TikZ}-t \cite{tikzmanual}\cite{tikzmanual2} használjuk, amely egy frontend réteg a \textit{PGF}-hez. A \textit{PGF} a "\textit{Portable Graphics Format}" rövidítése. A \textit{PGF} egy alacsonyabb szintű nyelv, míg a \textit{TikZ} egy \textit{PGF}-et használó magasabb szintű makrókészlet. A \textit{PGF} és a \textit{TikZ} parancsok \TeX\ makróként hívhatók meg. A \textit{TikZ} a \textit{PGF} 0.95-ös verziójában jelent meg.
 
-Egy ábrát létrehozni azt jelenti, hogy egyenes vagy görbe vonalak sorozatát rajzoljuk meg. A \textit{TikZ} parancsaira és szintaxisára olyan források voltak hatással, mint a \textit{MetaPost}\cite{metapost}, vagy a \textit{PSTricks}\cite{pstricks}.
+Egy ábrát létrehozni azt jelenti, hogy egyenes vagy görbe vonalak sorozatát rajzoljuk meg. A \textit{TikZ} parancsaira és szintaxisára olyan források voltak hatással, mint a \textit{MetaPost} \cite{metapost}, vagy a \textit{PSTricks} \cite{pstricks}.
 
 A \textit{MetaPost} egy programozási nyelvre és a \textit{MetaPost} interpreterére egyaránt utal. Mindkettő Donald Knuth nevéhez köthető. A \textit{MetaPost} geometriai vagy algebrai leírásból vektorgrafikus diagramokat készít. A nyelv osztozik a Metafont deklaratív szintaxisán a vonalak, görbék, pontok és geometriai transzformációk manipulálásához.
 
@@ -24,6 +24,7 @@ Először is be kell állítanunk a környezetünket. Ehhez a következőképpen
 \end{document}
 \end{lstlisting}
 
+\noindent
 Ezután kezdhetjük el az ábrák létrehozását. 
 
 
@@ -58,9 +59,15 @@ vagy
 \end{tikzpicture}
 \end{lstlisting}
 
+\noindent
+A továbbiakban a \textit{TikZ} kódok megjelenítése az alábbi szerint történik:
+
 \begin{tikzcode}
 \draw (0,0) -- (0,1) -- (1,0) -- (0,0);
 \end{tikzcode}
+
+\noindent
+A bal oldalon foglal helyet maga a \textit{TikZ} kód, míg a jobb oldalon a képe jelenik meg.
 
 \SubSection{Elérhető diagram elemek}
 
@@ -173,7 +180,7 @@ A következő színeket érhetjük el bármiféle definiálás nélkül:
 	\end{tabular}
 \end{table}
 
-A \textit{fill} paranccsal kitölthetjük a megadott színnel a bármely alakzat által határolt tartományt. Az aktuális rajzolt görbe lezárásához használhatjuk a \lstinline[style=latex]{-- cycle} parancsot. A szín argumentumhoz használhatjuk a szín nevét, például \textit{green} (\tikz\fill [green](0,0) rectangle (0.5,0.25);), \textit{white} (\tikz\draw (0,0) rectangle (0.5,0.25);) és \textit{red} (\tikz\fill [red](0,0) rectangle (0.5,0.25);), vagy keverhetjük a színeket, mint a \textit{red!40!white}, ami azt jelenti, hogy 40\% pirosat és 60\% fehéret fogunk keverni.
+A \textit{fill} paranccsal kitölthetjük a megadott színnel a bármely alakzat által határolt tartományt. Az aktuális rajzolt görbe lezárásához használhatjuk a \lstinline[style=latex]|-- cycle| parancsot. A szín argumentumhoz használhatjuk a szín nevét, például \textit{green} (\tikz\fill [green](0,0) rectangle (0.5,0.25);), \textit{white} (\tikz\draw (0,0) rectangle (0.5,0.25);) és \textit{red} (\tikz\fill [red](0,0) rectangle (0.5,0.25);), vagy keverhetjük a színeket, mint a \textit{red!40!white}, ami azt jelenti, hogy 40\% pirosat és 60\% fehéret fogunk keverni.
 
 \begin{tikzcode}
 \fill[red!40!white] 
@@ -194,7 +201,7 @@ Ez a színmegadás természetesen használható a körvonal színének módosít
 	(0,0) -- (0,1) -- (1,0) -- cycle;
 \end{tikzcode}
 
-A vonalakat végpontjait testreszabhatjuk, így nyilakat hozhatunk létre:
+A vonalakat végpontjait testre szabhatjuk, így nyilakat hozhatunk létre:
 
 \begin{tikzcode}
 \draw [->] (0,1) -- (1,1);
@@ -310,30 +317,28 @@ A következőkben a már meglévő, és népszerű szerkesztőkörnyezetek kerü
 	\label{fig:drawio}
 \end{figure}
 
-A kezelőfelület fejlécében az általános menüpontok szerepelnek. Az alkalmazás közepén van maga a felület, ahol az ábrák szerkeszthetők. Ezt fogja körbe a bal oldalról az ábrákkal kapcsolatos, míg jobb oldalon a diagram beállításai, és előre definiált stílusok közül lehet választani. 
+A \textit{draw.io} (\ref{fig:drawio}. ábra) egy sokoldalú, online szerkesztő, mely nemcsak ábrák szerkesztésére használható, hanem diagramok, folyamatábrák, hálózati architektúra felépítést, kapcsolási rajzok készítésére egyaránt alkalmas.
 
-Az alapelemek csoportosítva vannak kinézetük alapján lenyitható menüpontokként. 
+A kezelőfelület fejlécében az általános menüpontok szerepelnek. Az alkalmazás közepén van maga a felület, ahol az ábrák szerkeszthetők. Ezt fogja körbe a bal oldalról az ábrákkal kapcsolatos, míg jobb oldalon a diagram beállításai, és előre definiált stílusok közül lehet választani. Az alapelemek csoportosítva vannak kinézetük alapján lenyitható menüpontokként. 
 
-Az ábra kiválasztása után rögtön megjelenik a felület közepén, ezt követően lehet elhelyezni. Az ábrák szerkesztésénél több lehetőség áll rendelkezésünkre. Az előre definiált pár stíluson felül többféleképpen is meg lehet adni saját színeket is: RGB színválasztóval, hexakódokkal, és gyakran használt színekkel egyaránt. Be lehet állítani az adott ábrára kitöltőszínt, betűszínt, vízszintes és függőleges igazítást, árnyékot, bemetszést.
+Az alakzat kiválasztása után rögtön megjelenik a felület közepén, ezt követően lehet elhelyezni. Az ábrák szerkesztésénél több lehetőség áll rendelkezésünkre. Az előre definiált pár stíluson felül többféleképpen is meg lehet adni saját színeket is: RGB színválasztóval, hexakódokkal, és gyakran használt színekkel egyaránt. Be lehet állítani az adott ábrára kitöltőszínt, betűszínt, vízszintes és függőleges igazítást, árnyékot, bemetszést.
 
 Bármelyik ábrára helyezhető szöveg, ennek a stílusa igazodik az alakzat stílusához. Az objektumok bárhol összekapcsolhatók, de megjelennek ajánlott pontok is: 0, 25, 50, 75 és 100\%-on. A rétegek nem jelennek meg külön oldalon, az ábrák sorrendje számít, hogy melyik jelenik meg felül. A kijelölés téglalap alapú, a kijelölt elemeket lehet másolni, törölni, szerkeszteni. Az ábrák csak rácspontokhoz igazíthatók.
 
-Az alkalmazás rendelkezik Undo-Redo funkciókkal. 
-
-Az elkészített diagram menthető különböző fájlformátumokban, automatikusan mentésre kerülnek a módosítások. 
+Az alkalmazás rendelkezik Undo-Redo funkciókkal. Az elkészített diagram menthető különböző fájlformátumokban, automatikusan mentésre kerülnek a módosítások. 
 
 
 \SubSection{TikZiT}
-
-A \textit{TikZiT} leginkább gráfok rajzolására használható. A vezérlő elemek az alkalmazás fejlécében helyezkednek el. A grafikus alapelemek szintén itt találhatóak, számuk nem kiemelkedő: a kijelölésen kívül van egy gráf csomópont lerakásához és egy gráf éleinek berajzolásához egy gomb. 
-
-Mind a csomópont, mind a gráf stílusa módosítható, fájlként menthető, és betölthető, a programon belül és kívül is (a kód ismeretében) szerkeszthetők. Három lehetőség van: alak, szín, kitöltés. 
 
 \begin{figure}[!h]
 	\includegraphics[width=\textwidth]{images/tikzit.png}
 	\caption{A TikZiT kezelőfelülete \cite{tikzit}}
 	\label{fig:tikzit}
 \end{figure}
+
+A \textit{TikZiT} (\ref{fig:tikzit}. ábra) leginkább gráfok rajzolására használható. A vezérlő elemek az alkalmazás fejlécében helyezkednek el. A grafikus alapelemek szintén itt találhatóak, számuk nem kiemelkedő: a kijelölésen kívül van egy gráf csomópont lerakásához és egy gráf éleinek berajzolásához egy gomb. 
+
+Mind a csomópont, mind a gráf stílusa módosítható, fájlként menthető, és betölthető, a programon belül és kívül is (a kód ismeretében) szerkeszthetők. Három lehetőség van: alak, szín, kitöltés. 
 
 A szín és kitöltés kiválasztása történhet előre definiált alapszínekből, de lehetőség van RGB színskálából kiválasztásra vagy hexakód megadására is. Szöveg a gráf csomópontjainak adható. A csomópontokat összekötő élek a két pont helyzetétől függenek, csak az él hajlítására van lehetőség. 
 
@@ -351,7 +356,7 @@ A kész ábrák mentése fájlba történik, ezek betölthetők későbbi szerke
 \label{fig:tikzedt}
 \end{figure}
 
-A \textit{TikzEdt} esetében három hasábra osztható a felület: elsőben az előre definiált \LaTeX\ kódrészletek, másodikban a LaTeX kódszerkesztő, és végül a harmadikban a lefordított kód előnézete jelenik meg. 
+A \textit{TikzEdt} (\ref{fig:tikzedt}. ábra) esetében három hasábra osztható a felület: az elsőben az előre definiált \LaTeX\ kódrészletek, másodikban a LaTeX kódszerkesztő, és végül a harmadikban a lefordított kód előnézete jelenik meg. 
 
 Az alapelemek a felső sávban jelennek meg: főleg gráfokat és egyszerűbb elemeket tartalmaz. Az elemek, gráfok, egyenletek, szövegek stílusa és színei csak kód szinten szerkeszthetők, de vannak választható opciók. 
 
@@ -363,22 +368,21 @@ A kész ábrák mentése fájlba történik, automatikus mentés nincs.
 
 \SubSection{tikzcd-editor}
 
-A \textit{tikzcd-editor} klasszikus felülettel nem rendelkezik, csak egy négyzet alapú rácsháló fogad megnyitáskor. A rácsok közepére igazítva lehet nyilakat rajzolni, és szövegeket írni, de utólag van lehetőség a fel-le mozgatásra. 
-
-A stílusok nem testreszabhatók, csak pár alap stílusból lehet választani, mint a szaggatott vagy dupla vonal, módosítható a nyíl eleje, illetve vége. A rácsokon belül gombnyomásra tudunk hurkot rajzolni. A nyilakra és vonalakra kifejezések rakhatók. Az elemek színei nem módosíthatók, ezen a felületen kizárólag fekete vonalszínnel lehet dolgozni.
-
-A rétegződés a lerakás sorrendjében van. Az elemek kijelölése csak egyesével működik, nincs lehetőség téglalap vagy esetleg lasszó alapú kijelölésre. A kijelölt rács a felületen szabadon mozgatható, és áthelyezhető üres cellákba.
-
-A szerkesztő rendelkezik Undo-Redo funkciókkal, de mentésre nincs lehetőség, csak a \LaTeX\ kód kimásolására, és az ábrához tartozó link utólagos betöltésére.
-
-Az alkalmazás felépítését megnézve a felület egy felsorolás, aminek a stílusa erőteljesen testre lett szabva, hogy a rácsháló kinézetet megkapja. A rácsok szerkesztésével igazából a felsorolás pontjai kerülnek módosításra.
-
 \begin{figure}[!h]
 	\includegraphics[width=\textwidth]{images/tikzcd.png}
 	\caption{tikzcd-editor kezelőfelülete \cite{tikzcd}}
 	\label{fig:tikzcd}
 \end{figure}
 
+A \textit{tikzcd-editor} (\ref{fig:tikzcd}. ábra) klasszikus felülettel nem rendelkezik, csak egy négyzet alapú rácsháló fogad megnyitáskor. A rácsok közepére igazítva lehet nyilakat rajzolni, és szövegeket írni, de utólag van lehetőség a fel-le mozgatásra. 
+
+A stílusok nem testre szabhatók, csak pár alap stílusból lehet választani, mint a szaggatott vagy dupla vonal, módosítható a nyíl eleje, illetve vége. A rácsokon belül gombnyomásra tudunk hurkot rajzolni. A nyilakra és vonalakra kifejezések rakhatók. Az elemek színei nem módosíthatók, ezen a felületen kizárólag fekete vonalszínnel lehet dolgozni.
+
+A rétegződés a lerakás sorrendjében van. Az elemek kijelölése csak egyesével működik, nincs lehetőség téglalap vagy esetleg lasszó alapú kijelölésre. A kijelölt rács a felületen szabadon mozgatható, és áthelyezhető üres cellákba.
+
+A szerkesztő rendelkezik Undo-Redo funkciókkal, de mentésre nincs lehetőség, csak a \LaTeX\ kód kimásolására, és az ábrához tartozó link utólagos betöltésére.
+
+Az alkalmazás felépítését megnézve a felület egy felsorolás, aminek a stílusa erőteljesen testre lett szabva, hogy a rácsháló kinézetet megkapja. A rácsok szerkesztésével igazából a felsorolás pontjai kerülnek módosításra.
 
 \SubSection{Összehasonlítás}
 
@@ -400,6 +404,9 @@ Szempontok, amik alapján az összehasonlítást végzem:
 	\item[Automatikus mentés:] A szerkesztő menti-e a rajzolás közben a munkamenetet, vagy teljes mértékben a felhasználóra van bízva a mentés folyamata.
 \end{description}
 
+\noindent
+Ezeket az összehasonlítási szempontokat tartalmazza a \ref{tab:editors}. táblázat.
+
 \begin{table}[]
 	\caption{Szerkesztőeszközök összefoglalása az előző szempontok szerint}
 	\label{tab:editors}
@@ -408,7 +415,7 @@ Szempontok, amik alapján az összehasonlítást végzem:
 	\centering
 	\begin{tabular}{|l|c|c|c|c|}
 		\hline
-		& draw.io & tikzit & tikzedt& tikzcd\\ \hline
+		& draw.io & TikZiT & TikzEdt & tikzcd\\ \hline
 		
 		Elrendezés  & \multicolumn{3}{c|}{hasáb felépítés} & alul\\ \hline
 		

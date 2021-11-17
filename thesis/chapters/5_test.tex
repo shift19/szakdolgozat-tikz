@@ -1,10 +1,10 @@
 \Chapter{Példák ábrák szerkesztésére}
 
-Ebben a fejezetben már az szerkesztőprogrammal elkészített ábrák kerülnek bemutatásra. 
+Ebben a fejezetben már a szerkesztőprogrammal elkészített ábrák kerülnek bemutatásra. 
 
 \Section{Hasse-diagram}
 
-A rendezettségelméletben a Hasse-diagram egy olyan matematikai diagramtípus, amelyet egy véges, részben rendezett halmaz ábrázolására használnak, annak tranzitív redukciójának rajza formájában. Konkrétan, egy részlegesen rendezett $(S, \leq)$ halmaz esetében az $S$ minden elemét egy csúcsként ábrázoljuk a síkban, és egy olyan vonalszakaszt vagy görbét rajzolunk, amely $x$-ből $y$ felé halad, amikor $y$ lefedi $x$-et (vagyis amikor $x \leq y$ és nincs olyan $z$, hogy $x \leq z \leq y$). Ezek a görbék keresztezhetik egymást, de a végpontjaikon kívül nem érinthetnek más csúcsot. Egy ilyen diagram, felcímkézett csúcsokkal, egyértelműen meghatározza a részleges rendet.
+A matematikai értelemben vett rendezések elméletében a Hasse-diagram egy olyan diagramtípus, amelyet egy véges, részben rendezett halmaz ábrázolására használnak, annak tranzitív redukciójának rajza formájában. Konkrétan, egy részlegesen rendezett $(S, \leq)$ halmaz esetében az $S$ minden elemét egy csúcsként ábrázoljuk a síkban, és egy olyan vonalszakaszt vagy görbét rajzolunk, amely $x$-ből $y$ felé halad, amikor $y$ lefedi $x$-et (vagyis amikor $x \leq y$ és nincs olyan $z$, hogy $x \leq z \leq y$). Ezek a görbék keresztezhetik egymást, de a végpontjaikon kívül nem érinthetnek más csúcsot. Egy ilyen diagram, felcímkézett csúcsokkal, egyértelműen meghatározza a részleges rendet.
 
 Az oszthatóság egy részben rendezett halmaz. Vegyük a 30-as szám osztóit, ebben az esetben az alábbi halmaz adja meg: 
 $$D_{30} = \{1,2,3,5,6,10,15,30\}.$$
@@ -45,7 +45,7 @@ A gráf (vagy irányítatlan gráf) egy $G = (V, E)$ pár, ahol $V$ egy olyan ha
 
 A folyamatábra egy olyan diagramtípus, amely egy adott folyamatot vagy eljárást ábrázol. A folyamatábra definiálható úgy is, mint egy algoritmus, egy feladat megoldásának lépésről lépésre történő megközelítése.
 
-Az folyamatábra a lépéseket különböző típusú dobozokként, a lépések sorrendjét pedig a dobozok nyilakkal való összekapcsolásával mutatja be. Ez a diagrammszerű ábrázolás egy adott probléma megoldási modelljét szemlélteti. A folyamatábrákat különböző területeken használják egy folyamat vagy program elemzése, tervezése, dokumentálása vagy kezelése során.
+Az folyamatábra a lépéseket különböző típusú dobozokként, a lépések sorrendjét pedig a dobozok nyilakkal való összekapcsolásával mutatja be. Ez a diagramszerű ábrázolás egy adott probléma megoldási modelljét szemlélteti. A folyamatábrákat különböző területeken használják egy folyamat vagy program elemzése, tervezése, dokumentálása vagy kezelése során.
 
 \begin{figure*}[!h]
 	\label{fig:flowchart}
@@ -65,7 +65,7 @@ Az folyamatábra a lépéseket különböző típusú dobozokként, a lépések 
 
 A Nassi-Shneiderman-diagram a számítógépes programozásban a strukturált programozás grafikus ábrázolása. Isaak Nassi és Ben Shneidermann fejlesztette ki 1972-ben. Ezeket az ábrákat struktogramoknak is nevezik, mivel a program struktúráit mutatják.
 
-A struktogramok a folyamatábra szabadosságát korlátozzák és csak struktúrált szimbólumokat tartalmaznak. Alapelem a téglalap, amit különböző módokon osztunk fel részekre. Maga a program egyetlen partícionált (felosztott) téglalap.
+A struktogramok a folyamatábra szabadosságát korlátozzák és csak strukturált szimbólumokat tartalmaznak. Alapelem a téglalap, amit különböző módokon osztunk fel részekre. Maga a program egyetlen particionált (felosztott) téglalap.
 
 A Nassi-Shneiderman-diagramokat csak ritkán használják a formális programozásban. Absztrakciós szintjük közel áll a strukturált programkódhoz, és a módosítások miatt a teljes diagramot újra kell rajzolni. Az algoritmusokat és a magas szintű terveket egyértelművé teszik, ami az oktatásban is hasznossá teszi őket.
 
@@ -86,7 +86,7 @@ A Nassi-Shneiderman-diagramokat csak ritkán használják a formális programoz�
 \Section{Aranymetszés}
 
 A matematikában két mennyiség aranymetszésben van, ha arányuk megegyezik összegük és a két mennyiség közül a nagyobbik arányával. Algebrailag kifejezve, az $a$ és a $b$ esetében, ha $a>b>0$, akkor
-$$\frac{a+b}{a} = \frac{a}{b} = \varphi$$
+$$\frac{a+b}{a} = \frac{a}{b} = \varphi,$$
 ahol a $\varphi$ az aranymetszést jelenti. Ez egy olyan irracionális szám, amely a $x^{2}-x-1=0$ kvadratikus egyenlet megoldása, amelynek értéke
 
 $$\varphi =\frac{1+\sqrt{5}}{2}=1.618033988749\dots$$
@@ -98,9 +98,9 @@ $$1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, \dots$$
 
 A Fibonacci-sorozat kifejezése az aranymetszést foglalja magában:
 
-$$F(n)=\frac{\varphi^{n}-(1-\varphi )^{n}}{\sqrt{5}} = \frac{{\varphi ^{n}-(-\varphi )^{-n}}}{\sqrt {5}}$$
+$$F(n)=\frac{\varphi^{n}-(1-\varphi )^{n}}{\sqrt{5}} = \frac{{\varphi ^{n}-(-\varphi )^{-n}}}{\sqrt {5}}.$$
 
-Az aranymetszés alkalmazásával a webfejlesztésben a weloldal vonzóvá válik a felhasználó számára, és az elrendezése tudat alatt tökéletesnek és ismerősnek tűnik számukra. Ezáltal sokkal valószínűbbé válik, hogy továbbolvassák és alaposan megnézik a webhelyet. Az aranymetszést a webtervezésben arra is használják, hogy kiegyensúlyozzák a szöveges tartalmakat, hierarchiát hozzanak létre, és a felhasználók szemét bizonyos területekre irányítsák.
+Az aranymetszés alkalmazásával a webfejlesztésben a weboldal vonzóvá válik a felhasználó számára, és az elrendezése tudat alatt tökéletesnek és ismerősnek tűnik számukra. Ezáltal sokkal valószínűbbé válik, hogy továbbolvassák, és alaposan megnézik a webhelyet. Az aranymetszést a webtervezésben arra is használják, hogy kiegyensúlyozzák a szöveges tartalmakat, hierarchiát hozzanak létre, és a felhasználók szemét bizonyos területekre irányítsák.
 
 \begin{figure}[!h]
 	\label{fig:gr_editor}
